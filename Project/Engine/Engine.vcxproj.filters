@@ -1,0 +1,934 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="01. Header">
+      <UniqueIdentifier>{9a336534-6d43-4ce9-9130-cbd3dcf15658}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Engine">
+      <UniqueIdentifier>{563918de-948c-499e-a469-756a9f8d7f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{50904772-8c11-42d8-bbcb-0e22af4a7b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. GameObject">
+      <UniqueIdentifier>{d44c908b-c9c1-4e25-8f12-cde6afa773bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component">
+      <UniqueIdentifier>{d297a4bb-ba11-4d16-89a7-c341d12184b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{29c61fd4-bb61-40ad-9e34-76dbd0fa43da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL">
+      <UniqueIdentifier>{a2448546-ee81-4cd6-acbb-7a7863207b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\01. Transform">
+      <UniqueIdentifier>{82a10ca1-f71c-4b09-aff5-68b8ece6c53f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent">
+      <UniqueIdentifier>{162480d1-31cf-4bce-a970-9266b00d3d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\Script">
+      <UniqueIdentifier>{b3577795-19ac-4fad-aa32-3814c1d8999c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\01. MeshRender">
+      <UniqueIdentifier>{5bf56c56-207a-4c45-a552-9bbde621adb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\02. Camera">
+      <UniqueIdentifier>{a19e3818-a22d-434a-9e55-a91c111f82c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\02. SpriteRender">
+      <UniqueIdentifier>{74aaf065-60ed-400d-8745-290172c85041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\06. SkyBox">
+      <UniqueIdentifier>{a3669fae-039b-4ec3-a45b-3b240db86455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\07. Decal">
+      <UniqueIdentifier>{e00e674b-bb38-4f02-8089-6146f31c1555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\08. Landscape">
+      <UniqueIdentifier>{e30fd8ce-254a-4752-afa6-5bb7a3ae71f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\05. ParticleRender">
+      <UniqueIdentifier>{86a19fec-02ae-4370-aafa-ceabf5e999c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\04. TileRender">
+      <UniqueIdentifier>{e43a178a-ee2a-43bf-bf02-b2b505c7dcc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\03. FlipbookRender">
+      <UniqueIdentifier>{7414903a-dbd8-4b11-ba22-056f94b03039}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\03. Compute">
+      <UniqueIdentifier>{42b8597f-ad73-446d-bd1d-0b27bcae1bb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\02. 2D Shader">
+      <UniqueIdentifier>{d5311574-7e63-40cb-aa5d-26ce0bc156db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\01. Header">
+      <UniqueIdentifier>{e3606ea6-6f6e-4677-b736-902bccd19d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\03. Compute\ParticleTick">
+      <UniqueIdentifier>{0b856cba-15fe-47e0-a48a-f21ee690b881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\03. Compute\SetColor">
+      <UniqueIdentifier>{212108d4-10e0-4e43-b88b-801f30d76eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager">
+      <UniqueIdentifier>{7133b147-733a-4501-98a8-2c13745a2961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\01.Key">
+      <UniqueIdentifier>{3000db2e-72e9-4d47-b991-8faf89d481cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\02. Time">
+      <UniqueIdentifier>{e7de9fc6-0cae-411e-9dcb-a0192325a415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\03. Path">
+      <UniqueIdentifier>{889f199d-3bb3-4fac-9c81-b8f9d4e430aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\04. Asset">
+      <UniqueIdentifier>{15964748-4a26-4669-960d-90a58bd92f57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\05. Level">
+      <UniqueIdentifier>{f8cd8c92-22f9-45ea-85ae-b06b352f71ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\06. Render">
+      <UniqueIdentifier>{f3d6fb9d-3ea1-4a7b-8e43-f856d24e9c9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\08. TaskMgr">
+      <UniqueIdentifier>{df4949ff-0f19-4a4f-9b53-9ec9b96eeaa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\09. ImguiMgr">
+      <UniqueIdentifier>{9d619f8d-a194-40ee-9318-cb4a49236a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device">
+      <UniqueIdentifier>{1ad37502-b6e7-490f-9eb2-3798c00e39a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device\ConstantBuffer">
+      <UniqueIdentifier>{6aeba9a1-71a5-4e60-85ba-cce562c8fce2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device\StructuredBuffer">
+      <UniqueIdentifier>{f86cc3c6-0894-4bff-98a0-62e6e28929bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Level">
+      <UniqueIdentifier>{a381b5c2-9f8c-41b5-a9ac-c86debf3a411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset">
+      <UniqueIdentifier>{467337eb-7b4a-4ccc-a47d-c727a0ff492d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\05. Sound">
+      <UniqueIdentifier>{74df685f-7dad-4487-a994-b5763f5c1e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\06. Shader">
+      <UniqueIdentifier>{a39f9f2e-11f1-4207-87b8-7a1f0dbda178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\06. Shader\ComputeShader">
+      <UniqueIdentifier>{51ce262d-32ac-4b47-99f1-5cad6ec9c9f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\06. Shader\GraphicShader">
+      <UniqueIdentifier>{0a0a8943-8404-4afe-a765-220c27817823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\09. Flipbook">
+      <UniqueIdentifier>{6847000e-3d26-4f9f-86fc-510fd86244fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\10. PhysxMgr">
+      <UniqueIdentifier>{9efee060-e300-4765-86b8-4e0f87fb0a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject">
+      <UniqueIdentifier>{4648d97a-9cf3-45af-97d6-c0eba7a3bdc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\Imgui">
+      <UniqueIdentifier>{0248c35c-c65c-4983-b7cd-578e660c14ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\Inspector">
+      <UniqueIdentifier>{1344a44e-d983-4678-9523-f3a193f2342d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\Outliner">
+      <UniqueIdentifier>{fe65e37e-6817-4f11-b4d3-874b30656848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ContentViewer">
+      <UniqueIdentifier>{aec4e7fc-6215-4c45-9af5-95395ca741b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\TreeUI">
+      <UniqueIdentifier>{79132774-3c34-417e-9b1c-28fdfd2193a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ListUI">
+      <UniqueIdentifier>{82946dad-ccf9-48af-b3bf-eef482355e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI">
+      <UniqueIdentifier>{135bc060-339e-4b82-98cd-6395f614a0a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\01. TransformUI">
+      <UniqueIdentifier>{4de0edcb-5f3a-4013-91e5-10118f1b1e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\02. CameraUI">
+      <UniqueIdentifier>{d866d89e-d5ed-49f2-8178-92ae3765afd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI">
+      <UniqueIdentifier>{5015dbfc-d071-4387-b060-5f90791c38d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\01. MeshRenderUI">
+      <UniqueIdentifier>{2585ab8a-f670-4183-ab1d-fae43903424d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\02. SpriterenderUI">
+      <UniqueIdentifier>{c730770e-db5f-4ee6-9c57-e98bd237df5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\03. FlipbookRenderUI">
+      <UniqueIdentifier>{2d93176a-6817-4148-a124-23725e4951eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\04. TileRenderUI">
+      <UniqueIdentifier>{3fd5314a-31fd-4f3e-ba5b-b144fea25c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\05. ParticleRenderUI">
+      <UniqueIdentifier>{32270fa4-bbfb-4c03-b267-d500ac1d7f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI">
+      <UniqueIdentifier>{953d67fb-5d4f-4faa-84d6-01bab07d7fb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\01. MeshUI">
+      <UniqueIdentifier>{1a792098-1f96-4c74-8f91-dd94f5b98bb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\02. MeshData">
+      <UniqueIdentifier>{a550afc9-b1bf-4d5d-92e7-fe1f065b2eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\01. Mesh">
+      <UniqueIdentifier>{72d804bc-f319-41e2-8c8b-be6c13c993fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\02. MeshDataUI">
+      <UniqueIdentifier>{39b1d748-cbbf-4dd6-85b0-6d9be664a057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\03. MaterialUI">
+      <UniqueIdentifier>{1ba084bc-2040-486f-878c-11b204024121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\04. TextureUI">
+      <UniqueIdentifier>{54547184-2302-4930-a620-a3c30cc01d65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\05. SoundUI">
+      <UniqueIdentifier>{04c32233-9921-4c3b-a5db-af796155092f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\06. ShaderUI">
+      <UniqueIdentifier>{9882b482-d4c3-420d-ba78-31139f5bea01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\07. PrefabUI">
+      <UniqueIdentifier>{31404a4b-0b54-4ffa-b1a1-63a78fad30fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\08. SpriteUI">
+      <UniqueIdentifier>{9a1173d2-7d30-4461-b6f9-c0dec9f1d5bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\09. FlipbookUI">
+      <UniqueIdentifier>{3516488c-9059-46e6-848f-944c87b80ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\06. ShaderUI\ComputeShaderUI">
+      <UniqueIdentifier>{ba980dbd-9abc-4f54-bcaa-d3925e1e02ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\AssetUI\06. ShaderUI\GraphicShaderUI">
+      <UniqueIdentifier>{2d8cbf68-1df7-44eb-a57e-c37f38d64596}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\11. Component">
+      <UniqueIdentifier>{23af8cc8-2fb0-46eb-9b39-ba1d86d8b546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{941f2ffd-536b-46b1-8b50-7e087351fcd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\03. PhysxActor">
+      <UniqueIdentifier>{89926b5f-3481-43a2-bc0c-4ccf2e845f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\04. FSM">
+      <UniqueIdentifier>{4a42efd6-fb57-4123-b5e1-35f647e2599c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\10. FSM State">
+      <UniqueIdentifier>{58c9447d-a788-4edc-8991-387ab04ecd03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\12. FSMMgr">
+      <UniqueIdentifier>{0ffede52-49a0-4f07-a5e6-c186a40830de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\03. PhysxActorUI">
+      <UniqueIdentifier>{a33f974a-215c-4c98-9264-78f59eaec836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\04. FSMUI">
+      <UniqueIdentifier>{b07d5837-44d1-4ba4-a13a-9aeb8023da5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\03. Texture">
+      <UniqueIdentifier>{afc9de93-8012-45e0-b1c9-3c191d68b750}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\04. Material">
+      <UniqueIdentifier>{aafd811d-32c8-4eb9-ac88-25f050d602e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\08. Prefab">
+      <UniqueIdentifier>{547ee19f-168a-479c-b9d3-34bbcbba2469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\07. Sprite">
+      <UniqueIdentifier>{38a47a84-d5a0-4cfa-9503-2435d7232aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. Asset\11. Font">
+      <UniqueIdentifier>{99941234-b784-4eec-b5be-02f29587b163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\13. LightMgr">
+      <UniqueIdentifier>{7a960db7-54b9-4144-b79f-e8dc108c2c98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Device\MRT">
+      <UniqueIdentifier>{e905300b-98e9-4c1d-8521-ce235a217465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\05. Light">
+      <UniqueIdentifier>{10690b4c-b502-475a-8197-19c3e77a4a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\09. UICom">
+      <UniqueIdentifier>{0f4a5d8d-2e15-490e-b02a-3341e712fbf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\05. Light">
+      <UniqueIdentifier>{51b380d4-b228-462d-9d96-99c5d176ed98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\06. SkyBoxUI">
+      <UniqueIdentifier>{3a459744-06c8-4cba-8ae7-64685cb0a6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\07. DecalUI">
+      <UniqueIdentifier>{c0420b7f-e192-4af0-a572-f7331c29530a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\08. Landscape">
+      <UniqueIdentifier>{20e3a47c-518f-432d-b0e4-77abfb4ecff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\09. UIComUI">
+      <UniqueIdentifier>{63ff8a32-4414-4ef8-902a-79226d36451f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CEngine.h">
+      <Filter>02. Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="enum.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="CDevice.h">
+      <Filter>03. Device</Filter>
+    </ClInclude>
+    <ClInclude Include="CConstBuffer.h">
+      <Filter>03. Device\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>04. Manager\01.Key</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>04. Manager\02. Time</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathMgr.h">
+      <Filter>04. Manager\03. Path</Filter>
+    </ClInclude>
+    <ClInclude Include="CAssetMgr.h">
+      <Filter>04. Manager\04. Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevelMgr.h">
+      <Filter>04. Manager\05. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetPtr.h">
+      <Filter>08. Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="CAsset.h">
+      <Filter>08. Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="assets.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CShader.h">
+      <Filter>08. Asset\06. Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="CMesh.h">
+      <Filter>08. Asset\01. Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="CLevel.h">
+      <Filter>05. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CLayer.h">
+      <Filter>05. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
+      <Filter>06. GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CComponent.h">
+      <Filter>07. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform.h">
+      <Filter>07. Component\01. Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="CScript.h">
+      <Filter>07. Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshRender.h">
+      <Filter>07. Component\RenderComponent\01. MeshRender</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>07. Component\02. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture2D.h">
+      <Filter>08. Asset\03. Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderComponent.h">
+      <Filter>07. Component\RenderComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterial.h">
+      <Filter>08. Asset\04. Material</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderMgr.h">
+      <Filter>04. Manager\06. Render</Filter>
+    </ClInclude>
+    <ClInclude Include="CTaskMgr.h">
+      <Filter>04. Manager\08. TaskMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CStructuredBuffer.h">
+      <Filter>03. Device\StructuredBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticleRender.h">
+      <Filter>07. Component\RenderComponent\05. ParticleRender</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpriteRender.h">
+      <Filter>07. Component\RenderComponent\02. SpriteRender</Filter>
+    </ClInclude>
+    <ClInclude Include="CTileRender.h">
+      <Filter>07. Component\RenderComponent\04. TileRender</Filter>
+    </ClInclude>
+    <ClInclude Include="CFlipbookRender.h">
+      <Filter>07. Component\RenderComponent\03. FlipbookRender</Filter>
+    </ClInclude>
+    <ClInclude Include="CFlipbook.h">
+      <Filter>08. Asset\09. Flipbook</Filter>
+    </ClInclude>
+    <ClInclude Include="CSprite.h">
+      <Filter>08. Asset\07. Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticleTickCS.h">
+      <Filter>HLSL\03. Compute\ParticleTick</Filter>
+    </ClInclude>
+    <ClInclude Include="CComputeShader.h">
+      <Filter>08. Asset\06. Shader\ComputeShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphicShader.h">
+      <Filter>08. Asset\06. Shader\GraphicShader</Filter>
+    </ClInclude>
+    <ClInclude Include="CSetColorCS.h">
+      <Filter>HLSL\03. Compute\SetColor</Filter>
+    </ClInclude>
+    <ClInclude Include="CPhysxMgr.h">
+      <Filter>04. Manager\10. PhysxMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CSimulationEvent.h">
+      <Filter>04. Manager\10. PhysxMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CPhysxActor.h">
+      <Filter>07. Component\03. PhysxActor</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_dx11.h">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_win32.h">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="CImguiMgr.h">
+      <Filter>04. Manager\09. ImguiMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CImguiObject.h">
+      <Filter>09. ImguiObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CInspector.h">
+      <Filter>09. ImguiObject\Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="COutliner.h">
+      <Filter>09. ImguiObject\Outliner</Filter>
+    </ClInclude>
+    <ClInclude Include="CContentViewer.h">
+      <Filter>09. ImguiObject\ContentViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="CListUI.h">
+      <Filter>09. ImguiObject\ListUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTreeUI.h">
+      <Filter>09. ImguiObject\TreeUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CComponentUI.h">
+      <Filter>09. ImguiObject\ComponentUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransformUI.h">
+      <Filter>09. ImguiObject\ComponentUI\01. TransformUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraUI.h">
+      <Filter>09. ImguiObject\ComponentUI\02. CameraUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPhysxActorUI.h">
+      <Filter>09. ImguiObject\ComponentUI\03. PhysxActorUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CAssetUI.h">
+      <Filter>09. ImguiObject\AssetUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshUI.h">
+      <Filter>09. ImguiObject\AssetUI\01. MeshUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CComputeShaderUI.h">
+      <Filter>09. ImguiObject\AssetUI\06. ShaderUI\ComputeShaderUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CFlipbookUI.h">
+      <Filter>09. ImguiObject\AssetUI\09. FlipbookUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphicShaderUI.h">
+      <Filter>09. ImguiObject\AssetUI\06. ShaderUI\GraphicShaderUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterialUI.h">
+      <Filter>09. ImguiObject\AssetUI\03. MaterialUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpriteUI.h">
+      <Filter>09. ImguiObject\AssetUI\08. SpriteUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture2DUI.h">
+      <Filter>09. ImguiObject\AssetUI\04. TextureUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPrefab.h">
+      <Filter>08. Asset\08. Prefab</Filter>
+    </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>08. Asset\05. Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="CComponentMgr.h">
+      <Filter>04. Manager\11. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshRenderUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\01. MeshRenderUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpriteRenderUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\02. SpriterenderUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CFlipbookRenderUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\03. FlipbookRenderUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CTileRnederUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\04. TileRenderUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticleRenderUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\05. ParticleRenderUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderComponentUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI</Filter>
+    </ClInclude>
+    <ClInclude Include="uilist.h">
+      <Filter>01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CPrefabUI.h">
+      <Filter>09. ImguiObject\AssetUI\07. PrefabUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CEditorCamScript.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="CFSM.h">
+      <Filter>07. Component\04. FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="CFSM_State.h">
+      <Filter>08. Asset\10. FSM State</Filter>
+    </ClInclude>
+    <ClInclude Include="CFSMMgr.h">
+      <Filter>04. Manager\12. FSMMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CFSMUI.h">
+      <Filter>09. ImguiObject\ComponentUI\04. FSMUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CUICom.h">
+      <Filter>07. Component\RenderComponent\09. UICom</Filter>
+    </ClInclude>
+    <ClInclude Include="CFont.h">
+      <Filter>08. Asset\11. Font</Filter>
+    </ClInclude>
+    <ClInclude Include="CUIComUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\09. UIComUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CLight.h">
+      <Filter>07. Component\05. Light</Filter>
+    </ClInclude>
+    <ClInclude Include="CLightMgr.h">
+      <Filter>04. Manager\13. LightMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CLightUI.h">
+      <Filter>09. ImguiObject\ComponentUI\05. Light</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRT.h">
+      <Filter>03. Device\MRT</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CEngine.cpp">
+      <Filter>02. Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="CDevice.cpp">
+      <Filter>03. Device</Filter>
+    </ClCompile>
+    <ClCompile Include="CConstBuffer.cpp">
+      <Filter>03. Device\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>04. Manager\01.Key</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>04. Manager\02. Time</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathMgr.cpp">
+      <Filter>04. Manager\03. Path</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetMgr.cpp">
+      <Filter>04. Manager\04. Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevelMgr.cpp">
+      <Filter>04. Manager\05. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CAsset.cpp">
+      <Filter>08. Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="CShader.cpp">
+      <Filter>08. Asset\06. Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="CMesh.cpp">
+      <Filter>08. Asset\01. Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CLevel.cpp">
+      <Filter>05. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CLayer.cpp">
+      <Filter>05. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>06. GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CComponent.cpp">
+      <Filter>07. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform.cpp">
+      <Filter>07. Component\01. Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="CScript.cpp">
+      <Filter>07. Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshRender.cpp">
+      <Filter>07. Component\RenderComponent\01. MeshRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>07. Component\02. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="extern.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture2D.cpp">
+      <Filter>08. Asset\03. Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderComponent.cpp">
+      <Filter>07. Component\RenderComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterial.cpp">
+      <Filter>08. Asset\04. Material</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetMgr_Init.cpp">
+      <Filter>04. Manager\04. Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderMgr.cpp">
+      <Filter>04. Manager\06. Render</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderMgr_Init.cpp">
+      <Filter>04. Manager\06. Render</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>01. Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CTaskMgr.cpp">
+      <Filter>04. Manager\08. TaskMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CStructuredBuffer.cpp">
+      <Filter>03. Device\StructuredBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticleRender.cpp">
+      <Filter>07. Component\RenderComponent\05. ParticleRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpriteRender.cpp">
+      <Filter>07. Component\RenderComponent\02. SpriteRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CTileRender.cpp">
+      <Filter>07. Component\RenderComponent\04. TileRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CFlipbookRender.cpp">
+      <Filter>07. Component\RenderComponent\03. FlipbookRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CFlipbook.cpp">
+      <Filter>08. Asset\09. Flipbook</Filter>
+    </ClCompile>
+    <ClCompile Include="CSprite.cpp">
+      <Filter>08. Asset\07. Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticleTickCS.cpp">
+      <Filter>HLSL\03. Compute\ParticleTick</Filter>
+    </ClCompile>
+    <ClCompile Include="CComputeShader.cpp">
+      <Filter>08. Asset\06. Shader\ComputeShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphicShader.cpp">
+      <Filter>08. Asset\06. Shader\GraphicShader</Filter>
+    </ClCompile>
+    <ClCompile Include="CSetColorCS.cpp">
+      <Filter>HLSL\03. Compute\SetColor</Filter>
+    </ClCompile>
+    <ClCompile Include="CPhysxMgr.cpp">
+      <Filter>04. Manager\10. PhysxMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimulationEvent.cpp">
+      <Filter>04. Manager\10. PhysxMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CPhysxActor.cpp">
+      <Filter>07. Component\03. PhysxActor</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_dx11.cpp">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_win32.cpp">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>09. ImguiObject\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="CImguiMgr.cpp">
+      <Filter>04. Manager\09. ImguiMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CImguiObject.cpp">
+      <Filter>09. ImguiObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CInspector.cpp">
+      <Filter>09. ImguiObject\Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="CImguiMgr_Init.cpp">
+      <Filter>04. Manager\09. ImguiMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="COutliner.cpp">
+      <Filter>09. ImguiObject\Outliner</Filter>
+    </ClCompile>
+    <ClCompile Include="CContentViewer.cpp">
+      <Filter>09. ImguiObject\ContentViewer</Filter>
+    </ClCompile>
+    <ClCompile Include="CListUI.cpp">
+      <Filter>09. ImguiObject\ListUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTreeUI.cpp">
+      <Filter>09. ImguiObject\TreeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CComponentUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransformUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\01. TransformUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\02. CameraUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPhysxActorUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\03. PhysxActorUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAssetUI.cpp">
+      <Filter>09. ImguiObject\AssetUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\01. MeshUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CComputeShaderUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\06. ShaderUI\ComputeShaderUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CFlipbookUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\09. FlipbookUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphicShaderUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\06. ShaderUI\GraphicShaderUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterialUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\03. MaterialUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpriteUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\08. SpriteUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture2DUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\04. TextureUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPrefab.cpp">
+      <Filter>08. Asset\08. Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="CSound.cpp">
+      <Filter>08. Asset\05. Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="CComponentMgr.cpp">
+      <Filter>04. Manager\11. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CImguiMgr_Menu.cpp">
+      <Filter>04. Manager\09. ImguiMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshRenderUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\01. MeshRenderUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpriteRenderUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\02. SpriterenderUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CFlipbookRenderUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\03. FlipbookRenderUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CTileRnederUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\04. TileRenderUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticleRenderUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\05. ParticleRenderUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderComponentUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPrefabUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\07. PrefabUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CEditorCamScript.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="CFSM.cpp">
+      <Filter>07. Component\04. FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="CFSM_State.cpp">
+      <Filter>08. Asset\10. FSM State</Filter>
+    </ClCompile>
+    <ClCompile Include="CFSMMgr.cpp">
+      <Filter>04. Manager\12. FSMMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CFSMUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\04. FSMUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CUICom.cpp">
+      <Filter>07. Component\RenderComponent\09. UICom</Filter>
+    </ClCompile>
+    <ClCompile Include="CFont.cpp">
+      <Filter>08. Asset\11. Font</Filter>
+    </ClCompile>
+    <ClCompile Include="CUIComUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\09. UIComUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CLight.cpp">
+      <Filter>07. Component\05. Light</Filter>
+    </ClCompile>
+    <ClCompile Include="CLightMgr.cpp">
+      <Filter>04. Manager\13. LightMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CLightUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\05. Light</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRT.cpp">
+      <Filter>03. Device\MRT</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>01. Header</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="value.fx">
+      <Filter>HLSL\01. Header</Filter>
+    </FxCompile>
+    <FxCompile Include="debug_shape.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
+      <Filter>HLSL\01. Header</Filter>
+    </FxCompile>
+    <FxCompile Include="flipbook.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="particle.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="sprite.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="tilerender.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="particle_tick.fx">
+      <Filter>HLSL\03. Compute\ParticleTick</Filter>
+    </FxCompile>
+    <FxCompile Include="SetColor.fx">
+      <Filter>HLSL\03. Compute\SetColor</Filter>
+    </FxCompile>
+    <FxCompile Include="PhysxDebug.fx">
+      <Filter>HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="particle_func.fx">
+      <Filter>HLSL\03. Compute\ParticleTick</Filter>
+    </FxCompile>
+    <FxCompile Include="ui.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="merge.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="light.fx">
+      <Filter>HLSL\02. 2D Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

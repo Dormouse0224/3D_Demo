@@ -1,0 +1,112 @@
+#include "pch.h"
+
+
+tTransform g_Trans = {};
+
+tGlobal g_global = {};
+
+const Matrix Matrix::Identity = Matrix(1.f, 0.f, 0.f, 0.f
+	, 0.f, 1.f, 0.f, 0.f
+	, 0.f, 0.f, 1.f, 0.f
+	, 0.f, 0.f, 0.f, 1.f);
+
+wstring COMPONENT_TYPE_WSTR[] =
+{
+	L"TRANSFORM",
+	L"CAMERA",
+	L"PHYSXACTOR",
+	L"FSM",
+
+
+	L"MESHRENDER",
+	L"SPRITERENDER",
+	L"FLIPBOOKRENDER",
+	L"TILERENDER",
+	L"PARTICLERENDER",
+	L"SKYBOX",
+	L"DECAL",
+	L"LANDSCAPE",
+	L"UICOM",
+
+	L"LIGHT",
+
+	L"COMPONENT_END",
+
+	L"SCRIPT",
+};
+static_assert(sizeof(COMPONENT_TYPE_WSTR) / sizeof(COMPONENT_TYPE_WSTR[0]) == static_cast<int>(COMPONENT_TYPE::COMPONENT_END) + 2);
+
+std::unordered_map<std::wstring, COMPONENT_TYPE_SAVE> COMPONENT_TYPE_SAVE_MAP =
+{
+	{ L"TRANSFORM", COMPONENT_TYPE_SAVE::TRANSFORM },
+	{ L"CAMERA", COMPONENT_TYPE_SAVE::CAMERA },
+	{ L"PHYSXACTOR", COMPONENT_TYPE_SAVE::PHYSXACTOR },
+	{ L"FSM", COMPONENT_TYPE_SAVE::FSM },
+
+	// Rendering Component
+	{ L"MESHRENDER", COMPONENT_TYPE_SAVE::MESHRENDER },
+	{ L"SPRITERENDER", COMPONENT_TYPE_SAVE::SPRITERENDER },
+	{ L"FLIPBOOKRENDER", COMPONENT_TYPE_SAVE::FLIPBOOKRENDER },
+	{ L"TILERENDER", COMPONENT_TYPE_SAVE::TILERENDER },
+	{ L"PARTICLERENDER", COMPONENT_TYPE_SAVE::PARTICLERENDER },
+	{ L"SKYBOX", COMPONENT_TYPE_SAVE::SKYBOX },
+	{ L"DECAL", COMPONENT_TYPE_SAVE::DECAL },
+	{ L"LANDSCAPE", COMPONENT_TYPE_SAVE::LANDSCAPE },
+	{ L"UICOM", COMPONENT_TYPE_SAVE::UICOM },
+
+	// Additional
+	{ L"LIGHT", COMPONENT_TYPE_SAVE::LIGHT },
+
+	{ L"COMPONENT_END", COMPONENT_TYPE_SAVE::COMPONENT_END },
+
+	{ L"SCRIPT", COMPONENT_TYPE_SAVE::SCRIPT },
+};
+
+wstring ASSET_TYPE_WSTR[] = 
+{
+	L"MESH",
+	L"MESHDATA",
+	L"TEXTURE",
+	L"MATERIAL",
+	L"PREFAB",
+	L"SOUND",
+	L"GRAPHIC_SHADER",	// ·»´õ¸µ
+	L"COMPUTE_SHADER", // °è»ê, GP(General Purpose)
+	L"SPRITE",
+	L"FLIPBOOK",
+	L"FSM_STATE",
+	L"FONT",
+};
+static_assert(sizeof(ASSET_TYPE_WSTR) / sizeof(ASSET_TYPE_WSTR[0]) == static_cast<int>(ASSET_TYPE::ASSET_END));
+
+wstring COLLISION_LAYER_WSTR[] =
+{
+	L"ePLAYER",
+	L"eLANDSCAPE",
+	L"eMONSTER",
+	L"ePARTICLE",
+
+};
+static_assert(sizeof(COLLISION_LAYER_WSTR) / sizeof(COLLISION_LAYER_WSTR[0]) == COLLISION_LAYER::END);
+
+wstring LAYER_WSTR[] =
+{
+	L"Default",
+	L"Background",
+	L"Tile",
+	L"Player",
+	L"PlayerProjectile",
+	L"Enemy",
+	L"EnemyProjectile",
+
+	L"UI",
+};
+static_assert(sizeof(LAYER_WSTR) / sizeof(LAYER_WSTR[0]) == static_cast<int>(LAYER::END));
+
+wstring LIGHT_TYPE_WSTR[] =
+{
+	L"DIRECTIONAL",
+	L"POINT",
+	L"SPOT",
+};
+static_assert(sizeof(LIGHT_TYPE_WSTR) / sizeof(LIGHT_TYPE_WSTR[0]) == static_cast<int>(LIGHT_TYPE::END));
