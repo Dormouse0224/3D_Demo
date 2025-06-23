@@ -82,6 +82,7 @@ CComponent* CComponentMgr::CreateComp(COMPONENT_TYPE _Type)
         return new CParticleRender;
         break;
     case COMPONENT_TYPE::SKYBOX:
+        return new CSkyBox;
         break;
     case COMPONENT_TYPE::DECAL:
         break;

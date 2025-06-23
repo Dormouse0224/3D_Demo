@@ -48,13 +48,13 @@ void CAssetMgr::AddAsset(const wstring& _Key, AssetPtr<CAsset> _Asset)
 	m_AssetModified = true;
 }
 
-AssetPtr<CTexture2D> CAssetMgr::CreateTexture(const wstring& _Key, UINT _Width, UINT _Height
+AssetPtr<CTexture> CAssetMgr::CreateTexture(const wstring& _Key, UINT _Width, UINT _Height
 	, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage)
 {
-	AssetPtr<CTexture2D> pTex = FindAsset<CTexture2D>(_Key);
+	AssetPtr<CTexture> pTex = FindAsset<CTexture>(_Key);
 	assert(nullptr == pTex);	// 키값이 중복된 경우 중단합니다.
 
-	pTex = new CTexture2D;
+	pTex = new CTexture;
 	if (FAILED(pTex->Create(_Width, _Height, _Format, _BindFlag, _Usage)))
 	{
 		MessageBox(nullptr, _Key.c_str(), L"텍스쳐 생성 실패", MB_OK);
@@ -66,13 +66,13 @@ AssetPtr<CTexture2D> CAssetMgr::CreateTexture(const wstring& _Key, UINT _Width, 
 	return pTex;
 }
 
-AssetPtr<CTexture2D> CAssetMgr::CreateTexture(const wstring& _Key, ComPtr<ID3D11Texture2D> _Tex2D)
+AssetPtr<CTexture> CAssetMgr::CreateTexture(const wstring& _Key, ComPtr<ID3D11Texture2D> _Tex2D)
 {
-	AssetPtr<CTexture2D> pTex = FindAsset<CTexture2D>(_Key);
+	AssetPtr<CTexture> pTex = FindAsset<CTexture>(_Key);
 	if (nullptr != pTex)
 		return pTex;
 
-	pTex = new CTexture2D;
+	pTex = new CTexture;
 	if (FAILED(pTex->Create(_Tex2D)))
 	{
 		MessageBox(nullptr, _Key.c_str(), L"텍스쳐 생성 실패", MB_OK);
@@ -100,7 +100,7 @@ ASSET_TYPE CAssetMgr::GetAssetType(const wstring& _Path)
 		|| EXT == L".jpeg" || EXT == L".JPEG"
 		|| EXT == L".bmp" || EXT == L".BMP")
 	{
-		return ASSET_TYPE::TEXTURE2D;
+		return ASSET_TYPE::TEXTURE;
 	}
 	else if (EXT == L".mtrl")
 	{
@@ -139,19 +139,19 @@ ASSET_TYPE CAssetMgr::GetAssetType(const wstring& _Path)
 	return ASSET_TYPE::ASSET_END;
 }
 
-AssetPtr<CTexture2D> CAssetMgr::GetNormTex(const wstring& _DefaultTexName)
+AssetPtr<CTexture> CAssetMgr::GetNormTex(const wstring& _DefaultTexName)
 {
 	int pos = _DefaultTexName.rfind(L'.');
 	if (pos == wstring::npos)
 		return nullptr;
 	wstring NormTexName = _DefaultTexName.substr(0, pos) + L"_N" + _DefaultTexName.substr(pos);
 
-	map<wstring, AssetPtr<CAsset>>::iterator iter = m_mapAsset[(UINT)ASSET_TYPE::TEXTURE2D].find(NormTexName);
+	map<wstring, AssetPtr<CAsset>>::iterator iter = m_mapAsset[(UINT)ASSET_TYPE::TEXTURE].find(NormTexName);
 
-	if (iter == m_mapAsset[(UINT)ASSET_TYPE::TEXTURE2D].end())
+	if (iter == m_mapAsset[(UINT)ASSET_TYPE::TEXTURE].end())
 		return nullptr;
 
-	return (CTexture2D*)(iter->second.Get());
+	return (CTexture*)(iter->second.Get());
 }
 
 
@@ -176,8 +176,8 @@ void CAssetMgr::ContentLoad()
 			case ASSET_TYPE::MESHDATA:
 
 				break;
-			case ASSET_TYPE::TEXTURE2D:
-				CAssetMgr::GetInst()->Load<CTexture2D>(rp);
+			case ASSET_TYPE::TEXTURE:
+				CAssetMgr::GetInst()->Load<CTexture>(rp);
 				break;
 			case ASSET_TYPE::MATERIAL:
 				CAssetMgr::GetInst()->Load<CMaterial>(rp);

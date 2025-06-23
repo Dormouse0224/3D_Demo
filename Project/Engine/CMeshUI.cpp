@@ -10,7 +10,7 @@
 #include "CGameObject.h"
 #include "CTransform.h"
 #include "CCamera.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 #include "CDevice.h"
 #include "CMeshRender.h"
 

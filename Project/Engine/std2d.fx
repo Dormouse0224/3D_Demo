@@ -4,7 +4,7 @@
 #include "value.fx"
 
 #define TEXTURE         g_tex_0
-#define NORM_TEXTURE    g_Ntex_0
+#define NORM_TEXTURE    g_tex_1
 
 // Vertex Shader
 struct VS_IN

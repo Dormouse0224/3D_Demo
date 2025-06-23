@@ -1,20 +1,20 @@
 #include "pch.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 
 #include "CPathMgr.h"
 
 #include "CDevice.h"
 
-CTexture2D::CTexture2D()
-	: CAsset(ASSET_TYPE::TEXTURE2D)
+CTexture::CTexture()
+	: CAsset(ASSET_TYPE::TEXTURE)
 {
 }
 
-CTexture2D::~CTexture2D()
+CTexture::~CTexture()
 {
 }
 
-int CTexture2D::Load(const wstring& _FilePath)
+int CTexture::Load(const wstring& _FilePath)
 {
 	/*wchar_t szExt[50] = {};
 	_wsplitpath_s(_FilePath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 50);*/
@@ -75,31 +75,35 @@ int CTexture2D::Load(const wstring& _FilePath)
 	return S_OK;
 }
 
-void CTexture2D::Binding(UINT _RegisterNum)
+void CTexture::Binding(UINT _RegisterNum)
 {
-	CONTEXT->PSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+    CONTEXT->VSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+    CONTEXT->HSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+    CONTEXT->DSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+    CONTEXT->GSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
+    CONTEXT->PSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 }
 
-void CTexture2D::Unbind(UINT _RegisterNum)
+void CTexture::Unbind(UINT _RegisterNum)
 {
 	ID3D11ShaderResourceView* pSRV = nullptr;
 	CONTEXT->PSSetShaderResources(_RegisterNum, 1, &pSRV);
 }
 
-void CTexture2D::Binding_CS_SRV(UINT _RegisterNum)
+void CTexture::Binding_CS_SRV(UINT _RegisterNum)
 {
 	m_RecentSRV_CS = _RegisterNum;
 	CONTEXT->CSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 }
 
-void CTexture2D::Binding_CS_UAV(UINT _RegisterNum)
+void CTexture::Binding_CS_UAV(UINT _RegisterNum)
 {
 	m_RecentUAV_CS = _RegisterNum;
 	UINT i = -1;
 	CONTEXT->CSSetUnorderedAccessViews(_RegisterNum, 1, m_UAV.GetAddressOf(), &i);
 }
 
-void CTexture2D::Unbind_CS_SRV(int _RegisterNum)
+void CTexture::Unbind_CS_SRV(int _RegisterNum)
 {
 	if (_RegisterNum == -1)
 	{
@@ -114,7 +118,7 @@ void CTexture2D::Unbind_CS_SRV(int _RegisterNum)
 	}
 }
 
-void CTexture2D::Unbind_CS_UAV()
+void CTexture::Unbind_CS_UAV()
 {
 	ID3D11UnorderedAccessView* pUAV = nullptr;
 	UINT i = -1;
@@ -122,7 +126,7 @@ void CTexture2D::Unbind_CS_UAV()
 	m_RecentUAV_CS = -1;
 }
 
-int CTexture2D::Create(UINT _Width, UINT _Height, DXGI_FORMAT _format
+int CTexture::Create(UINT _Width, UINT _Height, DXGI_FORMAT _format
 	, UINT _Flag, D3D11_USAGE _usage)
 {
 	m_Desc.Format = _format;
@@ -186,7 +190,7 @@ int CTexture2D::Create(UINT _Width, UINT _Height, DXGI_FORMAT _format
 
 }
 
-int CTexture2D::Create(ComPtr<ID3D11Texture2D> _Tex2D)
+int CTexture::Create(ComPtr<ID3D11Texture2D> _Tex2D)
 {
 	m_Tex2D = _Tex2D;
 

@@ -67,7 +67,7 @@ void CGraphicShaderUI::Render_Ast()
 
     // ºŒ¿Ã¥ı ∑ª¥ı∏µ µµ∏ﬁ¿Œ
     ImGui::Text("Render Domain");
-    const char* domain[] = { "DOMAIN_QPAQUE", "DOMAIN_MASKED", "DOMAIN_TRANSPARENT", "DOMAIN_POSTPROCESS", "DOMAIN_UI", "DOMAIN_DEBUG" };
+    const char* domain[] = { "DOMAIN_OPAQUE", "DOMAIN_MASKED", "DOMAIN_TRANSPARENT", "DOMAIN_POSTPROCESS", "DOMAIN_UI", "DOMAIN_DEBUG" };
     int domain_current = static_cast<int>(pGS->GetDomain());
     if (ImGui::Combo("##RenderDomain", &domain_current, domain, IM_ARRAYSIZE(domain)))
     {

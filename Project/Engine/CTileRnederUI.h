@@ -16,6 +16,6 @@ public:
     virtual void Update_Com();
     virtual void Render_Com();
 
-    void TIlemapEditor(UINT& _Col, UINT& _Row, Vec2& _TileSize, AssetPtr<CTexture2D> _AtlasTex, vector<TileInfo>& _vecTIleInfo);
+    void TIlemapEditor(UINT& _Col, UINT& _Row, Vec2& _TileSize, AssetPtr<CTexture> _AtlasTex, vector<TileInfo>& _vecTIleInfo);
 };
 

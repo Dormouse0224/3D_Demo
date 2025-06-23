@@ -163,7 +163,7 @@ void CParticleRenderUI::Render_Com()
     }
 
     ImGui::SeparatorText("Particle Data");
-    AssetPtr<CTexture2D> ParticleTex = static_cast<CParticleRender*>(m_TargetObj->GetRenderComponent())->m_ParticleTex;
+    AssetPtr<CTexture> ParticleTex = static_cast<CParticleRender*>(m_TargetObj->GetRenderComponent())->m_ParticleTex;
     map<UINT, CGameObject*>& mapParticleObj = static_cast<CParticleRender*>(m_TargetObj->GetRenderComponent())->m_mapParticleObj;
 
     ImGui::Text("Particle Texture");
@@ -179,7 +179,7 @@ void CParticleRenderUI::Render_Com()
         if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ContentViewer"))
         {
             CAsset* Asset = *reinterpret_cast<CAsset**>(payload->Data);
-            AssetPtr<CTexture2D> pTex = dynamic_cast<CTexture2D*>(Asset);
+            AssetPtr<CTexture> pTex = dynamic_cast<CTexture*>(Asset);
             if (pTex.Get())
             {
                 m_TargetObj->ParticleRender()->SetParticleTex(pTex);

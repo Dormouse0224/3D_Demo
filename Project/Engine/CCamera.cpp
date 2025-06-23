@@ -224,7 +224,7 @@ void CCamera::SortObject()
 				// 2. 오브젝트가 사용하는 쉐이더의 도메인에 따라서 분류한다.
 				switch (vecObjects[j]->GetRenderComponent()->GetMaterial()->GetShader()->GetDomain())
 				{
-				case SHADER_DOMAIN::DOMAIN_QPAQUE:
+				case SHADER_DOMAIN::DOMAIN_OPAQUE:
 					m_vecOpaque.push_back(vecObjects[j]);
 					break;
 				case SHADER_DOMAIN::DOMAIN_MASKED:

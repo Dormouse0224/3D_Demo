@@ -203,6 +203,8 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="CRenderComponentUI.h" />
     <ClInclude Include="CSetColorCS.h" />
     <ClInclude Include="CSimulationEvent.h" />
+    <ClInclude Include="CSkyBox.h" />
+    <ClInclude Include="CSkyBoxUI.h" />
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CSprite.h" />
     <ClInclude Include="CSpriteRender.h" />
@@ -249,7 +251,7 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="CScript.h" />
     <ClInclude Include="CShader.h" />
     <ClInclude Include="CTaskMgr.h" />
-    <ClInclude Include="CTexture2D.h" />
+    <ClInclude Include="CTexture.h" />
     <ClInclude Include="CTimeMgr.h" />
     <ClInclude Include="CTransform.h" />
     <ClInclude Include="define.h" />
@@ -331,6 +333,8 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CSetColorCS.cpp" />
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CSimulationEvent.cpp" />
+    <ClCompile Include="CSkyBox.cpp" />
+    <ClCompile Include="CSkyBoxUI.cpp" />
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CSprite.cpp" />
     <ClCompile Include="CSpriteRender.cpp" />
@@ -338,7 +342,7 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CSpriteUI.cpp" />
     <ClCompile Include="CStructuredBuffer.cpp" />
     <ClCompile Include="CTaskMgr.cpp" />
-    <ClCompile Include="CTexture2D.cpp" />
+    <ClCompile Include="CTexture.cpp" />
     <ClCompile Include="CTexture2DUI.cpp" />
     <ClCompile Include="CTileRender.cpp" />
     <ClCompile Include="CTileRnederUI.cpp" />
@@ -422,6 +426,10 @@ call EngineHeaderCopy.bat</Command>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="skybox.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="sprite.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>

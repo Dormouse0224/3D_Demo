@@ -70,23 +70,25 @@ void CRenderMgr::Init()
 	// Merge Mesh
 	m_MergeMesh = CAssetMgr::GetInst()->Load<CMesh>(L"EA_RectMesh", true);
 
-	// Merge Shader
-	pShader = new CGraphicShader;
-	pShader->CreateVertexShader(L"HLSL\\Engine\\merge.fx", "VS_Merge");
-	pShader->CreatePixelShader(L"HLSL\\Engine\\merge.fx", "PS_Merge");
-	pShader->SetBSType(BS_TYPE::DEFAULT);
-	pShader->SetRSType(RS_TYPE::CULL_NONE);
-	pShader->SetDSType(DS_TYPE::NO_WRITE);
-	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
-	pShader->SetEngineAsset(true);
-	CAssetMgr::GetInst()->AddAsset(L"EA_MergeShader", pShader.Get());
+	//// Merge Shader
+	//pShader = new CGraphicShader;
+	//pShader->CreateVertexShader(L"HLSL\\Engine\\merge.fx", "VS_Merge");
+	//pShader->CreatePixelShader(L"HLSL\\Engine\\merge.fx", "PS_Merge");
+	//pShader->SetBSType(BS_TYPE::DEFAULT);
+	//pShader->SetRSType(RS_TYPE::CULL_NONE);
+	//pShader->SetDSType(DS_TYPE::NO_WRITE);
+	//pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
+	//pShader->SetEngineAsset(true);
+	//CAssetMgr::GetInst()->AddAsset(L"EA_MergeShader", pShader.Get());
 
-	// Merge Material
-	m_MergeMtrl = new CMaterial;
-	m_MergeMtrl->SetName(L"EA_MergeMtrl");
-	m_MergeMtrl->SetEngineAsset(true);
-	m_MergeMtrl->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_MergeShader"));
-	CAssetMgr::GetInst()->AddAsset(L"EA_MergeMtrl", m_MergeMtrl.Get());
+	//// Merge Material
+	//m_MergeMtrl = new CMaterial;
+	//m_MergeMtrl->SetName(L"EA_MergeMtrl");
+	//m_MergeMtrl->SetEngineAsset(true);
+	//m_MergeMtrl->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_MergeShader"));
+	//CAssetMgr::GetInst()->AddAsset(L"EA_MergeMtrl", m_MergeMtrl.Get());
+
+    m_MergeMtrl = CAssetMgr::GetInst()->Load<CMaterial>(L"EA_MergeMtrl", true);
 
 	CreateBackBufferView();
 	CreateMRT();

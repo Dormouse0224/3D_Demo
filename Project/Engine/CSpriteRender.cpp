@@ -76,24 +76,24 @@ int CSpriteRender::Save(fstream& _Stream)
 
 void CSpriteRender::CreateSpriteMaterial()
 {
-	if (nullptr == CAssetMgr::GetInst()->Load<CGraphicShader>(L"SpriteShader", true))
-	{
-		// SpriteShader
-		AssetPtr<CGraphicShader> pShader = new CGraphicShader;
-		pShader->CreateVertexShader(L"HLSL\\Engine\\sprite.fx", "VS_Sprite");
-		pShader->CreatePixelShader(L"HLSL\\Engine\\sprite.fx", "PS_Sprite");
-		pShader->SetRSType(RS_TYPE::CULL_NONE);
-		pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
-		CAssetMgr::GetInst()->AddAsset(L"SpriteShader", pShader.Get());
-	}
+	//if (nullptr == CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_SpriteShader", true))
+	//{
+	//	// SpriteShader
+	//	AssetPtr<CGraphicShader> pShader = new CGraphicShader;
+	//	pShader->CreateVertexShader(L"HLSL\\Engine\\sprite.fx", "VS_Sprite");
+	//	pShader->CreatePixelShader(L"HLSL\\Engine\\sprite.fx", "PS_Sprite");
+	//	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	//	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
+	//	CAssetMgr::GetInst()->AddAsset(L"SpriteShader", pShader.Get());
+	//}
 
-	if (nullptr == CAssetMgr::GetInst()->Load<CMaterial>(L"SpriteMtrl", true))
-	{
-		// SpriteMtrl
-		AssetPtr<CMaterial> pMtrl = new CMaterial;
-		pMtrl->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"SpriteShader", true));
-		CAssetMgr::GetInst()->AddAsset(L"SpriteMtrl", pMtrl.Get());
-	}
+	//if (nullptr == CAssetMgr::GetInst()->Load<CMaterial>(L"SpriteMtrl", true))
+	//{
+	//	// SpriteMtrl
+	//	AssetPtr<CMaterial> pMtrl = new CMaterial;
+	//	pMtrl->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"SpriteShader", true));
+	//	CAssetMgr::GetInst()->AddAsset(L"SpriteMtrl", pMtrl.Get());
+	//}
 
-	SetMaterial(CAssetMgr::GetInst()->Load<CMaterial>(L"SpriteMtrl", true));
+	SetMaterial(CAssetMgr::GetInst()->Load<CMaterial>(L"EA_SpriteMtrl", true));
 }

@@ -2,7 +2,7 @@
 #include "CAssetUI.h"
 
 class CGameObject;
-class CTexture2D;
+class CTexture;
 
 class CMeshUI :
     public CAssetUI
@@ -14,8 +14,8 @@ public:
 private:
     CGameObject*            m_MeshCam;
     CGameObject*            m_VertexObject;
-    AssetPtr<CTexture2D>    m_VertexRTTex;
-    AssetPtr<CTexture2D>    m_VertexDSTex;
+    AssetPtr<CTexture>    m_VertexRTTex;
+    AssetPtr<CTexture>    m_VertexDSTex;
     D3D11_VIEWPORT          m_ViewPort;
 
 

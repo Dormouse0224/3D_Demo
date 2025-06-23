@@ -87,7 +87,8 @@ void TreeNode::DragCheck()
 {
 	if (ImGui::BeginDragDropSource())
 	{
-		ImGui::SetDragDropPayload(to_str(m_Owner->GetName()).c_str(), &m_Data, sizeof(DWORD_PTR));
+        string str = to_str(m_Owner->GetName());
+		ImGui::SetDragDropPayload(str.c_str(), &m_Data, sizeof(DWORD_PTR));
 		ImGui::Text(m_Name.c_str());
 		ImGui::EndDragDropSource();
 	}

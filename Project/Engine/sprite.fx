@@ -4,7 +4,7 @@
 #include "value.fx"
 
 #define ATLAS_TEX       g_tex_0
-#define NORM_TEXTURE    g_Ntex_0
+#define NORM_TEXTURE    g_tex_1
 #define LeftTop         g_vec2_0
 #define Slice           g_vec2_1
 

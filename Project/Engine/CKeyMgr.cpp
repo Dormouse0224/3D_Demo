@@ -125,7 +125,7 @@ CKeyMgr::~CKeyMgr()
     delete m_Cursor;
 }
 
-void CKeyMgr::SetCursorTex(AssetPtr<CTexture2D> _Tex)
+void CKeyMgr::SetCursorTex(AssetPtr<CTexture> _Tex)
 {
     if (_Tex.Get())
         m_Cursor->MeshRender()->GetMaterial()->SetTexParam(TEX_0, _Tex);
@@ -145,7 +145,7 @@ void CKeyMgr::Init()
     m_Cursor->AddComponent(new CMeshRender);
     m_Cursor->SetLayerIdx((int)LAYER::UI);
     m_Cursor->MeshRender()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"EA_PointMesh"));
-    m_Cursor->MeshRender()->SetMaterial(CAssetMgr::GetInst()->Load<CMaterial>(L"EA_CursorMtrl"));
+    m_Cursor->MeshRender()->SetMaterial(CAssetMgr::GetInst()->Load<CMaterial>(L"EA_CursorMtrl", true));
     m_Cursor->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_1, 100.f);
     m_Cursor->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_2, 100.f);
 }
@@ -255,6 +255,8 @@ void CKeyMgr::Tick()
 
 void CKeyMgr::Render()
 {
+    if (m_Cursor->MeshRender()->GetMaterial()->GetTexParam(TEX_0) == nullptr)
+        return;
     CRenderMgr::GetInst()->GetUICam()->Camera()->SetMatrix();
     m_Cursor->Render();
 }

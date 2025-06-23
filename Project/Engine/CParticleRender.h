@@ -28,7 +28,7 @@ private:
     bool                        m_Active;
     bool                        m_Gravity;
 
-    AssetPtr<CTexture2D>        m_ParticleTex;
+    AssetPtr<CTexture>        m_ParticleTex;
 
     map<UINT, CGameObject*>     m_mapParticleObj;
     int                         m_PrevSpaceType;
@@ -36,7 +36,7 @@ private:
 public:
     void SetSpawnRate(float _Rate) { m_Module.SpawnRate = _Rate; }
     void SetSpawnCount(float _Count) { m_SpawnCount = _Count; }
-    void SetParticleTex(const AssetPtr<CTexture2D>& _Tex) { m_ParticleTex = _Tex; }
+    void SetParticleTex(const AssetPtr<CTexture>& _Tex) { m_ParticleTex = _Tex; }
     float GetSpawnRate() { return m_Module.SpawnRate; }
     void SetStartColor(Vec4 _Color) { m_Module.StartColor = _Color; }
     void SetEndColor(Vec4 _Color) { m_Module.EndColor = _Color; }

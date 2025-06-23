@@ -2,7 +2,7 @@
 #include "CSpriteUI.h"
 
 #include "CSprite.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 
 CSpriteUI::CSpriteUI()
 	: CAssetUI(ASSET_TYPE_WSTR[(UINT)ASSET_TYPE::SPRITE])
@@ -20,7 +20,7 @@ void CSpriteUI::Update_Ast()
 void CSpriteUI::Render_Ast()
 {
     AssetPtr<CSprite> pSprite = static_cast<CSprite*>(m_TargetAsset.Get());
-    AssetPtr<CTexture2D> pAtlas = pSprite->GetAtlasTex();
+    AssetPtr<CTexture> pAtlas = pSprite->GetAtlasTex();
     float tab = 130;
 
     // 스프라이트의 아틀라스 텍스쳐 정보
@@ -34,7 +34,7 @@ void CSpriteUI::Render_Ast()
         if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ContentViewer"))
         {
             CAsset* Asset = *reinterpret_cast<CAsset**>(payload->Data);
-            AssetPtr<CTexture2D> pTex = dynamic_cast<CTexture2D*>(Asset);
+            AssetPtr<CTexture> pTex = dynamic_cast<CTexture*>(Asset);
             if (pTex.Get())
             {
                 pSprite->SetAtlasTex(pTex);

@@ -2,7 +2,7 @@
 #include "CShader.h"
 #include "CStructuredBuffer.h"
 
-#include "CTexture2D.h"
+#include "CTexture.h"
 
 class CComputeShader :
     public CShader
@@ -19,7 +19,7 @@ protected:
     ComPtr<ID3D11ComputeShader>     m_CS;
 
     tMtrlConst                      m_Const;
-    pair<AssetPtr<CTexture2D>, int> m_CSTex[TEX_PARAM::TEX_END];    // 텍스쳐 셰이더 리소스와 텍스쳐가 바인딩 될 레지스터 넘버
+    pair<AssetPtr<CTexture>, int> m_CSTex[TEX_PARAM::TEX_END];    // 텍스쳐 셰이더 리소스와 텍스쳐가 바인딩 될 레지스터 넘버
 
     const UINT                      m_ThreadPerGroupX;
     const UINT                      m_ThreadPerGroupY;
@@ -35,7 +35,7 @@ protected:
 
 public:
     tMtrlConst GetConstParam() { return m_Const; }
-    pair<AssetPtr<CTexture2D>, int>& GetCSTex(TEX_PARAM _Param) { return m_CSTex[_Param]; }
+    pair<AssetPtr<CTexture>, int>& GetCSTex(TEX_PARAM _Param) { return m_CSTex[_Param]; }
     Vec3 GetThreadPerGroup() { return Vec3(m_ThreadPerGroupX, m_ThreadPerGroupY, m_ThreadPerGroupZ); }
     Vec3 GetGroupCount() { return Vec3(m_GroupX, m_GroupY, m_GroupZ); }
 

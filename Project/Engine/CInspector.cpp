@@ -25,17 +25,18 @@ CInspector::CInspector(wstring _Name)
 	m_ComponentUI[(UINT)COMPONENT_TYPE::CAMERA] = new CCameraUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::PHYSXACTOR] = new CPhysxActorUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::FSM] = new CFSMUI;
-	m_ComponentUI[(UINT)COMPONENT_TYPE::UICOM] = new CUIComUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::MESHRENDER] = new CMeshRenderUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::SPRITERENDER] = new CSpriteRenderUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::FLIPBOOKRENDER] = new CFlipbookRenderUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::TILERENDER] = new CTileRnederUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::PARTICLERENDER] = new CParticleRenderUI;
+    m_ComponentUI[(UINT)COMPONENT_TYPE::SKYBOX] = new CSkyBoxUI;
+    m_ComponentUI[(UINT)COMPONENT_TYPE::UICOM] = new CUIComUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::LIGHT] = new CLightUI;
 
 	m_AssetUI[(UINT)ASSET_TYPE::MESH] = new CMeshUI;
 	m_AssetUI[(UINT)ASSET_TYPE::MATERIAL] = new CMaterialUI;
-	m_AssetUI[(UINT)ASSET_TYPE::TEXTURE2D] = new CTexture2DUI;
+	m_AssetUI[(UINT)ASSET_TYPE::TEXTURE] = new CTexture2DUI;
 	m_AssetUI[(UINT)ASSET_TYPE::COMPUTE_SHADER] = new CComputeShaderUI;
 	m_AssetUI[(UINT)ASSET_TYPE::GRAPHIC_SHADER] = new CGraphicShaderUI;
 	m_AssetUI[(UINT)ASSET_TYPE::PREFAB] = new CPrefabUI;

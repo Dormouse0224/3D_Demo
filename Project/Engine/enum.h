@@ -105,7 +105,7 @@ enum class ASSET_TYPE
 {
 	MESH,
 	MESHDATA,
-	TEXTURE2D,
+	TEXTURE,
 	MATERIAL,
 	PREFAB,
 	SOUND,
@@ -140,7 +140,7 @@ enum class DIR
 
 enum class SHADER_DOMAIN
 {
-	DOMAIN_QPAQUE,		// 불투명
+	DOMAIN_OPAQUE,		// 불투명
 	DOMAIN_MASKED,		// 불투명 + 완전 투명
 	DOMAIN_TRANSPARENT, // 반투명 + 투명
 	DOMAIN_POSTPROCESS,	// 후처리
@@ -166,6 +166,12 @@ enum TEX_PARAM
 	TEX_3,
 	TEX_4,
 	TEX_5,
+
+    TEXCUBE_0,
+    TEXCUBE_1,
+
+    TEXARR_0,
+    TEXARR_1,
 
 	TEX_END,
 };

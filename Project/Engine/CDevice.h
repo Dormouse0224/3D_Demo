@@ -1,7 +1,7 @@
 #pragma once
 
 class CConstBuffer;
-class CTexture2D;
+class CTexture;
 
 class CDevice
 	: public Singleton<CDevice>

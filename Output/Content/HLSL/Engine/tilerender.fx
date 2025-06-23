@@ -13,7 +13,7 @@ struct TileInfo
 StructuredBuffer<TileInfo> g_TileInfo : register(t20);
 
 #define ATLAS_TEX       g_tex_0
-#define NORM_TEXTURE    g_Ntex_0
+#define NORM_TEXTURE    g_tex_1
 
 #define TileSize   g_vec2_0
 #define AtlasSize  g_vec2_1

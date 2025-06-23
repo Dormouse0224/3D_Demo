@@ -54,6 +54,7 @@ void CImguiMgr::Progress()
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
+    //ImGui::ShowMetricsWindow();
 
     // 메인 윈도우 메뉴바
     if (m_DebugMenuBar)
@@ -387,7 +388,7 @@ void CImguiMgr::LoadAsset()
                 || EXT == L".jpg" || EXT == L".JPG"
                 || EXT == L".jpeg" || EXT == L".JPEG"
                 || EXT == L".bmp" || EXT == L".BMP")
-            CAssetMgr::GetInst()->Load<CTexture2D>(RelativePath);
+            CAssetMgr::GetInst()->Load<CTexture>(RelativePath);
         else if (EXT == L".wav" || EXT == L".WAV"
                 || EXT == L".mp3" || EXT == L".MP3"
                 || EXT == L".aac" || EXT == L".AAC"

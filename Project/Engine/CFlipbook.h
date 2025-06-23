@@ -20,7 +20,7 @@ public:
 
 private:
     vector<AssetPtr<CSprite>>       m_vecSprite;
-    vector<AssetPtr<CTexture2D>>    m_vecTex;
+    vector<AssetPtr<CTexture>>    m_vecTex;
 
     SceneType               m_SceneType;
 
@@ -36,7 +36,7 @@ public:
             m_vecSprite.insert(m_vecSprite.begin() + _SceneIdx, _Scene);
             m_SceneType = SceneType::SPRITE;
         }
-        else if constexpr (is_same_v<CTexture2D, T>)
+        else if constexpr (is_same_v<CTexture, T>)
         {
             if (m_vecTex.size() < _SceneIdx)
                 return;
@@ -75,7 +75,7 @@ public:
                 return nullptr;
             return m_vecSprite[_Idx];
         }
-        else if constexpr (is_same_v<CTexture2D, T>)
+        else if constexpr (is_same_v<CTexture, T>)
         {
             if (_Idx >= m_vecTex.size() || _Idx < 0)
                 return nullptr;

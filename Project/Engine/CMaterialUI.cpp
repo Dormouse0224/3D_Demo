@@ -2,7 +2,7 @@
 #include "CMaterialUI.h"
 
 #include "CGraphicShader.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 #include "CMaterial.h"
 #include "CGraphicShader.h"
 
@@ -54,7 +54,7 @@ void CMaterialUI::Render_Ast()
 		{
 			ImGui::Text(data->m_Desc.c_str());
 			string label = "##TextureData_" + to_string(data->m_Param);
-			AssetPtr<CTexture2D> pTex = pMaterial->GetTexParam(static_cast<TEX_PARAM>(data->m_Param));
+			AssetPtr<CTexture> pTex = pMaterial->GetTexParam(static_cast<TEX_PARAM>(data->m_Param));
 			string name = "No Texture2D Exist";
 			if (pTex.Get())
 				name = to_str(pMaterial->GetTexParam(static_cast<TEX_PARAM>(data->m_Param))->GetName());
@@ -64,7 +64,7 @@ void CMaterialUI::Render_Ast()
 				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ContentViewer"))
 				{
 					CAsset* Asset = *reinterpret_cast<CAsset**>(payload->Data);
-					AssetPtr<CTexture2D> pTex = dynamic_cast<CTexture2D*>(Asset);
+					AssetPtr<CTexture> pTex = dynamic_cast<CTexture*>(Asset);
 					if (pTex.Get())
 					{
 						pMaterial->SetTexParam(data->m_Param, pTex);

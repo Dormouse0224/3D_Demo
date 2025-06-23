@@ -61,9 +61,6 @@
     <Filter Include="HLSL\03. Compute">
       <UniqueIdentifier>{42b8597f-ad73-446d-bd1d-0b27bcae1bb2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HLSL\02. 2D Shader">
-      <UniqueIdentifier>{d5311574-7e63-40cb-aa5d-26ce0bc156db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HLSL\01. Header">
       <UniqueIdentifier>{e3606ea6-6f6e-4677-b736-902bccd19d32}</UniqueIdentifier>
     </Filter>
@@ -289,6 +286,9 @@
     <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\09. UIComUI">
       <UniqueIdentifier>{63ff8a32-4414-4ef8-902a-79226d36451f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HLSL\02. Shader">
+      <UniqueIdentifier>{d5311574-7e63-40cb-aa5d-26ce0bc156db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEngine.h">
@@ -387,7 +387,7 @@
     <ClInclude Include="CCamera.h">
       <Filter>07. Component\02. Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CTexture2D.h">
+    <ClInclude Include="CTexture.h">
       <Filter>08. Asset\03. Texture</Filter>
     </ClInclude>
     <ClInclude Include="CRenderComponent.h">
@@ -594,6 +594,12 @@
     <ClInclude Include="CMRT.h">
       <Filter>03. Device\MRT</Filter>
     </ClInclude>
+    <ClInclude Include="CSkyBox.h">
+      <Filter>07. Component\RenderComponent\06. SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkyBoxUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\06. SkyBoxUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CEngine.cpp">
@@ -662,7 +668,7 @@
     <ClCompile Include="extern.cpp">
       <Filter>01. Header</Filter>
     </ClCompile>
-    <ClCompile Include="CTexture2D.cpp">
+    <ClCompile Include="CTexture.cpp">
       <Filter>08. Asset\03. Texture</Filter>
     </ClCompile>
     <ClCompile Include="CRenderComponent.cpp">
@@ -878,6 +884,12 @@
     <ClCompile Include="CMRT.cpp">
       <Filter>03. Device\MRT</Filter>
     </ClCompile>
+    <ClCompile Include="CSkyBox.cpp">
+      <Filter>07. Component\RenderComponent\06. SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkyBoxUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\06. SkyBoxUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -886,28 +898,28 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="value.fx">
       <Filter>HLSL\01. Header</Filter>
     </FxCompile>
     <FxCompile Include="debug_shape.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="struct.fx">
       <Filter>HLSL\01. Header</Filter>
     </FxCompile>
     <FxCompile Include="flipbook.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="particle.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="sprite.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="tilerender.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="particle_tick.fx">
       <Filter>HLSL\03. Compute\ParticleTick</Filter>
@@ -922,13 +934,16 @@
       <Filter>HLSL\03. Compute\ParticleTick</Filter>
     </FxCompile>
     <FxCompile Include="ui.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="merge.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="light.fx">
-      <Filter>HLSL\02. 2D Shader</Filter>
+      <Filter>HLSL\02. Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="skybox.fx">
+      <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

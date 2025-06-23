@@ -2,7 +2,7 @@
 #include "CFlipbookUI.h"
 
 #include "CFlipbook.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 #include "CSprite.h"
 #include "CAssetMgr.h"
 
@@ -56,7 +56,7 @@ void CFlipbookUI::Render_Ast()
             ImGui::Text("Flipbook Empty");
         else
             ImGui::SliderInt("##FlipbookSlider", &texture_current, 0, pFlipbook->GetSceneCount() - 1);
-        AssetPtr<CTexture2D> pScene = pFlipbook->GetScene<CTexture2D>(texture_current);
+        AssetPtr<CTexture> pScene = pFlipbook->GetScene<CTexture>(texture_current);
         if (pScene.Get())
             ImGui::Image(reinterpret_cast<ImTextureID>(pScene->GetSRV().Get()), ImVec2(300, 300));
         else
@@ -75,10 +75,10 @@ void CFlipbookUI::Render_Ast()
         }
         else if (pFlipbook->GetSceneType() == SceneType::TEXTURE)
         {
-            AssetPtr<CTexture2D> pTex = CAssetMgr::GetInst()->LoadFromFile<CTexture2D>(L"TEX");
+            AssetPtr<CTexture> pTex = CAssetMgr::GetInst()->LoadFromFile<CTexture>(L"TEX");
             if (pTex.Get())
             {
-                pFlipbook->AddScene<CTexture2D>(pTex, ++texture_current);
+                pFlipbook->AddScene<CTexture>(pTex, ++texture_current);
             }
         }
     }
@@ -92,7 +92,7 @@ void CFlipbookUI::Render_Ast()
         }
         else if (pFlipbook->GetSceneType() == SceneType::TEXTURE)
         {
-            pFlipbook->AddScene<CTexture2D>(pFlipbook->GetScene<CTexture2D>(texture_current), texture_current + 1);
+            pFlipbook->AddScene<CTexture>(pFlipbook->GetScene<CTexture>(texture_current), texture_current + 1);
         }
     }
 

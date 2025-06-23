@@ -2,7 +2,7 @@
 #include "CDevice.h"
 
 #include "CConstBuffer.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 
 #include "CLevelMgr.h"
 #include "CAssetMgr.h"

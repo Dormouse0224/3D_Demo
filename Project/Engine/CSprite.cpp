@@ -75,7 +75,7 @@ int CSprite::Load(const wstring& _FilePath)
         file.read(reinterpret_cast<char*>(AtlasName.data()), sizeof(wchar_t) * size);
 
         // 아틀라스 텍스쳐 로드
-        m_Atlas = CAssetMgr::GetInst()->Load<CTexture2D>(AtlasName);
+        m_Atlas = CAssetMgr::GetInst()->Load<CTexture>(AtlasName);
         if (m_Atlas == nullptr)
         {
             file.close();

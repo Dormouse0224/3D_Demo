@@ -7,7 +7,7 @@
 #define IS_SINGLE_TEX   g_int_1
 
 #define TEXTURE         g_tex_0
-#define NORM_TEXTURE    g_Ntex_0
+#define NORM_TEXTURE    g_tex_1
 
 #define LeftTop         g_vec2_0
 #define Slice           g_vec2_1

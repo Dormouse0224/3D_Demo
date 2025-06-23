@@ -87,7 +87,7 @@ int CTileRender::Load(fstream& _Stream)
 	{
 		AtlasName.resize(size);
 		_Stream.read(reinterpret_cast<char*>(AtlasName.data()), sizeof(wchar_t) * size);
-		m_AtlasTex = CAssetMgr::GetInst()->Load<CTexture2D>(AtlasName);
+		m_AtlasTex = CAssetMgr::GetInst()->Load<CTexture>(AtlasName);
 	}
 
 	int count = 0;

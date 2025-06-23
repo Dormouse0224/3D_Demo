@@ -2,7 +2,7 @@
 #include "CAsset.h"
 
 #include "CGraphicShader.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 
 class CMaterial :
     public CAsset
@@ -15,19 +15,19 @@ public:
 
 private:
     AssetPtr<CGraphicShader>    m_Shader;
-    AssetPtr<CTexture2D>        m_arrTex[TEX_PARAM::TEX_END];
+    AssetPtr<CTexture>          m_arrTex[TEX_PARAM::TEX_END];
     tMtrlConst                  m_Const;
 
 
 public:
     AssetPtr<CGraphicShader> GetShader() { return m_Shader; }
-    AssetPtr<CTexture2D> GetTexParam(TEX_PARAM _Idx) { return m_arrTex[_Idx]; }
+    AssetPtr<CTexture> GetTexParam(TEX_PARAM _Idx) { return m_arrTex[_Idx]; }
     tMtrlConst GetConstParam() { return m_Const; }
 
     void SetShader(AssetPtr<CGraphicShader> _Shader) { m_Shader = _Shader; }
     template<typename T>
     void SetScalarParam(CONST_PARAM _Param, const T& _Data);
-    void SetTexParam(TEX_PARAM _Param, const AssetPtr<CTexture2D>& _Tex) { m_arrTex[_Param] = _Tex; nullptr != _Tex ? m_Const.bTex[_Param] = true : m_Const.bTex[_Param] = false; }
+    void SetTexParam(TEX_PARAM _Param, const AssetPtr<CTexture>& _Tex) { m_arrTex[_Param] = _Tex; nullptr != _Tex ? m_Const.bTex[_Param] = true : m_Const.bTex[_Param] = false; }
 
     void Binding();
     static AssetPtr<CMaterial> Create(wstring _Name);

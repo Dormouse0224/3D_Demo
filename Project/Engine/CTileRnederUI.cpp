@@ -27,7 +27,7 @@ void CTileRnederUI::Render_Com()
     UINT Col = static_cast<CTileRender*>(m_TargetObj->GetRenderComponent())->m_Col;
     UINT Row = static_cast<CTileRender*>(m_TargetObj->GetRenderComponent())->m_Row;
     Vec2 TileSize = static_cast<CTileRender*>(m_TargetObj->GetRenderComponent())->m_TileSize;
-    AssetPtr<CTexture2D> AtlasTex = static_cast<CTileRender*>(m_TargetObj->GetRenderComponent())->m_AtlasTex;
+    AssetPtr<CTexture> AtlasTex = static_cast<CTileRender*>(m_TargetObj->GetRenderComponent())->m_AtlasTex;
     vector<TileInfo>& vecTIleInfo = static_cast<CTileRender*>(m_TargetObj->GetRenderComponent())->m_vecTileInfo;
 
     ImGui::SeparatorText("Tile Render Option");
@@ -66,7 +66,7 @@ void CTileRnederUI::Render_Com()
         if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ContentViewer"))
         {
             CAsset* Asset = *reinterpret_cast<CAsset**>(payload->Data);
-            AssetPtr<CTexture2D> pTex = dynamic_cast<CTexture2D*>(Asset);
+            AssetPtr<CTexture> pTex = dynamic_cast<CTexture*>(Asset);
             if (pTex.Get())
             {
                 m_TargetObj->TileRender()->SetAtlasTex(pTex);
@@ -83,7 +83,7 @@ void CTileRnederUI::Render_Com()
 
 }
 
-void CTileRnederUI::TIlemapEditor(UINT& _Col, UINT& _Row, Vec2& _TileSize, AssetPtr<CTexture2D> _AtlasTex, vector<TileInfo>& _vecTIleInfo)
+void CTileRnederUI::TIlemapEditor(UINT& _Col, UINT& _Row, Vec2& _TileSize, AssetPtr<CTexture> _AtlasTex, vector<TileInfo>& _vecTIleInfo)
 {
     static Vec2 originOffset(0, 0);
     static bool bEraseMode = false;

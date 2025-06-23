@@ -3,7 +3,7 @@
 
 #include "CDevice.h"
 #include "CConstBuffer.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 
 #include "CPathMgr.h"
 #include "CAssetMgr.h"
@@ -42,10 +42,10 @@ void CMaterial::Binding()
 		if (nullptr != m_arrTex[i].Get())
 		{
 			m_arrTex[i]->Binding(i);
-			AssetPtr<CTexture2D> pNormTex = CAssetMgr::GetInst()->GetNormTex(m_arrTex[i]->GetName());
-			CTexture2D::Unbind(TEX_PARAM::TEX_END + i);
-			if (pNormTex.Get())
-				pNormTex->Binding(TEX_PARAM::TEX_END + i);
+			//AssetPtr<CTexture> pNormTex = CAssetMgr::GetInst()->GetNormTex(m_arrTex[i]->GetName());
+			//CTexture::Unbind(TEX_PARAM::TEX_END + i);
+			//if (pNormTex.Get())
+			//	pNormTex->Binding(TEX_PARAM::TEX_END + i);
 		}
 	}
 
@@ -131,7 +131,7 @@ int CMaterial::Load(const wstring& _FilePath)
 		// 텍스쳐 로딩
 		if (!TexName.empty())
 		{
-			m_arrTex[i] = CAssetMgr::GetInst()->Load<CTexture2D>(TexName);
+			m_arrTex[i] = CAssetMgr::GetInst()->Load<CTexture>(TexName);
 			if (m_arrTex[i] == nullptr)
 			{
 				file.close();

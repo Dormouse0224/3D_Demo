@@ -40,11 +40,11 @@ public:
 	template<typename T>
 	AssetPtr<T> LoadFromFile(const wstring& _Extention);
 	/// <param name="_BindFlag">flags of D3D11_BIND_FLAG</param>
-	AssetPtr<CTexture2D> CreateTexture(const wstring& _Key, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
-	AssetPtr<CTexture2D> CreateTexture(const wstring& _Key, ComPtr<ID3D11Texture2D> _Tex2D);
+	AssetPtr<CTexture> CreateTexture(const wstring& _Key, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
+	AssetPtr<CTexture> CreateTexture(const wstring& _Key, ComPtr<ID3D11Texture2D> _Tex2D);
 	// 파일 경로로부터 확장자를 통해 에셋 타입을 반환합니다.
 	ASSET_TYPE GetAssetType(const wstring& _RelativePath);
-	AssetPtr<CTexture2D> GetNormTex(const wstring& _DefaultTexName);
+	AssetPtr<CTexture> GetNormTex(const wstring& _DefaultTexName);
 
 	void ContentLoad();
 	void ContentObserve();
@@ -65,8 +65,8 @@ ASSET_TYPE CAssetMgr::GetAssetType()
 		return ASSET_TYPE::MESH;
 	else if constexpr (is_same_v<CMaterial, T>)
 		return ASSET_TYPE::MATERIAL;
-	else if constexpr (is_same_v<CTexture2D, T>)
-		return ASSET_TYPE::TEXTURE2D;
+	else if constexpr (is_same_v<CTexture, T>)
+		return ASSET_TYPE::TEXTURE;
 	else if constexpr (is_same_v<CSound, T>)
 		return ASSET_TYPE::SOUND;
 	else if constexpr (is_same_v<CGraphicShader, T>)
@@ -174,7 +174,7 @@ inline AssetPtr<T> CAssetMgr::LoadFromFile(const wstring& _Extention)
 		}
 		std::filesystem::path RelativePath = path.substr(ContentDir.size());
 		std::filesystem::path EXT = RelativePath.extension();
-		if (is_same_v<T, CTexture2D>)
+		if (is_same_v<T, CTexture>)
 		{
 			if (EXT == L".dds" || EXT == L".DDS"
 				|| EXT == L".tga" || EXT == L".TGA"

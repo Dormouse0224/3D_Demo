@@ -117,7 +117,7 @@ int CFlipbook::Load(const wstring& _FilePath)
             file.read(reinterpret_cast<char*>(TexName.data()), sizeof(wchar_t) * len);
 
             // 텍스쳐 로드
-            m_vecTex[i] = CAssetMgr::GetInst()->Load<CTexture2D>(TexName);
+            m_vecTex[i] = CAssetMgr::GetInst()->Load<CTexture>(TexName);
             if (m_vecTex[i] == nullptr)
             {
                 file.close();

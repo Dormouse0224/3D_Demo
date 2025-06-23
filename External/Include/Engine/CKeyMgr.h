@@ -118,7 +118,7 @@ struct key_info
     bool isPrevPressed;
 };
 
-class CTexture2D;
+class CTexture;
 
 class CKeyMgr
     : public Singleton<CKeyMgr>
@@ -143,7 +143,7 @@ public:
     Vec2 GetMousePrevPos() { return m_MousePos; }
     Vec2 GetDragDir() { return m_DragDir; }
 
-    void SetCursorTex(AssetPtr<CTexture2D> _Tex);
+    void SetCursorTex(AssetPtr<CTexture> _Tex);
 
     void Init();
     void Tick();

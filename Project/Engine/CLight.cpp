@@ -13,23 +13,23 @@ CLight::CLight()
 	, m_LightMesh(nullptr)
 	, m_LightMtrl(nullptr)
 {
-	// Light Shader
-	AssetPtr<CGraphicShader> pShader = new CGraphicShader;
-	pShader->CreateVertexShader(L"HLSL\\Engine\\light.fx", "VS_Light");
-	pShader->CreatePixelShader(L"HLSL\\Engine\\light.fx", "PS_Light");
-	pShader->SetBSType(BS_TYPE::DEFAULT);
-	pShader->SetRSType(RS_TYPE::CULL_NONE);
-	pShader->SetDSType(DS_TYPE::NO_WRITE);
-	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
-	pShader->SetEngineAsset(true);
-	CAssetMgr::GetInst()->AddAsset(L"EA_LightShader", pShader.Get());
+	//// Light Shader
+	//AssetPtr<CGraphicShader> pShader = new CGraphicShader;
+	//pShader->CreateVertexShader(L"HLSL\\Engine\\light.fx", "VS_Light");
+	//pShader->CreatePixelShader(L"HLSL\\Engine\\light.fx", "PS_Light");
+	//pShader->SetBSType(BS_TYPE::DEFAULT);
+	//pShader->SetRSType(RS_TYPE::CULL_NONE);
+	//pShader->SetDSType(DS_TYPE::NO_WRITE);
+	//pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
+	//pShader->SetEngineAsset(true);
+	//CAssetMgr::GetInst()->AddAsset(L"EA_LightShader", pShader.Get());
 
-	// Light Material
-	m_LightMtrl = new CMaterial;
-	m_LightMtrl->SetName(L"EA_LightMtrl");
-	m_LightMtrl->SetEngineAsset(true);
-	m_LightMtrl->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_LightShader"));
-	CAssetMgr::GetInst()->AddAsset(L"EA_LightMtrl", m_LightMtrl.Get());
+	//// Light Material
+	//m_LightMtrl = new CMaterial;
+	//m_LightMtrl->SetName(L"EA_LightMtrl");
+	//m_LightMtrl->SetEngineAsset(true);
+	//m_LightMtrl->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_LightShader"));
+    m_LightMtrl = CAssetMgr::GetInst()->Load<CMaterial>(L"EA_LightMtrl", true);
 }
 
 CLight::CLight(const CLight& _Origin)

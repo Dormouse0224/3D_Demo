@@ -82,16 +82,14 @@ Texture2D g_tex_3 : register(t3);
 Texture2D g_tex_4 : register(t4);
 Texture2D g_tex_5 : register(t5);
 
-// 노멀맵 텍스쳐 레지스터
-Texture2D g_Ntex_0 : register(t6);
-Texture2D g_Ntex_1 : register(t7);
-Texture2D g_Ntex_2 : register(t8);
-Texture2D g_Ntex_3 : register(t9);
-Texture2D g_Ntex_4 : register(t10);
-Texture2D g_Ntex_5 : register(t11);
+TextureCube g_cubetex_0 : register(t6);
+TextureCube g_cubetex_1 : register(t7);
+
+Texture2DArray g_texarr_0 : register(t8);
+Texture2DArray g_texarr_1 : register(t9);
 
 // 광원 구조화 버퍼
-StructuredBuffer<tLightModule> g_LightBuffer : register(t12);
+StructuredBuffer<tLightModule> g_LightBuffer : register(t16);
 
 
 

@@ -3,7 +3,7 @@
 
 #include "CAssetMgr.h"
 #include "CDevice.h"
-#include "CTexture2D.h"
+#include "CTexture.h"
 
 CMRT::CMRT()
 	: m_RTTex{}
@@ -25,7 +25,7 @@ CMRT::~CMRT()
 int CMRT::CreateRenderTarget(D3D11_TEXTURE2D_DESC _Desc, wstring _Key, Vec4 _ClearColor)
 {
 	// 렌더 타겟이 이미 8개 이거나 해당 키값으로 이미 리소스가 존재하는 경우, 또는 바인드 플래그가 렌더 타겟이 아닌 경우 생성 실패
-	if (m_TexCount == 8 || CAssetMgr::GetInst()->Load<CTexture2D>(_Key, true) != nullptr || !(_Desc.BindFlags & D3D11_BIND_RENDER_TARGET))
+	if (m_TexCount == 8 || CAssetMgr::GetInst()->Load<CTexture>(_Key, true) != nullptr || !(_Desc.BindFlags & D3D11_BIND_RENDER_TARGET))
 		return E_FAIL;
 
 	ComPtr<ID3D11Texture2D> pRTTex = nullptr;
@@ -58,7 +58,7 @@ int CMRT::CreateRenderTarget(ComPtr<ID3D11Texture2D> _RTTex, wstring _Key, Vec4 
 int CMRT::CreateDepthStencil(D3D11_TEXTURE2D_DESC _Desc, wstring _Key, float _DepthClear, UINT8 _StencilClear)
 {
 	// 해당 키값으로 이미 리소스가 존재하는 경우, 또는 바인드 플래그가 깊이 스텐실이 아닌 경우 생성 실패
-	if (CAssetMgr::GetInst()->Load<CTexture2D>(_Key, true) != nullptr || !(_Desc.BindFlags & D3D11_BIND_DEPTH_STENCIL))
+	if (CAssetMgr::GetInst()->Load<CTexture>(_Key, true) != nullptr || !(_Desc.BindFlags & D3D11_BIND_DEPTH_STENCIL))
 		return E_FAIL;
 
 	ComPtr<ID3D11Texture2D> pDSTex = nullptr;
@@ -96,7 +96,7 @@ void CMRT::SetRenderTarget()
 	CONTEXT->OMSetRenderTargets(m_TexCount, vecRTV.data(), m_DSTex->GetDSV().Get());
 }
 
-AssetPtr<CTexture2D> CMRT::GetRenderTarget(int _Idx)
+AssetPtr<CTexture> CMRT::GetRenderTarget(int _Idx)
 {
 	if (_Idx >= m_TexCount)
 		return nullptr;

@@ -1,7 +1,7 @@
 #pragma once
 #include "CComputeShader.h"
 
-#include "CTexture2D.h"
+#include "CTexture.h"
 
 class CParticleTickCS :
     public CComputeShader
@@ -16,7 +16,7 @@ public:
     void SetParticleBuffer(CStructuredBuffer* _Buffer) { m_ParticleBuffer = _Buffer; }
     void SetSpawnBuffer(CStructuredBuffer* _Buffer) { m_SpawnBuffer = _Buffer; }
     void SetModuleBuffer(CStructuredBuffer* _Buffer) { m_ModuleBuffer = _Buffer; }
-    void SetNoiseTex(AssetPtr<CTexture2D> _Noise) { m_CSTex[TEX_0] = make_pair(_Noise, 0); }
+    void SetNoiseTex(AssetPtr<CTexture> _Noise) { m_CSTex[TEX_0] = make_pair(_Noise, 0); }
 
 public:
     virtual int Binding() override;
