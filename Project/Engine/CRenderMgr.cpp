@@ -231,3 +231,17 @@ void CRenderMgr::UnbindShaders()
 	CONTEXT->HSSetShader(nullptr, nullptr, 0);
 	CONTEXT->PSSetShader(nullptr, nullptr, 0);
 }
+
+void CRenderMgr::UnbindResources()
+{
+    ID3D11ShaderResourceView* nullSRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
+    UINT count = D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT;
+
+    // 각 셰이더 스테이지의 SRV 해제
+    CONTEXT->VSSetShaderResources(0, count, nullSRVs); // Vertex Shader
+    CONTEXT->PSSetShaderResources(0, count, nullSRVs); // Pixel Shader
+    CONTEXT->GSSetShaderResources(0, count, nullSRVs); // Geometry Shader
+    CONTEXT->HSSetShaderResources(0, count, nullSRVs); // Hull Shader
+    CONTEXT->DSSetShaderResources(0, count, nullSRVs); // Domain Shader
+    CONTEXT->CSSetShaderResources(0, count, nullSRVs); // Compute Shader
+}

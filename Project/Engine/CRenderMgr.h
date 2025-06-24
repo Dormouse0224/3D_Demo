@@ -38,6 +38,7 @@ public:
 	CCamera* GetCurrentCam() { return m_CurrentCam; }
 
 	void UnbindShaders();
+	void UnbindResources();
 
 public:
 	void Init();

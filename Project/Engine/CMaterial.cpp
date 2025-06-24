@@ -7,6 +7,7 @@
 
 #include "CPathMgr.h"
 #include "CAssetMgr.h"
+#include "CRenderMgr.h"
 
 CMaterial::CMaterial()
 	: CAsset(ASSET_TYPE::MATERIAL)
@@ -35,6 +36,9 @@ CMaterial::~CMaterial()
 
 void CMaterial::Binding()
 {
+    CRenderMgr::GetInst()->UnbindShaders();
+    CRenderMgr::GetInst()->UnbindResources();
+
 	m_Shader->Binding();
 
 	for (UINT i = 0; i < TEX_PARAM::TEX_END; ++i)

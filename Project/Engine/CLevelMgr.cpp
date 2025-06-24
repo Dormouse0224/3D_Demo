@@ -85,6 +85,17 @@ CLevel* CLevelMgr::FindLevel(wstring _RelativePath)
 		return iter->second->Clone();
 }
 
+void CLevelMgr::UpdateLevel(wstring _RelativePath, CLevel* _Level)
+{
+    // 레벨을 저장해둔 컨테이너에서 검색, 찾으면 기존 레벨 삭제 후 입력받은 레벨로 변경
+    const auto iter = m_mapLevelList.find(_RelativePath);
+    if (iter != m_mapLevelList.end())
+    {
+        delete iter->second;
+        iter->second = _Level;
+    }
+}
+
 void CLevelMgr::DeleteLevel(wstring _RelativePath)
 {
 	const auto iter = m_mapLevelList.find(_RelativePath);

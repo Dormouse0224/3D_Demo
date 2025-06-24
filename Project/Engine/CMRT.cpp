@@ -2,6 +2,8 @@
 #include "CMRT.h"
 
 #include "CAssetMgr.h"
+#include "CRenderMgr.h"
+
 #include "CDevice.h"
 #include "CTexture.h"
 
@@ -84,6 +86,9 @@ void CMRT::ClearTargets()
 
 void CMRT::SetRenderTarget()
 {
+    CRenderMgr::GetInst()->UnbindShaders();
+    CRenderMgr::GetInst()->UnbindResources();
+
 	// 뷰포트 설정값 전달
 	CONTEXT->RSSetViewports(1, &m_Viewport);
 

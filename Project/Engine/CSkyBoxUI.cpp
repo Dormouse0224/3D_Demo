@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CSkyBoxUI.h"
+#include "CSkyBox.h"
 
 CSkyBoxUI::CSkyBoxUI()
     : CRenderComponentUI(COMPONENT_TYPE::SKYBOX)
@@ -18,7 +19,10 @@ void CSkyBoxUI::Render_Com()
 {
     Render_RCom();
 
-    AssetPtr<CMaterial> pMaterial = m_TargetObj->GetRenderComponent()->GetMaterial();
+    CSkyBox* pSkybox = dynamic_cast<CSkyBox*>(m_TargetObj->GetRenderComponent());
+    if (pSkybox == nullptr)
+        return;
+    AssetPtr<CMaterial> pMaterial = pSkybox->GetMaterial();
 
     if (pMaterial.Get())
     {
@@ -37,7 +41,7 @@ void CSkyBoxUI::Render_Com()
                 AssetPtr<CTexture> pTex = dynamic_cast<CTexture*>(Asset);
                 if (pTex.Get())
                 {
-                    pMaterial->SetTexParam(TEX_PARAM::TEXCUBE_0, pTex);
+                    pSkybox->SetSkyboxTex(pTex);
                 }
             }
             ImGui::EndDragDropTarget();

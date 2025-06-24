@@ -34,6 +34,7 @@ CEngine::~CEngine()
 
 int CEngine::Init(HINSTANCE _Inst, UINT _Width, UINT _Height)
 {
+
     m_hInst = _Inst;
     m_vResolution = Vec2(_Width, _Height);
 

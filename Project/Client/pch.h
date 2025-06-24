@@ -1,6 +1,8 @@
 #pragma once
 
 
+//#include <VLD/vld.h>
+
 #include "framework.h"
 #include <crtdbg.h>
 
@@ -15,8 +17,8 @@
 #endif
 
 // 스크립트 라이브러리 인클루드
-//#ifndef _DEBUG
-//#pragma comment(lib, "Script//Script")
-//#else
-//#pragma comment(lib, "Script//Script_d")
-//#endif
+#ifndef _DEBUG
+#pragma comment(lib, "Script//Script")
+#else
+#pragma comment(lib, "Script//Script_d")
+#endif

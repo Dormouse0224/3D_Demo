@@ -32,6 +32,7 @@ public:
 	void AddLevelList(wstring _RelativePath, CLevel* _Level) { m_mapLevelList.insert(make_pair(_RelativePath, _Level->Clone())); }
 	// 상대경로를 키값으로 저장된 레벨을 찾아 복사본을 반환합니다.
 	CLevel* FindLevel(wstring _RelativePath);
+	void UpdateLevel(wstring _RelativePath, CLevel* _Level);
 	// 저장된 레벨 중 해당 키값으로 등록된 레벨을 제거합니다.
 	void DeleteLevel(wstring _RelativePath);
 

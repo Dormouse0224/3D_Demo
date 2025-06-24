@@ -26,6 +26,7 @@ private:
 public:
     UINT GetWidth() { return m_Desc.Width; }
     UINT GetHeight() { return m_Desc.Height; }
+    const D3D11_TEXTURE2D_DESC& GetDesc() { return m_Desc; }
 
     ComPtr<ID3D11RenderTargetView>	    GetRTV() { return  m_RTV; }
     ComPtr<ID3D11DepthStencilView>	    GetDSV() { return  m_DSV; }

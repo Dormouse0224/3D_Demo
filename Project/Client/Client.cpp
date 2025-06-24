@@ -9,7 +9,7 @@
 #include "Engine/CComponentMgr.h"
 #include "Engine/CFSMMgr.h"
 
-//#include "Script/CScriptInit.h"
+#include "Script/CScriptInit.h"
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -20,7 +20,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ int       nCmdShow)
 {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    //_CrtSetBreakAlloc(4783); // 블록 번호로 중단
+    //_CrtSetBreakAlloc(953244); // 블록 번호로 중단
 
     WNDCLASSEXW wcex = {};
 
@@ -46,8 +46,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 
     // 스크립트 라이브러리에서 만든 스크립트와 FSM 관련 엔진에 등록
-    //CComponentMgr::GetInst()->SetScriptInitFunc(&CScriptInit::ScriptInit);
-    //CFSMMgr::GetInst()->SetFSMInitFunc(&CScriptInit::FSMInit);
+    CComponentMgr::GetInst()->SetScriptInitFunc(&CScriptInit::ScriptInit);
+    CFSMMgr::GetInst()->SetFSMInitFunc(&CScriptInit::FSMInit);
 
     // 엔진 초기 작업
     CEngine::GetInst()->Begin();
