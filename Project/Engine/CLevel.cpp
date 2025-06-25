@@ -153,8 +153,9 @@ int CLevel::Save(wstring _FileName, bool _Update)
 
 	file.close();
 
-	// 기존에 등록된 레벨 중 같은 이름의 레벨이 있다면 업데이트
-    CLevelMgr::GetInst()->UpdateLevel(RelativePath, this);
+    // 기존에 등록된 레벨 중 같은 이름의 레벨이 있다면 업데이트
+    if (_Update)
+        CLevelMgr::GetInst()->UpdateLevel(RelativePath, this);
 
 	return S_OK;
 }

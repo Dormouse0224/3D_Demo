@@ -190,6 +190,50 @@ void CDevice::CreateDepthStencilState()
     Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO; // 깊이 기록 X
     Desc.StencilEnable = false;
     DEVICE->CreateDepthStencilState(&Desc, m_DSState[(UINT)DS_TYPE::NO_TEST_NO_WIRITE].GetAddressOf());
+
+    // volume mesh check
+    Desc.DepthEnable = true;
+    Desc.DepthFunc = D3D11_COMPARISON_GREATER;
+    Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO; // 깊이 기록 X
+
+    Desc.StencilEnable = true;
+    Desc.StencilReadMask = 0xff;
+    Desc.StencilWriteMask = 0xff;
+
+    // 뒷면 스텐실 테스트
+    Desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;    // 스탠실 항상 통과
+    Desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_INCR;    // 성공하면 스텐실값을 증가
+    Desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;    // 스탠실 실패시 : 항상 통과하므로 의미 없음
+    Desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_ZERO;   // 스텐실은 통과했지만 깊이 테스트에서 실패한 경우 스텐실값을 0으로 설정
+
+    Desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;   // 스탠실 항상 통과
+    Desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;  // Grater 조건으로 앞면을 그린다.
+    Desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_ZERO;  // 성공한게 오히려 실패, 앞면보다 더 앞쪽에 있는 부위 
+    Desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
+
+    DEVICE->CreateDepthStencilState(&Desc, m_DSState[(UINT)DS_TYPE::VOLUME_MESH_CHECK].GetAddressOf());
+
+    // stencil equal check
+    // 특정 스텐실값이 있는 부분만 통과
+    Desc.DepthEnable = true;
+    Desc.DepthFunc = D3D11_COMPARISON_ALWAYS;
+    Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO; // 깊이 기록 X
+
+    Desc.StencilEnable = true;
+    Desc.StencilReadMask = 0xff;
+    Desc.StencilWriteMask = 0xff;
+
+    Desc.BackFace.StencilFunc = D3D11_COMPARISON_LESS; // 특정 값인경우 통과
+    Desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_ZERO; // 모든 스텐실 값을 0로 만든다.
+    Desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_ZERO;
+    Desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_ZERO;
+
+    Desc.FrontFace.StencilFunc = D3D11_COMPARISON_LESS; // 특정 값인경우 통과
+    Desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_ZERO;  // 모든 스텐실 값을 0로 만든다.
+    Desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_ZERO;
+    Desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_ZERO;
+
+    DEVICE->CreateDepthStencilState(&Desc, m_DSState[(UINT)DS_TYPE::STENCIL_EQUAL].GetAddressOf());
 }
 
 void CDevice::CreateBlendState()
@@ -201,7 +245,7 @@ void CDevice::CreateBlendState()
     // AlphaBlend
     D3D11_BLEND_DESC Desc = {};
     Desc.AlphaToCoverageEnable = false;
-    Desc.IndependentBlendEnable = true;
+    Desc.IndependentBlendEnable = false;
     {
         // 0번 렌더 타겟 알파블렌드 설정
         Desc.RenderTarget[0].BlendEnable = true;
@@ -216,21 +260,6 @@ void CDevice::CreateBlendState()
         Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
         Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
         Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
-    }
-    for (int i = 1; i < MRT_COUNT; ++i)
-    {
-        Desc.RenderTarget[i].BlendEnable = true;
-        Desc.RenderTarget[i].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-
-        // RGB 혼합 계수 설정
-        Desc.RenderTarget[i].BlendOp = D3D11_BLEND_OP_ADD;          // Src 와 Dst 를 더하기    
-        Desc.RenderTarget[i].SrcBlend = D3D11_BLEND_ONE;            // Src 계수는 1
-        Desc.RenderTarget[i].DestBlend = D3D11_BLEND_ZERO;          // Dst 계수는 0
-
-        // A 혼합 계수 설정
-        Desc.RenderTarget[i].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-        Desc.RenderTarget[i].SrcBlendAlpha = D3D11_BLEND_ONE;
-        Desc.RenderTarget[i].DestBlendAlpha = D3D11_BLEND_ZERO;
     }
 
     DEVICE->CreateBlendState(&Desc, m_BSState[(UINT)BS_TYPE::ALPHABLEND].GetAddressOf());

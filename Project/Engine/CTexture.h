@@ -37,16 +37,12 @@ public:
 public:
     // GraphicShader, t 레지스터
     void Binding(UINT _RegisterNum);
-    static void Unbind(UINT _RegisterNum);
 
     // ComputeShader, t 레지스터
-    void Binding_CS_SRV(UINT _RegisterNum);
+    void Binding_CS(UINT _RegisterNum);
 
     // ComputeShader, u 레지스터
     void Binding_CS_UAV(UINT _RegisterNum);
-
-    void Unbind_CS_SRV(int _RegisterNum);
-    void Unbind_CS_UAV();
 
 
 private:

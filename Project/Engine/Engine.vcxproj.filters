@@ -67,9 +67,6 @@
     <Filter Include="HLSL\03. Compute\ParticleTick">
       <UniqueIdentifier>{0b856cba-15fe-47e0-a48a-f21ee690b881}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HLSL\03. Compute\SetColor">
-      <UniqueIdentifier>{212108d4-10e0-4e43-b88b-801f30d76eec}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Manager">
       <UniqueIdentifier>{7133b147-733a-4501-98a8-2c13745a2961}</UniqueIdentifier>
     </Filter>
@@ -432,9 +429,6 @@
     <ClInclude Include="CGraphicShader.h">
       <Filter>08. Asset\06. Shader\GraphicShader</Filter>
     </ClInclude>
-    <ClInclude Include="CSetColorCS.h">
-      <Filter>HLSL\03. Compute\SetColor</Filter>
-    </ClInclude>
     <ClInclude Include="CPhysxMgr.h">
       <Filter>04. Manager\10. PhysxMgr</Filter>
     </ClInclude>
@@ -722,9 +716,6 @@
     <ClCompile Include="CGraphicShader.cpp">
       <Filter>08. Asset\06. Shader\GraphicShader</Filter>
     </ClCompile>
-    <ClCompile Include="CSetColorCS.cpp">
-      <Filter>HLSL\03. Compute\SetColor</Filter>
-    </ClCompile>
     <ClCompile Include="CPhysxMgr.cpp">
       <Filter>04. Manager\10. PhysxMgr</Filter>
     </ClCompile>
@@ -897,7 +888,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="std2d.fx">
+    <FxCompile Include="deferred.fx">
       <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="value.fx">
@@ -924,9 +915,6 @@
     <FxCompile Include="particle_tick.fx">
       <Filter>HLSL\03. Compute\ParticleTick</Filter>
     </FxCompile>
-    <FxCompile Include="SetColor.fx">
-      <Filter>HLSL\03. Compute\SetColor</Filter>
-    </FxCompile>
     <FxCompile Include="PhysxDebug.fx">
       <Filter>HLSL</Filter>
     </FxCompile>
@@ -943,6 +931,9 @@
       <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
     <FxCompile Include="skybox.fx">
+      <Filter>HLSL\02. Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="lightfunc.fx">
       <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
   </ItemGroup>

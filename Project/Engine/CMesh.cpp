@@ -4,6 +4,7 @@
 #include "CDevice.h"
 #include "CPathMgr.h"
 #include "CAssetMgr.h"
+#include "CRenderMgr.h"
 
 CMesh::CMesh()
 	: CAsset(ASSET_TYPE::MESH)
@@ -82,6 +83,10 @@ void CMesh::Render()
 	Binding();
 
 	CONTEXT->DrawIndexed(m_IdxCount, 0, 0);
+
+    // 사용이 끝난 셰이더 및 리소스 언바인딩
+    CRenderMgr::GetInst()->UnbindShaders();
+    CRenderMgr::GetInst()->UnbindResources();
 }
 
 void CMesh::Render_Particle(UINT _Count)
@@ -89,6 +94,10 @@ void CMesh::Render_Particle(UINT _Count)
 	Binding();
 
 	CONTEXT->DrawIndexedInstanced(m_IdxCount, _Count, 0, 0, 0);
+
+    // 사용이 끝난 셰이더 및 리소스 언바인딩
+    CRenderMgr::GetInst()->UnbindShaders();
+    CRenderMgr::GetInst()->UnbindResources();
 }
 
 int CMesh::Save(const wstring& _FileName, bool _Update)

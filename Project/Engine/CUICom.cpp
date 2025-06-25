@@ -209,11 +209,11 @@ void CUICom::Render()
 	Transform()->Binding();
 
 	// 사용할 쉐이더 바인딩
-	GetMaterial()->SetScalarParam(VEC2_0, m_ScreenPosNDC);
+	GetMaterial()->SetConstParam(VEC2_0, m_ScreenPosNDC);
 	m_Alpha = clamp(m_Alpha, 0.f, 1.f);
-	GetMaterial()->SetScalarParam(FLOAT_0, m_Alpha);
-	GetMaterial()->SetScalarParam(FLOAT_1, m_Scale.x);
-	GetMaterial()->SetScalarParam(FLOAT_2, m_Scale.y);
+	GetMaterial()->SetConstParam(FLOAT_0, m_Alpha);
+	GetMaterial()->SetConstParam(FLOAT_1, m_Scale.x);
+	GetMaterial()->SetConstParam(FLOAT_2, m_Scale.y);
 	GetMaterial()->Binding();
 
 	// 렌더링 시작

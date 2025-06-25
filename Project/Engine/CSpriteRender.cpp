@@ -29,14 +29,14 @@ void CSpriteRender::Render()
 	// 사용할 쉐이더 바인딩	
 	if (nullptr != m_Sprite)
 	{
-		GetMaterial()->SetScalarParam(INT_0, (int)!!m_Sprite->GetAtlasTex().Get());
+		GetMaterial()->SetConstParam(INT_0, (int)!!m_Sprite->GetAtlasTex().Get());
 		GetMaterial()->SetTexParam(TEX_0, m_Sprite->GetAtlasTex());
-		GetMaterial()->SetScalarParam(VEC2_0, m_Sprite->GetLeftTop());
-		GetMaterial()->SetScalarParam(VEC2_1, m_Sprite->GetSlice());
+		GetMaterial()->SetConstParam(VEC2_0, m_Sprite->GetLeftTop());
+		GetMaterial()->SetConstParam(VEC2_1, m_Sprite->GetSlice());
 	}
 	else
 	{
-		GetMaterial()->SetScalarParam(INT_0, 0);
+		GetMaterial()->SetConstParam(INT_0, 0);
 		GetMaterial()->SetTexParam(TEX_0, nullptr);
 	}
 

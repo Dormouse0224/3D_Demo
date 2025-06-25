@@ -136,6 +136,10 @@
       <Command>
       </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>cd $(SolutionDir)
+call EngineHeaderCopy.bat</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -201,7 +205,6 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="CComponentMgr.h" />
     <ClInclude Include="CPrefabUI.h" />
     <ClInclude Include="CRenderComponentUI.h" />
-    <ClInclude Include="CSetColorCS.h" />
     <ClInclude Include="CSimulationEvent.h" />
     <ClInclude Include="CSkyBox.h" />
     <ClInclude Include="CSkyBoxUI.h" />
@@ -330,7 +333,6 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CRenderMgr_Init.cpp" />
     <ClCompile Include="CScript.cpp" />
     <ClCompile Include="CComponentMgr.cpp" />
-    <ClCompile Include="CSetColorCS.cpp" />
     <ClCompile Include="CShader.cpp" />
     <ClCompile Include="CSimulationEvent.cpp" />
     <ClCompile Include="CSkyBox.cpp" />
@@ -373,6 +375,10 @@ call EngineHeaderCopy.bat</Command>
     <None Include="SimpleMath.inl" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="lightfunc.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="merge.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
@@ -421,12 +427,6 @@ call EngineHeaderCopy.bat</Command>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="SetColor.fx">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
-    </FxCompile>
     <FxCompile Include="skybox.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
@@ -437,7 +437,7 @@ call EngineHeaderCopy.bat</Command>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="std2d.fx">
+    <FxCompile Include="deferred.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>

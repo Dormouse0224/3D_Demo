@@ -73,14 +73,14 @@ void CFlipbookRender::Render()
 		// 사용할 쉐이더 바인딩	
 		if (nullptr != pCurSprite)
 		{
-			GetMaterial()->SetScalarParam(INT_0, (int)!!pCurSprite->GetAtlasTex().Get());
+			GetMaterial()->SetConstParam(INT_0, (int)!!pCurSprite->GetAtlasTex().Get());
 			GetMaterial()->SetTexParam(TEX_0, pAtlas);
-			GetMaterial()->SetScalarParam(VEC2_0, vLeftTop);
-			GetMaterial()->SetScalarParam(VEC2_1, vSlice);
+			GetMaterial()->SetConstParam(VEC2_0, vLeftTop);
+			GetMaterial()->SetConstParam(VEC2_1, vSlice);
 		}
 		else
 		{
-			GetMaterial()->SetScalarParam(INT_0, 0);
+			GetMaterial()->SetConstParam(INT_0, 0);
 			GetMaterial()->SetTexParam(TEX_0, nullptr);
 		}
 	}
@@ -88,8 +88,8 @@ void CFlipbookRender::Render()
 	{
 		AssetPtr<CTexture> pCurTex = m_CurFlipbook->GetScene<CTexture>(m_SceneIdx);
 
-		GetMaterial()->SetScalarParam(INT_0, 0);
-		GetMaterial()->SetScalarParam(INT_1, (int)!!pCurTex.Get());
+		GetMaterial()->SetConstParam(INT_0, 0);
+		GetMaterial()->SetConstParam(INT_1, (int)!!pCurTex.Get());
 		GetMaterial()->SetTexParam(TEX_0, pCurTex);
 	}
 

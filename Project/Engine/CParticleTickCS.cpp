@@ -25,7 +25,7 @@ int CParticleTickCS::Binding()
 	m_SpawnBuffer->Binding_CS_UAV(1);
 
 	// 모듈 데이터
-	m_ModuleBuffer->Binding_CS_SRV(20);
+	m_ModuleBuffer->Binding_CS(20);
 
 	// 파티클 버퍼 최대 개수
 	m_Const.iArr[0] = (int)m_ParticleBuffer->GetElementCount();
@@ -42,20 +42,6 @@ void CParticleTickCS::CalcGroupNum()
 
 	m_GroupY = 1;
 	m_GroupZ = 1;
-}
-
-void CParticleTickCS::Clear()
-{
-	m_ParticleBuffer->Unbind_CS_UAV();
-	m_ParticleBuffer = nullptr;
-
-	m_SpawnBuffer->Unbind_CS_UAV();
-	m_SpawnBuffer = nullptr;
-
-	m_ModuleBuffer->Unbind_CS_SRV();
-	m_ModuleBuffer = nullptr;
-
-
 }
 
 void CParticleTickCS::SetData()

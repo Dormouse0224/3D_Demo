@@ -112,7 +112,7 @@ void CMeshUI::VertexRender()
 
 	// 렌더 오브젝트 메쉬 설정, 카메라 틱 및 렌더링 수행
 	m_VertexObject->MeshRender()->SetMesh(static_cast<CMesh*>(m_TargetAsset.Get()));
-	m_VertexObject->MeshRender()->GetMaterial()->SetScalarParam(VEC4_0, Vec4(0, 1, 0, 1));
+	m_VertexObject->MeshRender()->GetMaterial()->SetConstParam(VEC4_0, Vec4(0, 1, 0, 1));
 	m_VertexObject->MeshRender()->GetMaterial()->GetShader()->SetBSType(BS_TYPE::DEFAULT);
 	m_MeshCam->FinalTick();
 	m_VertexObject->FinalTick();

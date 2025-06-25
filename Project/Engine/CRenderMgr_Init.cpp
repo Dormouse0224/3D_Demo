@@ -70,24 +70,6 @@ void CRenderMgr::Init()
 	// Merge Mesh
 	m_MergeMesh = CAssetMgr::GetInst()->Load<CMesh>(L"EA_RectMesh", true);
 
-	//// Merge Shader
-	//pShader = new CGraphicShader;
-	//pShader->CreateVertexShader(L"HLSL\\Engine\\merge.fx", "VS_Merge");
-	//pShader->CreatePixelShader(L"HLSL\\Engine\\merge.fx", "PS_Merge");
-	//pShader->SetBSType(BS_TYPE::DEFAULT);
-	//pShader->SetRSType(RS_TYPE::CULL_NONE);
-	//pShader->SetDSType(DS_TYPE::NO_WRITE);
-	//pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
-	//pShader->SetEngineAsset(true);
-	//CAssetMgr::GetInst()->AddAsset(L"EA_MergeShader", pShader.Get());
-
-	//// Merge Material
-	//m_MergeMtrl = new CMaterial;
-	//m_MergeMtrl->SetName(L"EA_MergeMtrl");
-	//m_MergeMtrl->SetEngineAsset(true);
-	//m_MergeMtrl->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_MergeShader"));
-	//CAssetMgr::GetInst()->AddAsset(L"EA_MergeMtrl", m_MergeMtrl.Get());
-
     m_MergeMtrl = CAssetMgr::GetInst()->Load<CMaterial>(L"EA_MergeMtrl", true);
 
 	CreateBackBufferView();
@@ -130,6 +112,10 @@ int CRenderMgr::CreateBackBufferView()
 
 int CRenderMgr::CreateMRT()
 {
+    // ============
+    // Deffered MRT
+    // ============
+
 	m_arrMRT[MRT_TYPE::DEFERRED] = new CMRT;
 	m_arrMRT[MRT_TYPE::DEFERRED]->SetViewport(CDevice::GetInst()->GetViewPort());
 
@@ -141,7 +127,6 @@ int CRenderMgr::CreateMRT()
 	texDesc.Height = (UINT)CDevice::GetInst()->GetRenderResolution().y;
 	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
 
-	// System Memroy 이동 불가능
 	texDesc.Usage = D3D11_USAGE_DEFAULT;
 	texDesc.CPUAccessFlags = 0;
 
@@ -158,7 +143,6 @@ int CRenderMgr::CreateMRT()
 	texDesc.Height = (UINT)CDevice::GetInst()->GetRenderResolution().y;
 	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
 
-	// System Memroy 이동 불가능
 	texDesc.Usage = D3D11_USAGE_DEFAULT;
 	texDesc.CPUAccessFlags = 0;
 
@@ -175,7 +159,6 @@ int CRenderMgr::CreateMRT()
 	texDesc.Height = (UINT)CDevice::GetInst()->GetRenderResolution().y;
 	texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
 
-	// System Memroy 이동 불가능
 	texDesc.Usage = D3D11_USAGE_DEFAULT;
 	texDesc.CPUAccessFlags = 0;
 
@@ -185,6 +168,22 @@ int CRenderMgr::CreateMRT()
 
 	m_arrMRT[MRT_TYPE::DEFERRED]->CreateRenderTarget(texDesc, L"DeferredRTT_Position");
 
+    texDesc = {};
+    texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+    texDesc.ArraySize = 1;
+    texDesc.Width = (UINT)CDevice::GetInst()->GetRenderResolution().x;
+    texDesc.Height = (UINT)CDevice::GetInst()->GetRenderResolution().y;
+    texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+    texDesc.Usage = D3D11_USAGE_DEFAULT;
+    texDesc.CPUAccessFlags = 0;
+
+    texDesc.MipLevels = 1;
+    texDesc.SampleDesc.Count = 1;
+    texDesc.SampleDesc.Quality = 0;
+
+    m_arrMRT[MRT_TYPE::DEFERRED]->CreateRenderTarget(texDesc, L"DeferredRTT_Effect");
+
 	// MRT 의 DSV 텍스쳐 생성
 	D3D11_TEXTURE2D_DESC DSTexDesc = {};
 	DSTexDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -193,7 +192,6 @@ int CRenderMgr::CreateMRT()
 	DSTexDesc.Height = (UINT)CDevice::GetInst()->GetRenderResolution().y;
 	DSTexDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
-	// System Memroy 이동 불가능
 	DSTexDesc.Usage = D3D11_USAGE_DEFAULT;
 	DSTexDesc.CPUAccessFlags = 0;
 
@@ -202,6 +200,47 @@ int CRenderMgr::CreateMRT()
 	DSTexDesc.SampleDesc.Quality = 0;
 
 	m_arrMRT[MRT_TYPE::DEFERRED]->CreateDepthStencil(DSTexDesc, L"DeferredDST");
+
+
+    // =========
+    // Light MRT
+    // =========
+
+    m_arrMRT[MRT_TYPE::LIGHT] = new CMRT;
+    m_arrMRT[MRT_TYPE::LIGHT]->SetViewport(CDevice::GetInst()->GetViewPort());
+
+    // Light Render Target 텍스쳐 생성
+    texDesc = {};
+    texDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    texDesc.ArraySize = 1;
+    texDesc.Width = (UINT)CDevice::GetInst()->GetRenderResolution().x;
+    texDesc.Height = (UINT)CDevice::GetInst()->GetRenderResolution().y;
+    texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+    texDesc.Usage = D3D11_USAGE_DEFAULT;
+    texDesc.CPUAccessFlags = 0;
+
+    texDesc.MipLevels = 1;
+    texDesc.SampleDesc.Count = 1;
+    texDesc.SampleDesc.Quality = 0;
+
+    m_arrMRT[MRT_TYPE::LIGHT]->CreateRenderTarget(texDesc, L"LightRTT_Diffuse");
+
+    texDesc = {};
+    texDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    texDesc.ArraySize = 1;
+    texDesc.Width = (UINT)CDevice::GetInst()->GetRenderResolution().x;
+    texDesc.Height = (UINT)CDevice::GetInst()->GetRenderResolution().y;
+    texDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+
+    texDesc.Usage = D3D11_USAGE_DEFAULT;
+    texDesc.CPUAccessFlags = 0;
+
+    texDesc.MipLevels = 1;
+    texDesc.SampleDesc.Count = 1;
+    texDesc.SampleDesc.Quality = 0;
+
+    m_arrMRT[MRT_TYPE::LIGHT]->CreateRenderTarget(texDesc, L"LightRTT_Specular");
 
 	return S_OK;
 }

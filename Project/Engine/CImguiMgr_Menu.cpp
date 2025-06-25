@@ -173,6 +173,48 @@ void CImguiMgr::DebugMenuBar()
             ImGui::EndMenu();
         }
 
+        if (ImGui::BeginMenu("Render"))
+        {
+            if (ImGui::BeginMenu("Merge Mode"))
+            {
+                if (ImGui::MenuItem("Default"))
+                {
+                    CRenderMgr::GetInst()->SetMergeMode(-1);
+                }
+                if (ImGui::MenuItem("Albedo"))
+                {
+                    CRenderMgr::GetInst()->SetMergeMode(0);
+                }
+                if (ImGui::MenuItem("Normal"))
+                {
+                    CRenderMgr::GetInst()->SetMergeMode(1);
+                }
+                if (ImGui::MenuItem("Position"))
+                {
+                    CRenderMgr::GetInst()->SetMergeMode(2);
+                }
+                if (ImGui::MenuItem("Effect"))
+                {
+                    CRenderMgr::GetInst()->SetMergeMode(3);
+                }
+                if (ImGui::MenuItem("Diffuse"))
+                {
+                    CRenderMgr::GetInst()->SetMergeMode(4);
+                }
+                if (ImGui::MenuItem("Specular"))
+                {
+                    CRenderMgr::GetInst()->SetMergeMode(5);
+                }
+                if (ImGui::MenuItem("Emissive"))
+                {
+                    CRenderMgr::GetInst()->SetMergeMode(6);
+                }
+
+                ImGui::EndMenu();
+            }
+            ImGui::EndMenu();
+        }
+
         ImGui::EndMainMenuBar();
     }
 

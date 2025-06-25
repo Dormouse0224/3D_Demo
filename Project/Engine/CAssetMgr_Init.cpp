@@ -485,42 +485,44 @@ void CAssetMgr::CreateEngineGraphicShader()
 	// 표준 쉐이더 생성
 	AssetPtr<CGraphicShader>	pShader = nullptr;
 
-	// ===========
-	// Std2DShader
-	// ===========
+	// ===============
+	// Deferred Shader
+	// ===============
 	pShader = new CGraphicShader;
 
-	pShader->CreateVertexShader(L"HLSL\\Engine\\std2d.fx", "VS_Std2D");
-	pShader->CreatePixelShader(L"HLSL\\Engine\\std2d.fx", "PS_Std2D");
+	pShader->CreateVertexShader(L"HLSL\\Engine\\deferred.fx", "VS_Deferred");
+	pShader->CreatePixelShader(L"HLSL\\Engine\\deferred.fx", "PS_Deferred");
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
-	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetRSType(RS_TYPE::CULL_BACK);
 	pShader->SetDSType(DS_TYPE::LESS);
 	pShader->SetBSType(BS_TYPE::DEFAULT);
 	pShader->SetTexData(TEX_0, "Main Texture");
+    pShader->SetTexData(TEX_1, "Normal Texture");
 	pShader->SetEngineAsset(true);
 
-	AddAsset(L"EA_Std2DShader", pShader.Get());
+	AddAsset(L"EA_DeferredShader", pShader.Get());
 
 
-	// =====================
-	// Std2DAlphaBlendShader
-	// =====================
+	// ==========================
+	// Deferred AlphaBlend Shader
+	// ==========================
 	pShader = new CGraphicShader;
 
-	pShader->CreateVertexShader(L"HLSL\\Engine\\std2d.fx", "VS_Std2D");
-	pShader->CreatePixelShader(L"HLSL\\Engine\\std2d.fx", "PS_Std2D_AlphaBlend");
+	pShader->CreateVertexShader(L"HLSL\\Engine\\deferred.fx", "VS_Deferred");
+	pShader->CreatePixelShader(L"HLSL\\Engine\\deferred.fx", "PS_Deferred_AlphaBlend");
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_TRANSPARENT);
-	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetRSType(RS_TYPE::CULL_BACK);
 	pShader->SetDSType(DS_TYPE::NO_WRITE);
 	pShader->SetBSType(BS_TYPE::ALPHABLEND);
-	pShader->SetTexData(TEX_0, "Alpha Texture");
+    pShader->SetTexData(TEX_0, "Main Texture");
+    pShader->SetTexData(TEX_1, "Normal Texture");
 	pShader->SetConstData(FLOAT_0, "Alpha Tint");
 	pShader->SetEngineAsset(true);
 
-	AddAsset(L"EA_Std2DAlphaBlendShader", pShader.Get());
+	AddAsset(L"EA_DeferredAlphaBlendShader", pShader.Get());
 
 
-	// FlipbookShader
+	// Flipbook Shader
 	pShader = new CGraphicShader;
 	pShader->CreateVertexShader(L"HLSL\\Engine\\flipbook.fx", "VS_Flipbook");
 	pShader->CreatePixelShader(L"HLSL\\Engine\\flipbook.fx", "PS_Flipbook");
@@ -539,20 +541,7 @@ void CAssetMgr::CreateEngineGraphicShader()
 	pShader->SetEngineAsset(true);
 	AddAsset(L"EA_FlipbookShader", pShader.Get());
 
-	// 파티클 렌더링 쉐이더 및 재질
-	pShader = new CGraphicShader;
-	pShader->CreateVertexShader(L"HLSL\\Engine\\particle.fx", "VS_Particle");
-	pShader->CreateGeometryShader(L"HLSL\\Engine\\particle.fx", "GS_Particle");
-	pShader->CreatePixelShader(L"HLSL\\Engine\\particle.fx", "PS_Particle");
-	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_TRANSPARENT);
-	pShader->SetBSType(BS_TYPE::ALPHABLEND);
-	pShader->SetRSType(RS_TYPE::CULL_NONE);
-	pShader->SetDSType(DS_TYPE::NO_WRITE);
-	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
-	pShader->SetEngineAsset(true);
-	AddAsset(L"EA_ParticleRenderShader", pShader.Get());
-
-	// SpriteShader
+	// Sprite Shader
 	pShader = new CGraphicShader;
 	pShader->CreateVertexShader(L"HLSL\\Engine\\sprite.fx", "VS_Sprite");
 	pShader->CreatePixelShader(L"HLSL\\Engine\\sprite.fx", "PS_Sprite");
@@ -562,7 +551,7 @@ void CAssetMgr::CreateEngineGraphicShader()
 	AddAsset(L"EA_SpriteShader", pShader.Get());
 
 
-	// TileRenderShader
+	// TileRender Shader
 	pShader = new CGraphicShader;
 	pShader->CreateVertexShader(L"HLSL\\Engine\\tilerender.fx", "VS_TileRender");
 	pShader->CreatePixelShader(L"HLSL\\Engine\\tilerender.fx", "PS_TileRender");
@@ -574,7 +563,7 @@ void CAssetMgr::CreateEngineGraphicShader()
 	AddAsset(L"EA_TileRenderShader", pShader.Get());
 
 
-	// UIShader
+	// UI Shader
 	pShader = new CGraphicShader;
 	pShader->CreateVertexShader(L"HLSL\\Engine\\ui.fx", "VS_UI");
 	pShader->CreateGeometryShader(L"HLSL\\Engine\\ui.fx", "GS_UI");
@@ -597,15 +586,15 @@ void CAssetMgr::CreateEngineGraphicShader()
     pShader = new CGraphicShader;
     pShader->CreateVertexShader(L"HLSL\\Engine\\light.fx", "VS_Light");
     pShader->CreatePixelShader(L"HLSL\\Engine\\light.fx", "PS_Light");
-    pShader->SetBSType(BS_TYPE::DEFAULT);
+    pShader->SetBSType(BS_TYPE::ONE_ONE);
     pShader->SetRSType(RS_TYPE::CULL_NONE);
-    pShader->SetDSType(DS_TYPE::NO_WRITE);
+    pShader->SetDSType(DS_TYPE::NO_TEST_NO_WIRITE);
     pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
     pShader->SetEngineAsset(true);
     CAssetMgr::GetInst()->AddAsset(L"EA_LightShader", pShader.Get());
 
 
-    // SpriteShader
+    // Sprite Shader
     pShader = new CGraphicShader;
     pShader->CreateVertexShader(L"HLSL\\Engine\\sprite.fx", "VS_Sprite");
     pShader->CreatePixelShader(L"HLSL\\Engine\\sprite.fx", "PS_Sprite");
@@ -645,10 +634,10 @@ void CAssetMgr::CreateEngineGraphicShader()
     pShader = new CGraphicShader;
     pShader->CreateVertexShader(L"HLSL\\Engine\\skybox.fx", "VS_SkyBox");
     pShader->CreatePixelShader(L"HLSL\\Engine\\skybox.fx", "PS_SkyBox");
-    //pShader->SetBSType(BS_TYPE::ALPHABLEND);
+    pShader->SetBSType(BS_TYPE::ALPHABLEND);
     pShader->SetRSType(RS_TYPE::CULL_FRONT);
     pShader->SetDSType(DS_TYPE::LESS_EQUAL);
-    pShader->SetDomain(SHADER_DOMAIN::DOMAIN_OPAQUE);
+    pShader->SetDomain(SHADER_DOMAIN::DOMAIN_EFFECT);
     pShader->SetEngineAsset(true);
     AddAsset(L"EA_SkyboxShader", pShader.Get());
 }
@@ -659,7 +648,7 @@ void CAssetMgr::CreateEngineMaterial()
 	AssetPtr<CMaterial> pMaterial = new CMaterial;
 	pMaterial->SetEngineAsset(true);
 	pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_UIShader", true));
-	pMaterial->SetScalarParam(FLOAT_0, 1.f);
+	pMaterial->SetConstParam(FLOAT_0, 1.f);
 	AddAsset(L"EA_CursorMtrl", pMaterial.Get());
 
 

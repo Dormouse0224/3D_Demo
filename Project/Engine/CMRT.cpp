@@ -98,7 +98,10 @@ void CMRT::SetRenderTarget()
 	{
 		vecRTV.push_back(m_RTTex[i]->GetRTV().Get());
 	}
-	CONTEXT->OMSetRenderTargets(m_TexCount, vecRTV.data(), m_DSTex->GetDSV().Get());
+    ID3D11DepthStencilView* pDSV = nullptr;
+    if (m_DSTex.Get())
+        pDSV = m_DSTex->GetDSV().Get();
+	CONTEXT->OMSetRenderTargets(m_TexCount, vecRTV.data(), pDSV);
 }
 
 AssetPtr<CTexture> CMRT::GetRenderTarget(int _Idx)

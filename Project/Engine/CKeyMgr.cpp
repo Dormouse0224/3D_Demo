@@ -146,8 +146,8 @@ void CKeyMgr::Init()
     m_Cursor->SetLayerIdx((int)LAYER::UI);
     m_Cursor->MeshRender()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"EA_PointMesh"));
     m_Cursor->MeshRender()->SetMaterial(CAssetMgr::GetInst()->Load<CMaterial>(L"EA_CursorMtrl", true));
-    m_Cursor->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_1, 100.f);
-    m_Cursor->MeshRender()->GetMaterial()->SetScalarParam(FLOAT_2, 100.f);
+    m_Cursor->MeshRender()->GetMaterial()->SetConstParam(FLOAT_1, 100.f);
+    m_Cursor->MeshRender()->GetMaterial()->SetConstParam(FLOAT_2, 100.f);
 }
 
 void CKeyMgr::Tick()
@@ -223,7 +223,7 @@ void CKeyMgr::Tick()
 
         Vec2 resolution = CEngine::GetInst()->GetResolution();
         Vec2 clip = Vec2((m_MousePos.x / resolution.x) * 2.f - 1.f, -((m_MousePos.y / resolution.y) * 2.f - 1.f));
-        m_Cursor->MeshRender()->GetMaterial()->SetScalarParam(VEC2_0, clip);
+        m_Cursor->MeshRender()->GetMaterial()->SetConstParam(VEC2_0, clip);
 
     }
     else

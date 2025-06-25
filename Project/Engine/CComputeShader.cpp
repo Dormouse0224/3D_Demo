@@ -4,6 +4,7 @@
 #include "CDevice.h"
 #include "CConstBuffer.h"
 #include "CPathMgr.h"
+#include "CRenderMgr.h"
 
 CComputeShader::CComputeShader()
 	: CShader(ASSET_TYPE::COMPUTE_SHADER)
@@ -96,7 +97,7 @@ int CComputeShader::Execute()
 	for (int i = 0; i < TEX_PARAM::TEX_END; ++i)
 	{
 		if (m_CSTex[i].first != nullptr)
-			m_CSTex[i].first->Binding_CS_SRV(m_CSTex[i].second);
+			m_CSTex[i].first->Binding_CS(m_CSTex[i].second);
 	}
 
 	// 컴퓨트 쉐이더 바인딩 및 실행
@@ -104,11 +105,7 @@ int CComputeShader::Execute()
 	CONTEXT->Dispatch(m_GroupX, m_GroupY, m_GroupZ);
 
 	// 리소스 및 쉐이더 바인딩 클리어
-	Clear();
-	for (int i = 0; i < TEX_PARAM::TEX_END; ++i)
-	{
-		if (m_CSTex[i].first != nullptr)
-			m_CSTex[i].first->Unbind_CS_SRV(m_CSTex[i].second);
-	}
-	CONTEXT->CSSetShader(nullptr, nullptr, 0);
+    CRenderMgr::GetInst()->UnbindShaders_CS();
+    CRenderMgr::GetInst()->UnbindResources_CS();
+    CRenderMgr::GetInst()->UnbindResources_CS_UAV();
 }

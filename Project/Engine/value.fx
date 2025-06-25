@@ -51,8 +51,20 @@ cbuffer MATERIAL : register(b1)
     int g_btex_3;
     int g_btex_4;
     int g_btex_5;
+    int g_btex_6;
+    int g_btex_7;
     
-    int2 g_padding;
+    int g_btexCube_0;
+    int g_btexCube_1;
+    int g_btexCube_2;
+    int g_btexCube_3;
+    
+    int g_btexArr_0;
+    int g_btexArr_1;
+    int g_btexArr_2;
+    int g_btexArr_3;
+    
+    //int2 g_padding;
 }
 
 cbuffer GLOBAL : register(b2)
@@ -66,9 +78,6 @@ cbuffer GLOBAL : register(b2)
     int g_Light3DCount;
 }
 
-
-
-
 // »ùÇÃ·¯
 SamplerState g_sam_0 : register(s0);
 SamplerState g_sam_1 : register(s1);
@@ -81,15 +90,21 @@ Texture2D g_tex_2 : register(t2);
 Texture2D g_tex_3 : register(t3);
 Texture2D g_tex_4 : register(t4);
 Texture2D g_tex_5 : register(t5);
+Texture2D g_tex_6 : register(t6);
+Texture2D g_tex_7 : register(t7);
 
-TextureCube g_cubetex_0 : register(t6);
-TextureCube g_cubetex_1 : register(t7);
+TextureCube g_cubetex_0 : register(t8);
+TextureCube g_cubetex_1 : register(t9);
+TextureCube g_cubetex_2 : register(t10);
+TextureCube g_cubetex_3 : register(t11);
 
-Texture2DArray g_texarr_0 : register(t8);
-Texture2DArray g_texarr_1 : register(t9);
+Texture2DArray g_texarr_0 : register(t12);
+Texture2DArray g_texarr_1 : register(t13);
+Texture2DArray g_texarr_2 : register(t14);
+Texture2DArray g_texarr_3 : register(t15);
 
 // ±¤¿ø ±¸Á¶È­ ¹öÆÛ
-StructuredBuffer<tLightModule> g_LightBuffer : register(t16);
+StructuredBuffer<tLightModule> g_LightBuffer : register(t12);
 
 
 

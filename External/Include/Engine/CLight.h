@@ -17,7 +17,7 @@ private:
     tLightModule m_LightModule;
     int m_LightIdx;
 
-    AssetPtr<CMesh>			m_LightMesh;
+    AssetPtr<CMesh>			m_LightMesh;    // 빛이 닿는 영역에 픽셀 셰이더를 호출시킬 메시
     AssetPtr<CMaterial>		m_LightMtrl;
 
 public:

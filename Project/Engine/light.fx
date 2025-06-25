@@ -2,89 +2,64 @@
 #define _LIGHT
 
 #include "value.fx"
+#include "lightfunc.fx"
 
-#define TEX_Color g_tex_0
-#define TEX_Normal g_tex_1
-#define TEX_ViewPos g_tex_2
+#define NORMAL_TEX g_tex_0
+#define POSITION_TEX g_tex_1
 
 #define DIRECTIONAL 0
 #define POINT 1
 #define SPOT 2
 
+#define LIGHT_INDEX g_int_0
+
 struct VS_IN
 {
-    float3 Pos : POSITION;
-    float2 UV : TEXCOORD0;
-    
-    float3 Tangent : TANGENT;
-    float3 Normal : NORMAL;
-    float3 Binormal : BINORMAL;
+    float3 vPos : POSITION;
+    float2 vUV : TEXCOORD0;
 };
 
 struct VS_OUT
 {
-    float4 Pos : SV_Position;
-    float2 UV : TEXCOORD0;
-    
-    float3 Tangent : TANGENT;
-    float3 Normal : NORMAL;
-    float3 Binormal : BINORMAL;
+    float4 vPos : SV_Position;
+    float2 vUV : TEXCOORD0;
 };
 
-VS_OUT VS_Light(VS_IN _in)
+VS_OUT VS_Light(VS_IN _In)
 {
     VS_OUT _Out;
-    _Out.Pos = float4(_in.Pos * 2.f, 1.f);
-    _Out.UV = _in.UV;
-    
-    _Out.Tangent = mul(float4(_in.Tangent, 0), g_matWV);
-    _Out.Normal = mul(float4(_in.Normal, 0), g_matWV);
-    _Out.Binormal = mul(float4(_in.Binormal, 0), g_matWV);
+    _Out.vPos = float4(_In.vPos * 2.f, 1.f);
+    _Out.vUV = _In.vUV;
     
     return _Out;
 }
 
+struct PS_OUT
+{
+    float4 vDiffuse : SV_Target0;
+    float4 vSpecular : SV_Target1;
+};
+
 // Lighting
 // 기본 오브젝트 색상 + 조명 색상
-float4 PS_Light(VS_OUT _in) : SV_Target
+PS_OUT PS_Light(VS_OUT _In)
 {
-    float4 _Out;
+    PS_OUT output;
+    output.vDiffuse = float4(0.f, 0.f, 0.f, 1.f);
+    output.vSpecular = float4(0.f, 0.f, 0.f, 1.f);
     
-    float3x3 TBN = { float3(-1, 0, 0), float3(0, 1, 0), float3(0, 0, -1) };
-    
-    for (int i = 0; i < g_Light2DCount; ++i)
-    {
-        if (g_LightBuffer[i].Type == DIRECTIONAL)
-        {
-            // Diffuse
-            float3 vLightDir = normalize(g_LightBuffer[i].Dir);
-            float3x3 matTBN = { _in.Tangent, _in.Binormal, _in.Normal };
-            float3 vNormal = normalize(mul(TEX_Normal.Sample(g_sam_0, _in.UV).xyz * 2.f - 1.f, matTBN));
-            float3 diffuse = max(dot(-vLightDir, vNormal), 0.f) * TEX_Color.Sample(g_sam_0, _in.UV).xyz;
-            
-            // Specular
-            float3 vReflect = vLightDir + 2 * dot(-vLightDir, vNormal) * vNormal;
-            float3 vCamDir = normalize(-_in.Pos);
-            float specPow = 32.f;
-            float3 specular = pow(max(dot(vReflect, vCamDir), 0.f), specPow) * float3(1.f, 1.f, 1.f);
-            
-            // Ambient
-            float3 ambient = 0.1f * TEX_Color.Sample(g_sam_0, _in.UV).xyz;
-            
-            _Out = float4(diffuse + specular + ambient, 1.f);
-        }
-        else if (g_LightBuffer[i].Type == POINT)
-        {
-            
-        }
-        else if (g_LightBuffer[i].Type == SPOT)
-        {
-            
-        }
-    }
+    float4 ViewPos = POSITION_TEX.Sample(g_sam_0, _In.vUV);
+    float4 ViewNorm = NORMAL_TEX.Sample(g_sam_0, _In.vUV);
+    if (ViewPos.x == 0 && ViewPos.y == 0 && ViewPos.z == 0 && ViewPos.w == 0)
+        discard;
     
     
-    return _Out;
+    CalcLight(ViewPos.xyz, ViewNorm.xyz, g_LightBuffer[LIGHT_INDEX], 2.f, output.vDiffuse.xyz, output.vSpecular.xyz);
+    
+    //output.vDiffuse = ViewPos;
+    //output.vSpecular = ViewNorm;
+    
+    return output;
 }
 
 

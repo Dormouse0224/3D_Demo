@@ -236,7 +236,7 @@ void CCamera::SortObject()
 					m_vecTransparent.push_back(make_pair(vpos.z, vecObjects[j]));
 				}
 					break;
-				case SHADER_DOMAIN::DOMAIN_POSTPROCESS:
+				case SHADER_DOMAIN::DOMAIN_EFFECT:
 					m_vecPostprocess.push_back(vecObjects[j]);
 					break;
 				case SHADER_DOMAIN::DOMAIN_UI:

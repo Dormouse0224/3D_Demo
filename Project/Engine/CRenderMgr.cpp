@@ -19,6 +19,16 @@
 #include "CLightMgr.h"
 
 CRenderMgr::CRenderMgr()
+    : m_vecCam{}
+    , m_DebugObject(nullptr)
+    , m_EditorCam(nullptr)
+    , m_UICam(nullptr)
+    , m_CurrentCam(nullptr)
+    , m_vecDebugInfo{}
+    , m_arrMRT{}
+    , m_MergeMesh(nullptr)
+    , m_MergeMtrl(nullptr)
+    , m_MergeMode(-1)
 {
 
 }
@@ -70,9 +80,6 @@ void CRenderMgr::ResetEditorCamPos()
 
 void CRenderMgr::Tick()
 {
-	// 광원 데이터 바인딩
-	CLightMgr::GetInst()->Binding();
-
 	// Global 데이터 바인딩
 	static CConstBuffer* pGlobal = CDevice::GetInst()->GetConstBuffer(CB_TYPE::GLOBAL);
 	pGlobal->SetData(&g_global, sizeof(tGlobal));
@@ -94,13 +101,16 @@ void CRenderMgr::Tick()
 	ClearMRT();
 
 	// Main 렌더링	
-	Render();
+	MainRender();
+
+    // Light 렌더링
+    LightRender();
 
 	// 최종 백버퍼 렌더링
 	MergeRender();
 }
 
-void CRenderMgr::Render()
+void CRenderMgr::MainRender()
 {
 	// 출력 렌더타겟 및 출력 깊이타겟 설정
 	m_arrMRT[MRT_TYPE::DEFERRED]->SetRenderTarget();
@@ -120,6 +130,17 @@ void CRenderMgr::Render()
 			m_vecCam[i]->Render();
 		}
 	}
+}
+
+void CRenderMgr::LightRender()
+{
+    // 출력 렌더타겟 및 출력 깊이타겟 설정
+    m_arrMRT[MRT_TYPE::LIGHT]->SetRenderTarget();
+
+    // 광원 데이터 바인딩
+    CLightMgr::GetInst()->Binding();
+
+    CLightMgr::GetInst()->Render();
 }
 
 void CRenderMgr::UIRender()
@@ -159,7 +180,7 @@ void CRenderMgr::DebugRender()
 			m_DebugObject->GetRenderComponent()->GetMaterial()->GetShader()->SetDSType(DS_TYPE::NO_TEST_NO_WIRITE);
 
 		// 색상값을 재질을 통해서 전달
-		m_DebugObject->GetRenderComponent()->GetMaterial()->SetScalarParam(VEC4_0, (*iter).Color);
+		m_DebugObject->GetRenderComponent()->GetMaterial()->SetConstParam(VEC4_0, (*iter).Color);
 
 		// 위치정보 세팅 및 월드행렬 계산
 		if ((*iter).MatWorld == Matrix::Identity)
@@ -191,9 +212,13 @@ void CRenderMgr::MergeRender()
 	// 출력 렌더타겟 및 출력 깊이타겟 설정
 	m_arrMRT[MRT_TYPE::MERGE]->SetRenderTarget();
 
-	m_MergeMtrl->SetTexParam(TEX_0, m_arrMRT[MRT_TYPE::DEFERRED]->GetRenderTarget(0));
-	//m_BackBufferMtrl->SetTexParam(TEX_0, CDevice::GetInst()->GetLightRTT());
-
+	m_MergeMtrl->SetTexParam(TEX_0, m_arrMRT[MRT_TYPE::DEFERRED]->GetRenderTarget(0));  // Albedo
+    m_MergeMtrl->SetTexParam(TEX_1, m_arrMRT[MRT_TYPE::DEFERRED]->GetRenderTarget(1));  // Normal
+    m_MergeMtrl->SetTexParam(TEX_2, m_arrMRT[MRT_TYPE::DEFERRED]->GetRenderTarget(2));  // Position
+    m_MergeMtrl->SetTexParam(TEX_3, m_arrMRT[MRT_TYPE::DEFERRED]->GetRenderTarget(3));  // Effect
+    m_MergeMtrl->SetTexParam(TEX_4, m_arrMRT[MRT_TYPE::LIGHT]->GetRenderTarget(0));     // Diffuse
+    m_MergeMtrl->SetTexParam(TEX_5, m_arrMRT[MRT_TYPE::LIGHT]->GetRenderTarget(1));     // Specular
+    m_MergeMtrl->SetConstParam(INT_0, m_MergeMode);
 	m_MergeMtrl->Binding();
 
 	m_MergeMesh->Render();
@@ -232,6 +257,11 @@ void CRenderMgr::UnbindShaders()
 	CONTEXT->PSSetShader(nullptr, nullptr, 0);
 }
 
+void CRenderMgr::UnbindShaders_CS()
+{
+    CONTEXT->CSSetShader(nullptr, nullptr, 0);
+}
+
 void CRenderMgr::UnbindResources()
 {
     ID3D11ShaderResourceView* nullSRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
@@ -243,5 +273,20 @@ void CRenderMgr::UnbindResources()
     CONTEXT->GSSetShaderResources(0, count, nullSRVs); // Geometry Shader
     CONTEXT->HSSetShaderResources(0, count, nullSRVs); // Hull Shader
     CONTEXT->DSSetShaderResources(0, count, nullSRVs); // Domain Shader
+}
+
+void CRenderMgr::UnbindResources_CS()
+{
+    ID3D11ShaderResourceView* nullSRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
+    UINT count = D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT;
+
     CONTEXT->CSSetShaderResources(0, count, nullSRVs); // Compute Shader
+}
+
+void CRenderMgr::UnbindResources_CS_UAV()
+{
+    ID3D11UnorderedAccessView* nullUAVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
+    UINT count = D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT;
+    UINT i = -1;
+    CONTEXT->CSSetUnorderedAccessViews(0, count, nullUAVs, &i); // Compute Shader
 }

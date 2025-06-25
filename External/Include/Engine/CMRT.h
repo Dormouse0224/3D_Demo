@@ -14,8 +14,8 @@ public:
 
 private:
     D3D11_VIEWPORT          m_Viewport;
-    AssetPtr<CTexture>    m_RTTex[8];
-    AssetPtr<CTexture>    m_DSTex;
+    AssetPtr<CTexture>      m_RTTex[8];
+    AssetPtr<CTexture>      m_DSTex;
     int                     m_TexCount;
     Vec4                    m_ClearColor[8];
     float                   m_DepthClear;

@@ -49,16 +49,16 @@ void CTileRender::Render()
 	// 위치정보 업데이트
 	Transform()->Binding();
 
-	GetMaterial()->SetScalarParam(INT_0, m_Col);
-	GetMaterial()->SetScalarParam(INT_1, m_Row);
+	GetMaterial()->SetConstParam(INT_0, m_Col);
+	GetMaterial()->SetConstParam(INT_1, m_Row);
 
 	GetMaterial()->SetTexParam(TEX_0, m_AtlasTex);
 
-	GetMaterial()->SetScalarParam(VEC2_0, m_TileSize);
+	GetMaterial()->SetConstParam(VEC2_0, m_TileSize);
 	if (m_AtlasTex.Get())
-		GetMaterial()->SetScalarParam(VEC2_1, Vec2(m_AtlasTex->GetWidth(), m_AtlasTex->GetHeight()));
+		GetMaterial()->SetConstParam(VEC2_1, Vec2(m_AtlasTex->GetWidth(), m_AtlasTex->GetHeight()));
 	else
-		GetMaterial()->SetScalarParam(VEC2_1, Vec2(0, 0));
+		GetMaterial()->SetConstParam(VEC2_1, Vec2(0, 0));
 
 	GetMaterial()->Binding();
 

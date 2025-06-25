@@ -101,10 +101,7 @@
     </Link>
     <PostBuildEvent>
       <Command>cd $(SolutionDir)CodeGen\
-call CodeGen.exe
-cd $(SolutionDir)
-call ScriptHeaderCopy.bat
-call EngineHeaderCopy.bat</Command>
+call CodeGen.exe</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

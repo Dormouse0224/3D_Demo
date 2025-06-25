@@ -26,7 +26,7 @@ public:
 
     void SetShader(AssetPtr<CGraphicShader> _Shader) { m_Shader = _Shader; }
     template<typename T>
-    void SetScalarParam(CONST_PARAM _Param, const T& _Data);
+    void SetConstParam(CONST_PARAM _Param, const T& _Data);
     void SetTexParam(TEX_PARAM _Param, const AssetPtr<CTexture>& _Tex) { m_arrTex[_Param] = _Tex; nullptr != _Tex ? m_Const.bTex[_Param] = true : m_Const.bTex[_Param] = false; }
 
     void Binding();
@@ -37,7 +37,7 @@ public:
 };
 
 template<typename T>
-void CMaterial::SetScalarParam(CONST_PARAM _Param, const T& _Data)
+void CMaterial::SetConstParam(CONST_PARAM _Param, const T& _Data)
 {
     bool bInput = false;
 

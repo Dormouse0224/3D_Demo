@@ -195,7 +195,7 @@ void CParticleRender::Render()
 	m_ModuleBuffer->Binding(21);
 
 	GetMaterial()->SetTexParam(TEX_0, m_ParticleTex);
-	GetMaterial()->SetScalarParam(VEC4_0, Transform()->GetWorldTrans());
+	GetMaterial()->SetConstParam(VEC4_0, Transform()->GetWorldTrans());
 
 	// 재질 및 쉐이더 바인딩
 	GetMaterial()->Binding();
@@ -203,10 +203,10 @@ void CParticleRender::Render()
 	// 파티클 인스턴싱 렌더링
 	GetMesh()->Render_Particle(m_MaxParticle);
 
-	// 파티클 버퍼 Unbind
-	m_ParticleBuffer->Unbind(20);
-	// 모듈버퍼 Unbind
-	m_ModuleBuffer->Unbind(21);
+	//// 파티클 버퍼 Unbind
+	//m_ParticleBuffer->Unbind(20);
+	//// 모듈버퍼 Unbind
+	//m_ModuleBuffer->Unbind(21);
 }
 
 int CParticleRender::Load(fstream& _Stream)

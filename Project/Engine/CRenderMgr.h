@@ -25,6 +25,7 @@ private:
 
 	AssetPtr<CMesh>			m_MergeMesh;
 	AssetPtr<CMaterial>		m_MergeMtrl;
+    int                     m_MergeMode;
 
 
 
@@ -33,19 +34,27 @@ public:
 	void AddDebugShapeInfo(const tDebugShapeInfo& _info) { m_vecDebugInfo.push_back(_info); }
 	void ClearCamera() { m_vecCam.clear(); }
 	void ResetEditorCamPos();
+
 	CGameObject* GetUICam() { return m_UICam; }
 	CGameObject* GetEditorCam() { return m_EditorCam; }
 	CCamera* GetCurrentCam() { return m_CurrentCam; }
+    CMRT* GetMRT(MRT_TYPE _Type) { return m_arrMRT[_Type]; }
+
+    void SetMergeMode(int _mode) { m_MergeMode = _mode; }
 
 	void UnbindShaders();
+    void UnbindShaders_CS();
 	void UnbindResources();
+    void UnbindResources_CS();
+    void UnbindResources_CS_UAV();
 
 public:
 	void Init();
 	void Tick();
 
 private:
-	void Render();
+	void MainRender();
+    void LightRender();
 	void UIRender();
 	void DebugRender();
 	void MergeRender();

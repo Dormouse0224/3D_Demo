@@ -100,7 +100,7 @@ void CMaterialUI::Render_Ast()
 			{
 				if (ImGui::InputInt(label.c_str(), &Const.iArr[data->m_Param - INT_0]))
 				{
-					pMaterial->SetScalarParam(data->m_Param, Const.iArr[data->m_Param - INT_0]);
+					pMaterial->SetConstParam(data->m_Param, Const.iArr[data->m_Param - INT_0]);
 				}
 			}
 			break;
@@ -111,7 +111,7 @@ void CMaterialUI::Render_Ast()
 			{
 				if (ImGui::DragFloat(label.c_str(), &Const.fArr[data->m_Param - FLOAT_0], 0.001f))
 				{
-					pMaterial->SetScalarParam(data->m_Param, Const.fArr[data->m_Param - FLOAT_0]);
+					pMaterial->SetConstParam(data->m_Param, Const.fArr[data->m_Param - FLOAT_0]);
 				}
 			}
 			break;
@@ -123,7 +123,7 @@ void CMaterialUI::Render_Ast()
 				float vec[2] = { Const.v2Arr[data->m_Param - VEC2_0].x, Const.v2Arr[data->m_Param - VEC2_0].y };
 				if (ImGui::DragFloat2(label.c_str(), vec, 0.001f))
 				{
-					pMaterial->SetScalarParam(data->m_Param, Vec2(vec));
+					pMaterial->SetConstParam(data->m_Param, Vec2(vec));
 				}
 			}
 			break;
@@ -136,7 +136,7 @@ void CMaterialUI::Render_Ast()
 				float vec[4] = { v4.x, v4.y, v4.z, v4.w };
 				if (ImGui::DragFloat4(label.c_str(), vec, 0.001f))
 				{
-					pMaterial->SetScalarParam(data->m_Param, Vec2(vec));
+					pMaterial->SetConstParam(data->m_Param, Vec2(vec));
 				}
 			}
 			break;

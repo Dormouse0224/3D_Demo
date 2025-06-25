@@ -32,6 +32,9 @@ enum class DS_TYPE
 	NO_WRITE,			// 깊이판정 : 더 작아야 통과(LESS), 깊이 기록 X
 	NO_TEST_NO_WIRITE,	// 깊이판정 항상 성공(검사X), 깊이 기록 X
 
+    VOLUME_MESH_CHECK,
+    STENCIL_EQUAL,
+
 	END,
 };
 
@@ -140,11 +143,13 @@ enum class DIR
 
 enum class SHADER_DOMAIN
 {
+    // 일반 카메라 컴포넌트에서 렌더링을 담당함
 	DOMAIN_OPAQUE,		// 불투명
 	DOMAIN_MASKED,		// 불투명 + 완전 투명
 	DOMAIN_TRANSPARENT, // 반투명 + 투명
-	DOMAIN_POSTPROCESS,	// 후처리
+	DOMAIN_EFFECT,	// 후처리
 	DOMAIN_UI,			// UI
+
 	DOMAIN_DEBUG,		// 디버그 렌더링
 	DOMAIN_SYSTEM,		// 카메라 분류에 사용되지 않음
 };
@@ -166,12 +171,18 @@ enum TEX_PARAM
 	TEX_3,
 	TEX_4,
 	TEX_5,
+    TEX_6,
+    TEX_7,
 
     TEXCUBE_0,
     TEXCUBE_1,
+    TEXCUBE_2,
+    TEXCUBE_3,
 
     TEXARR_0,
     TEXARR_1,
+    TEXARR_2,
+    TEXARR_3,
 
 	TEX_END,
 };
@@ -230,6 +241,7 @@ extern std::wstring LIGHT_TYPE_WSTR[static_cast<int>(LIGHT_TYPE::END)];
 enum MRT_TYPE
 {
 	DEFERRED,
+    LIGHT,
 	MERGE,
 
 	MRT_END

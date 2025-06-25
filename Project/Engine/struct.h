@@ -129,7 +129,7 @@ struct tMtrlConst
 	//텍스쳐 바인딩 정보
 	int		bTex[TEX_END];
 
-	int		padding[2];
+	//int		padding[2];
 };
 
 // Global Data

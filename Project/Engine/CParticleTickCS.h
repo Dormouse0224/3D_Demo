@@ -21,7 +21,6 @@ public:
 public:
     virtual int Binding() override;
     virtual void CalcGroupNum() override;
-    virtual void Clear() override;
     virtual void UIRender() override {}
     virtual void SetData() override;
 

@@ -36,9 +36,6 @@ CMaterial::~CMaterial()
 
 void CMaterial::Binding()
 {
-    CRenderMgr::GetInst()->UnbindShaders();
-    CRenderMgr::GetInst()->UnbindResources();
-
 	m_Shader->Binding();
 
 	for (UINT i = 0; i < TEX_PARAM::TEX_END; ++i)
@@ -46,11 +43,10 @@ void CMaterial::Binding()
 		if (nullptr != m_arrTex[i].Get())
 		{
 			m_arrTex[i]->Binding(i);
-			//AssetPtr<CTexture> pNormTex = CAssetMgr::GetInst()->GetNormTex(m_arrTex[i]->GetName());
-			//CTexture::Unbind(TEX_PARAM::TEX_END + i);
-			//if (pNormTex.Get())
-			//	pNormTex->Binding(TEX_PARAM::TEX_END + i);
+            m_Const.bTex[i] = true;
 		}
+        else
+            m_Const.bTex[i] = false;
 	}
 
 	// 재질 상수값을 상수버퍼에 전달 및 바인딩

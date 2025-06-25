@@ -12,8 +12,8 @@
 #include "CEngine.h"
 
 CEditorCamScript::CEditorCamScript()
-	: m_CamSpeedLin(500.f)
-	, m_CamSpeedAng(100.f)
+	: m_CamSpeedLin(200.f)
+	, m_CamSpeedAng(200.f)
 {
 }
 
