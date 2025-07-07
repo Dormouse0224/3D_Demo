@@ -35,6 +35,7 @@ CInspector::CInspector(wstring _Name)
 	m_ComponentUI[(UINT)COMPONENT_TYPE::LIGHT] = new CLightUI;
 
 	m_AssetUI[(UINT)ASSET_TYPE::MESH] = new CMeshUI;
+    m_AssetUI[(UINT)ASSET_TYPE::MESHDATA] = new CMeshDataUI;
 	m_AssetUI[(UINT)ASSET_TYPE::MATERIAL] = new CMaterialUI;
 	m_AssetUI[(UINT)ASSET_TYPE::TEXTURE] = new CTexture2DUI;
 	m_AssetUI[(UINT)ASSET_TYPE::COMPUTE_SHADER] = new CComputeShaderUI;

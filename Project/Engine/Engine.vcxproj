@@ -167,12 +167,15 @@ call EngineHeaderCopy.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="assets.h" />
+    <ClInclude Include="CAnimator3D.h" />
     <ClInclude Include="CAssetUI.h" />
+    <ClInclude Include="CBoneMatrixCS.h" />
     <ClInclude Include="CCameraUI.h" />
     <ClInclude Include="CComponentUI.h" />
     <ClInclude Include="CComputeShaderUI.h" />
     <ClInclude Include="CContentViewer.h" />
     <ClInclude Include="CEditorCamScript.h" />
+    <ClInclude Include="CFBXLoader.h" />
     <ClInclude Include="CFlipbook.h" />
     <ClInclude Include="CFlipbookRender.h" />
     <ClInclude Include="CFlipbookRenderUI.h" />
@@ -191,6 +194,8 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="CLightUI.h" />
     <ClInclude Include="CListUI.h" />
     <ClInclude Include="CMaterialUI.h" />
+    <ClInclude Include="CMeshData.h" />
+    <ClInclude Include="CMeshDataUI.h" />
     <ClInclude Include="CMeshRenderUI.h" />
     <ClInclude Include="CMeshUI.h" />
     <ClInclude Include="CMRT.h" />
@@ -270,10 +275,12 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="uilist.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CAnimator3D.cpp" />
     <ClCompile Include="CAsset.cpp" />
     <ClCompile Include="CAssetMgr.cpp" />
     <ClCompile Include="CAssetMgr_Init.cpp" />
     <ClCompile Include="CAssetUI.cpp" />
+    <ClCompile Include="CBoneMatrixCS.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCameraUI.cpp" />
     <ClCompile Include="CComponent.cpp" />
@@ -286,6 +293,7 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CEditorCamScript.cpp" />
     <ClCompile Include="CEngine.cpp" />
     <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CFBXLoader.cpp" />
     <ClCompile Include="CFlipbook.cpp" />
     <ClCompile Include="CFlipbookRender.cpp" />
     <ClCompile Include="CFlipbookRenderUI.cpp" />
@@ -313,6 +321,8 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CMaterial.cpp" />
     <ClCompile Include="CMaterialUI.cpp" />
     <ClCompile Include="CMesh.cpp" />
+    <ClCompile Include="CMeshData.cpp" />
+    <ClCompile Include="CMeshDataUI.cpp" />
     <ClCompile Include="CMeshRender.cpp" />
     <ClCompile Include="CMeshRenderUI.cpp" />
     <ClCompile Include="CMeshUI.cpp" />
@@ -375,7 +385,11 @@ call EngineHeaderCopy.bat</Command>
     <None Include="SimpleMath.inl" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="lightfunc.fx">
+    <FxCompile Include="bonemat.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="func.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>

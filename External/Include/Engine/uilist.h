@@ -2,6 +2,7 @@
 
 // ¿¡¼Â UI
 #include "CMeshUI.h"
+#include "CMeshDataUI.h"
 #include "CMaterialUI.h"
 #include "CTexture2DUI.h"
 #include "CComputeShaderUI.h"

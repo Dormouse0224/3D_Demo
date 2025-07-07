@@ -56,6 +56,11 @@ void CImguiMgr::DebugMenuBar()
                     ImGui::EndMenu();
 				}
 
+                if (ImGui::MenuItem("Load FBX", nullptr))
+                {
+                    LoadFBX();
+                }
+
 				ImGui::EndMenu();
             }
 

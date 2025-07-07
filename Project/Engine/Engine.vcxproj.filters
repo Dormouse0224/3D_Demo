@@ -286,6 +286,15 @@
     <Filter Include="HLSL\02. Shader">
       <UniqueIdentifier>{d5311574-7e63-40cb-aa5d-26ce0bc156db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Manager\04. Asset\FBXLoader">
+      <UniqueIdentifier>{982cd33b-c25b-43a3-9eaa-e1c74f659855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\06. Animator3D">
+      <UniqueIdentifier>{7592df85-815b-4820-bb4e-5f1fce855482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\03. Compute\3DAnimation">
+      <UniqueIdentifier>{0394c336-4a38-4d28-abdd-b8a1033c6239}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEngine.h">
@@ -594,6 +603,21 @@
     <ClInclude Include="CSkyBoxUI.h">
       <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\06. SkyBoxUI</Filter>
     </ClInclude>
+    <ClInclude Include="CMeshData.h">
+      <Filter>08. Asset\02. MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="CFBXLoader.h">
+      <Filter>04. Manager\04. Asset\FBXLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimator3D.h">
+      <Filter>07. Component\06. Animator3D</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoneMatrixCS.h">
+      <Filter>HLSL\03. Compute\3DAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="CMeshDataUI.h">
+      <Filter>09. ImguiObject\AssetUI\02. MeshDataUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CEngine.cpp">
@@ -881,6 +905,21 @@
     <ClCompile Include="CSkyBoxUI.cpp">
       <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\06. SkyBoxUI</Filter>
     </ClCompile>
+    <ClCompile Include="CMeshData.cpp">
+      <Filter>08. Asset\02. MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="CFBXLoader.cpp">
+      <Filter>04. Manager\04. Asset\FBXLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator3D.cpp">
+      <Filter>07. Component\06. Animator3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoneMatrixCS.cpp">
+      <Filter>HLSL\03. Compute\3DAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="CMeshDataUI.cpp">
+      <Filter>09. ImguiObject\AssetUI\02. MeshDataUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -933,8 +972,11 @@
     <FxCompile Include="skybox.fx">
       <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
-    <FxCompile Include="lightfunc.fx">
-      <Filter>HLSL\02. Shader</Filter>
+    <FxCompile Include="bonemat.fx">
+      <Filter>HLSL\03. Compute\3DAnimation</Filter>
+    </FxCompile>
+    <FxCompile Include="func.fx">
+      <Filter>HLSL\01. Header</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

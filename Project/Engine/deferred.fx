@@ -2,6 +2,7 @@
 #define _DEFERRED
 
 #include "value.fx"
+#include "func.fx"
 
 #define TEXTURE         g_tex_0
 #define NORM_TEXTURE    g_tex_1
@@ -16,6 +17,10 @@ struct VS_IN
     float3 Tangent : TANGENT;
     float3 Normal : NORMAL;
     float3 Binormal : BINORMAL;
+    
+    // 3D Animatino 관련 정보
+    float4 vWeights : BLENDWEIGHT;
+    float4 vIndices : BLENDINDICES;
 };
 
 struct VS_OUT
@@ -35,7 +40,13 @@ struct VS_OUT
 VS_OUT VS_Deferred(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
-                
+    
+    if (g_iAnim)
+    {
+        Skinning(_in.vPos, _in.Tangent, _in.Binormal, _in.Normal
+              , _in.vWeights, _in.vIndices, 0);
+    }
+    
     output.vPosition = mul(float4(_in.vPos, 1.f), g_matWVP);
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
@@ -64,7 +75,7 @@ PS_OUT PS_Deferred(VS_OUT _in)
     _Out.RT_ViewPos = _in.vViewPos;
     
     if (g_btex_0 == 1)
-        _Out.RT_Color = TEXTURE.Sample(g_sam_1, _in.vUV);
+        _Out.RT_Color.rgb = TEXTURE.Sample(g_sam_1, _in.vUV).rgb;
     
     if (g_btex_1 == 1)
     {

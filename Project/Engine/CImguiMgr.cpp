@@ -451,3 +451,44 @@ void CImguiMgr::LoadLevel()
     }
     CURSOR_OFF;
 }
+
+void CImguiMgr::LoadFBX()
+{
+    // 에셋 파일 열기
+    WCHAR filepath[255] = {};
+    WCHAR filename[255] = {};
+    wstring ContentDir = CPathMgr::GetContentDir();
+    OPENFILENAME Desc = {};
+    ZeroMemory(&Desc, sizeof(Desc));
+    Desc.lStructSize = sizeof(OPENFILENAME);
+    Desc.hwndOwner = CEngine::GetInst()->GetMainWndHwnd();
+    Desc.lpstrFilter = L"FBX\0*.fbx\0\0";
+    Desc.lpstrFile = filepath;
+    Desc.nMaxFile = 255;
+    Desc.lpstrFileTitle = filename;
+    Desc.nMaxFileTitle = 255;
+    Desc.lpstrInitialDir = ContentDir.c_str();
+    Desc.lpstrTitle = L"FBX 파일 로드";
+    Desc.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST;
+
+    CURSOR_ON;
+    if (GetOpenFileName(&Desc))
+    {
+        CURSOR_OFF;
+        std::wstring path = filepath;
+        if (path.find(CPathMgr::GetContentDir()) == std::wstring::npos)
+        {
+            MessageBoxW(nullptr, L"파일 경로가 Content 디렉토리가 아닙니다.", L"Level Load Error", MB_OK);
+            return;
+        }
+        std::filesystem::path RelativePath = path.substr(ContentDir.size());
+        std::filesystem::path EXT = RelativePath.extension();
+        if (EXT == ".fbx")
+        {
+            CAssetMgr::GetInst()->LoadFBX(RelativePath);
+        }
+        else
+            MessageBoxW(nullptr, L"지원하지 않는 파일 형식입니다.", L"Asset Load Error", MB_OK);
+    }
+    CURSOR_OFF;
+}

@@ -44,3 +44,16 @@ const wstring CPathMgr::GetFileName(std::filesystem::path _Path)
 	wstring wstr = _Path.filename().wstring().substr(0, _Path.filename().wstring().find(L'.'));
 	return wstr;
 }
+
+wstring CPathMgr::GetRelativePath(const wstring& _FilePath)
+{
+    wstring contentPath = GetContentDir();
+
+    if (-1 == _FilePath.find(contentPath.c_str()))
+    {
+        return wstring();
+    }
+
+    return _FilePath.substr(contentPath.length(), _FilePath.length());
+}
+

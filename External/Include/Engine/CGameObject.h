@@ -56,6 +56,7 @@ public:
     class CFSM*         FSM() { return (CFSM*)GetComponent(COMPONENT_TYPE::FSM); }
     class CUICom*       UICom() { return (CUICom*)GetComponent(COMPONENT_TYPE::UICOM); }
     class CLight*       Light() { return (CLight*)GetComponent(COMPONENT_TYPE::LIGHT); }
+    class CAnimator3D*  Animator3D() { return (CAnimator3D*)GetComponent(COMPONENT_TYPE::ANIMATOR3D); }
 
     class CMeshRender*      MeshRender() { return (CMeshRender*)GetComponent(COMPONENT_TYPE::MESHRENDER); }
     class CSpriteRender*    SpriteRender() { return (CSpriteRender*)GetComponent(COMPONENT_TYPE::SPRITERENDER); }

@@ -32,6 +32,7 @@ int CFont::Load(const wstring& _FilePath)
 void CFont::Render(wstring _Text, Vec2 _Pos, Vec4 _Color, float _Rot, float _Scale, float _Depth)
 {
 	// 블렌드 설정
+    // 스프라이트폰트에서 자체적으로 셰이더를 바인딩해서 사용하므로, 기존 셰이더 파이프라인을 클리어해주어야 함
 	CRenderMgr::GetInst()->UnbindShaders();
 	m_SpriteBatch->Begin();
 	if (m_SpriteFont)

@@ -68,4 +68,12 @@ struct tLightModule
     float Angle; // 광원 각도(스포트 라이트)	
 };
 
+struct tSkinningInfo
+{
+    float3 vPos;
+    float3 vTangent;
+    float3 vBinormal;
+    float3 vNormal;
+};
+
 #endif 

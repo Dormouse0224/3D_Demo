@@ -93,6 +93,10 @@ ASSET_TYPE CAssetMgr::GetAssetType(const wstring& _Path)
 	{
 		return ASSET_TYPE::MESH;
 	}
+    else if (EXT == L".mdat")
+    {
+        return ASSET_TYPE::MESHDATA;
+    }
 	else if (EXT == L".dds" || EXT == L".DDS"
 		|| EXT == L".tga" || EXT == L".TGA"
 		|| EXT == L".png" || EXT == L".PNG"
@@ -174,8 +178,8 @@ void CAssetMgr::ContentLoad()
 				CAssetMgr::GetInst()->Load<CMesh>(rp);
 				break;
 			case ASSET_TYPE::MESHDATA:
-
-				break;
+                CAssetMgr::GetInst()->Load<CMeshData>(rp);
+                break;
 			case ASSET_TYPE::TEXTURE:
 				CAssetMgr::GetInst()->Load<CTexture>(rp);
 				break;
@@ -292,3 +296,32 @@ void CAssetMgr::UpdateAsset()
 		}
 	}
 }
+
+AssetPtr<CMeshData> CAssetMgr::LoadFBX(const wstring& _strPath)
+{
+    wstring strFileName = path(_strPath).stem();
+
+    wstring strName = L"MeshData\\";
+    strName += strFileName + L".mdat";
+
+    AssetPtr<CMeshData> pMeshData = FindAsset<CMeshData>(strName);
+
+    if (nullptr != pMeshData)
+        return pMeshData;
+
+    pMeshData = CMeshData::LoadFromFBX(_strPath);
+    //pMeshData->SetKey(strName);
+    //pMeshData->SetRelativePath(strName);
+
+    //m_mapAsset[(UINT)ASSET_TYPE::MESHDATA].insert(make_pair(strName, pMeshData.Get()));
+    if (pMeshData != nullptr)
+    {
+        AddAsset(strName, pMeshData.Get());
+        // meshdata 를 실제파일로 저장
+        pMeshData->Save(strFileName);
+    }
+
+    return pMeshData;
+}
+
+

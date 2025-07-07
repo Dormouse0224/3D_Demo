@@ -70,7 +70,7 @@ int CGraphicShader::CreateVertexShader(const wstring& _RelativePath, const strin
 	m_ShaderName[VERTEX_SHADER] = make_pair(_RelativePath, _FuncName);
 
 	// Input Layout 도 같이 생성	
-	D3D11_INPUT_ELEMENT_DESC LayoutDesc[6] = {};
+	D3D11_INPUT_ELEMENT_DESC LayoutDesc[8] = {};
 
 	LayoutDesc[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;			// 해당 데이터의 바이트 구조 및 크기
 	LayoutDesc[0].InputSlot = 0;								// 버퍼의 인덱스 - 여러 버퍼를 동시에 전달할 때 사용
@@ -120,8 +120,24 @@ int CGraphicShader::CreateVertexShader(const wstring& _RelativePath, const strin
 	LayoutDesc[5].SemanticIndex = 0;
 	LayoutDesc[5].AlignedByteOffset = 60;
 
+    LayoutDesc[6].AlignedByteOffset = 72;
+    LayoutDesc[6].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    LayoutDesc[6].InputSlot = 0;
+    LayoutDesc[6].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+    LayoutDesc[6].InstanceDataStepRate = 0;
+    LayoutDesc[6].SemanticName = "BLENDWEIGHT";
+    LayoutDesc[6].SemanticIndex = 0;
 
-	if (FAILED(DEVICE->CreateInputLayout(LayoutDesc, 6
+    LayoutDesc[7].AlignedByteOffset = 88;
+    LayoutDesc[7].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    LayoutDesc[7].InputSlot = 0;
+    LayoutDesc[7].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+    LayoutDesc[7].InstanceDataStepRate = 0;
+    LayoutDesc[7].SemanticName = "BLENDINDICES";
+    LayoutDesc[7].SemanticIndex = 0;
+
+
+	if (FAILED(DEVICE->CreateInputLayout(LayoutDesc, 8
 		, m_VSBlob->GetBufferPointer()
 		, m_VSBlob->GetBufferSize(), m_Layout.GetAddressOf())))
 	{

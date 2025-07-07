@@ -28,3 +28,9 @@ void Delete_Vec(std::vector<T*>& _vec)
 }
 
 void enumSizeCheck();
+
+Matrix GetMatrixFromFbxMatrix(FbxAMatrix& _mat);
+
+void SaveWString(const wstring& _Str, std::fstream& _File);
+
+void LoadWString(wstring& _Str, std::fstream& _File);

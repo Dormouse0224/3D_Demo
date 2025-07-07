@@ -14,6 +14,7 @@ public:
 	static const wchar_t* GetSolutionPath() { return g_SolutionPath; }
 	static void CreateParentDir(std::filesystem::path _Path);
 	static const wstring GetFileName(std::filesystem::path _Path);
+    static wstring GetRelativePath(const wstring& _FilePath);
 
 private:
 	CPathMgr() {}

@@ -56,6 +56,8 @@ enum class COMPONENT_TYPE
 	CAMERA,
 	PHYSXACTOR,
 	FSM,
+    LIGHT,
+    ANIMATOR3D,
 
 	// Rendering Component
 	MESHRENDER,			// 가장 기본적인 RenderComponent
@@ -67,9 +69,6 @@ enum class COMPONENT_TYPE
 	DECAL,				// 문신
 	LANDSCAPE,			// 3D 지형
 	UICOM,
-
-	// Additional
-	LIGHT,
 
 	COMPONENT_END,
 

@@ -28,14 +28,15 @@ protected:
     GET_OTHER_COMPONENT(Camera);
     GET_OTHER_COMPONENT(PhysxActor);
     GET_OTHER_COMPONENT(FSM);
-    GET_OTHER_COMPONENT(UICom);
     GET_OTHER_COMPONENT(Light);
+    GET_OTHER_COMPONENT(Animator3D);
 
     GET_OTHER_COMPONENT(MeshRender);
     GET_OTHER_COMPONENT(SpriteRender);
     GET_OTHER_COMPONENT(FlipbookRender);
     GET_OTHER_COMPONENT(TileRender);
     GET_OTHER_COMPONENT(ParticleRender);
+    GET_OTHER_COMPONENT(UICom);
 
     class CRenderComponent* RenderComponent() { return m_Owner->GetRenderComponent(); }
 

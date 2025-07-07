@@ -93,6 +93,15 @@ using namespace physx;
 #pragma comment(lib, "FMOD/fmod_vc.lib")
 #endif
 
+// FBX
+#include <fbxsdk/fbxsdk.h>
+#ifdef _DEBUG
+#pragma comment(lib, "FBXLoader/x64/debug/libfbxsdk-md.lib")
+#else
+#pragma comment(lib, "FBXLoader/x64/release/libfbxsdk-md.lib")
+#endif
+
+// STL
 #include <vector>
 #include <map>
 #include <set>

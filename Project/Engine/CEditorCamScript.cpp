@@ -63,6 +63,7 @@ void CEditorCamScript::Move_Perspective()
 
 	Vec3 vFront = Transform()->GetRelativeDir(DIR::FRONT);
 	Vec3 vRight = Transform()->GetRelativeDir(DIR::RIGHT);
+    Vec3 vUp = Transform()->GetRelativeDir(DIR::UP);
 
 	if (KEY_PRESSED(Keyboard::W))
 		vPos += vFront * EngineDT * m_CamSpeedLin;
@@ -72,6 +73,10 @@ void CEditorCamScript::Move_Perspective()
 		vPos -= vRight * EngineDT * m_CamSpeedLin;
 	if (KEY_PRESSED(Keyboard::D))
 		vPos += vRight * EngineDT * m_CamSpeedLin;
+    if (KEY_PRESSED(Keyboard::LSHIFT))
+        vPos += vUp * EngineDT * m_CamSpeedLin;
+    if (KEY_PRESSED(Keyboard::LCTRL))
+        vPos -= vUp * EngineDT * m_CamSpeedLin;
 
 	Transform()->SetRelativePos(vPos);
 

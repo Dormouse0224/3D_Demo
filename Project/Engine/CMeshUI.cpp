@@ -40,7 +40,6 @@ CMeshUI::CMeshUI()
 	m_VertexObject = new CGameObject;
 	m_VertexObject->AddComponent(new CTransform);
 	m_VertexObject->AddComponent(new CMeshRender);
-	m_VertexObject->MeshRender()->SetMaterial(CAssetMgr::GetInst()->Load<CMaterial>(L"EA_DebugShapeMtrl", true));
 	m_VertexObject->Transform()->SetRelativePos(0, 0, 1);
 }
 
@@ -112,12 +111,22 @@ void CMeshUI::VertexRender()
 
 	// ·»´õ ¿ÀºêÁ§Æ® ¸Þ½¬ ¼³Á¤, Ä«¸Þ¶ó Æ½ ¹× ·»´õ¸µ ¼öÇà
 	m_VertexObject->MeshRender()->SetMesh(static_cast<CMesh*>(m_TargetAsset.Get()));
-	m_VertexObject->MeshRender()->GetMaterial()->SetConstParam(VEC4_0, Vec4(0, 1, 0, 1));
-	m_VertexObject->MeshRender()->GetMaterial()->GetShader()->SetBSType(BS_TYPE::DEFAULT);
+    
+    for (int i = 0; i < m_VertexObject->MeshRender()->GetMesh()->GetIdxCount(); ++i)
+    {
+        m_VertexObject->MeshRender()->SetMaterial(CAssetMgr::GetInst()->Load<CMaterial>(L"EA_DebugShapeMtrl", true), i);
+        m_VertexObject->MeshRender()->GetMaterial(i)->SetConstParam(VEC4_0, Vec4(0, 1, 0, 1));
+        m_VertexObject->MeshRender()->GetMaterial(i)->GetShader()->SetBSType(BS_TYPE::DEFAULT);
+    }
 	m_MeshCam->FinalTick();
 	m_VertexObject->FinalTick();
 	vector<CGameObject*> vec = { m_VertexObject };
 	m_MeshCam->Camera()->Direct_Render(vec);
+
+    for (int i = 0; i < m_VertexObject->MeshRender()->GetMesh()->GetIdxCount(); ++i)
+    {
+        m_VertexObject->MeshRender()->SetMaterial(nullptr, i);
+    }
 
 	// ·»´õÅ¸°Ù°ú ºäÆ÷Æ® ¿ø»óº¹±¸
 	CONTEXT->OMSetRenderTargets(1, ImGuiRTV.GetAddressOf(), ImGuiDSV.Get());
@@ -137,8 +146,8 @@ void CMeshUI::VertexRender()
 		//m_VertexObject->Transform()->SetRelativeRot(vObjDir);
 
 		Vec4 vQuat = m_VertexObject->Transform()->GetRelativeRotQuat();
-		Vec4 qX = XMQuaternionRotationAxis(m_VertexObject->Transform()->GetRelativeDir(DIR::RIGHT), XMConvertToRadians(vDrag.x * EngineDT * 1000.f));
-		Vec4 qY = XMQuaternionRotationAxis(Vec3(0, 1, 0), XMConvertToRadians(vDrag.y * EngineDT * 1000.f));
+		Vec4 qX = XMQuaternionRotationAxis(Vec3(0, 1, 0), XMConvertToRadians(vDrag.x * EngineDT * 1000.f));
+		Vec4 qY = XMQuaternionRotationAxis(m_VertexObject->Transform()->GetRelativeDir(DIR::RIGHT), XMConvertToRadians(vDrag.y * EngineDT * 1000.f));
 		Vec4 vRotQuat = XMQuaternionMultiply(vQuat, XMQuaternionMultiply(qX, qY));
 		m_VertexObject->Transform()->SetRelativeRot(vRotQuat);
 

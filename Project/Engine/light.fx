@@ -2,7 +2,7 @@
 #define _LIGHT
 
 #include "value.fx"
-#include "lightfunc.fx"
+#include "func.fx"
 
 #define NORMAL_TEX g_tex_0
 #define POSITION_TEX g_tex_1

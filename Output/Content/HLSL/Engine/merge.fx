@@ -45,7 +45,7 @@ float4 PS_Merge(VS_OUT _in) : SV_Target
         float4 vAlbedo = ALBEDO_TEX.Sample(g_sam_0, _in.UV);
         float4 vDiffuse = DIFFUSE_TEX.Sample(g_sam_0, _in.UV);
         float4 vSpecular = SPECULAR_TEX.Sample(g_sam_0, _in.UV);
-        float4 vAmbient = (float4) 0.2f;
+        float4 vAmbient = (float4) 1.f;
         
         float4 vEffect = EFFECT_TEX.Sample(g_sam_0, _in.UV);
         

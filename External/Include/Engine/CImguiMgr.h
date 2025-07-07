@@ -51,6 +51,7 @@ public:
 
 	void LoadAsset();
 	void LoadLevel();
+	void LoadFBX();
 
 	CInspector* GetInspector() { return m_Inspector; }
 	COutliner* GetOutliner() { return m_Outliner; }

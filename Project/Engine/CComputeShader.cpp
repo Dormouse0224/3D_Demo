@@ -104,8 +104,12 @@ int CComputeShader::Execute()
 	CONTEXT->CSSetShader(m_CS.Get(), nullptr, 0);
 	CONTEXT->Dispatch(m_GroupX, m_GroupY, m_GroupZ);
 
+    // 리소스 및 쉐이더 클리어
+    Clear();
+    CONTEXT->CSSetShader(nullptr, nullptr, 0);
+
 	// 리소스 및 쉐이더 바인딩 클리어
-    CRenderMgr::GetInst()->UnbindShaders_CS();
-    CRenderMgr::GetInst()->UnbindResources_CS();
-    CRenderMgr::GetInst()->UnbindResources_CS_UAV();
+    //CRenderMgr::GetInst()->UnbindShaders_CS();
+    //CRenderMgr::GetInst()->UnbindResources_CS();
+    //CRenderMgr::GetInst()->UnbindResources_CS_UAV();
 }

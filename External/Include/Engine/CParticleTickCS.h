@@ -6,6 +6,10 @@
 class CParticleTickCS :
     public CComputeShader
 {
+public:
+    CParticleTickCS();
+    ~CParticleTickCS();
+
 private:
     CStructuredBuffer* m_ParticleBuffer;
     CStructuredBuffer* m_SpawnBuffer;
@@ -19,13 +23,12 @@ public:
     void SetNoiseTex(AssetPtr<CTexture> _Noise) { m_CSTex[TEX_0] = make_pair(_Noise, 0); }
 
 public:
-    virtual int Binding() override;
-    virtual void CalcGroupNum() override;
     virtual void UIRender() override {}
     virtual void SetData() override;
 
-public:
-    CParticleTickCS();
-    ~CParticleTickCS();
+    virtual int Binding() override;
+    virtual void CalcGroupNum() override;
+    virtual void Clear() override;
+
 };
 

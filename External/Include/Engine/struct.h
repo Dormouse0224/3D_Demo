@@ -14,6 +14,10 @@ struct Vtx
 	Vec3	vTangent;	// 접선벡터
 	Vec3	vNormal;	// 법선벡터
 	Vec3	vBinormal;	// 종법선벡터
+
+    // Skinning 용 데이터
+    Vec4	vWeights;  // Bone 가중치
+    Vec4	vIndices;  // Bone 인덱스
 };
 
 // DebugShapeInfo
@@ -100,6 +104,49 @@ struct tLightModule
 };
 
 
+// ============
+// Animation 3D
+// ============
+struct tFrameTrans
+{
+    Vec4	vTranslate;
+    Vec4	vScale;
+    Vec4	qRot;
+};
+
+struct tMTKeyFrame
+{
+    double	dTime;
+    int		iFrame;
+    Vec3	vTranslate;
+    Vec3	vScale;
+    Vec4	qRot;
+};
+
+struct tMTBone
+{
+    wstring				strBoneName;
+    int					iDepth;
+    int					iParentIndx;
+    Matrix				matOffset;	// Inverse 행렬( Skin 정점을 -> 기본상태로 되돌림)
+    Matrix				matBone;
+    vector<tMTKeyFrame>	vecKeyFrame;
+};
+
+struct tMTAnimClip
+{
+    wstring			strAnimName;
+    int				iStartFrame;
+    int				iEndFrame;
+    int				iFrameLength;
+
+    double			dStartTime;
+    double			dEndTime;
+    double			dTimeLength;
+    float			fUpdateTime; // 이거 안씀
+
+    FbxTime::EMode	eMode;
+};
 
 // ===================
 // 상수버퍼 연동 구조체
@@ -117,9 +164,20 @@ struct tTransform
 };
 extern tTransform g_Trans;
 
+// Material 계수
+struct tMtrlData
+{
+    Vec4 vDiff;
+    Vec4 vSpec;
+    Vec4 vAmb;
+    Vec4 vEmv;
+};
+
 // 재질을 통해서 전달되는 상수
 struct tMtrlConst
 {
+    tMtrlData	mtrl;
+
 	int		iArr[4];
 	float	fArr[4];
 	Vec2	v2Arr[4];
@@ -129,7 +187,10 @@ struct tMtrlConst
 	//텍스쳐 바인딩 정보
 	int		bTex[TEX_END];
 
-	//int		padding[2];
+    // 3D Animation 정보
+    int		arrAnimData[2];
+
+    int     padding[2];
 };
 
 // Global Data

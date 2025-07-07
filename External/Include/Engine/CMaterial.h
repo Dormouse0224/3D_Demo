@@ -28,6 +28,9 @@ public:
     template<typename T>
     void SetConstParam(CONST_PARAM _Param, const T& _Data);
     void SetTexParam(TEX_PARAM _Param, const AssetPtr<CTexture>& _Tex) { m_arrTex[_Param] = _Tex; nullptr != _Tex ? m_Const.bTex[_Param] = true : m_Const.bTex[_Param] = false; }
+    void SetMaterialCoefficient(Vec4 _vDiff, Vec4 _vSpec, Vec4 _vAmb, Vec4 _vEmis);
+    void SetAnim3D(bool _bTrue) { m_Const.arrAnimData[0] = (int)_bTrue; }
+    void SetBoneCount(int _iBoneCount) { m_Const.arrAnimData[1] = _iBoneCount; }
 
     void Binding();
     static AssetPtr<CMaterial> Create(wstring _Name);

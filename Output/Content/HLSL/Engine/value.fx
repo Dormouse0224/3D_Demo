@@ -20,6 +20,12 @@ cbuffer TRANSFORM : register(b0)
 
 cbuffer MATERIAL : register(b1)
 {
+    // 재질 계수
+    float4 g_vDiff;
+    float4 g_vSpec;
+    float4 g_vAmb;
+    float4 g_vEmv;
+    
     int g_int_0;
     int g_int_1;
     int g_int_2;
@@ -64,7 +70,11 @@ cbuffer MATERIAL : register(b1)
     int g_btexArr_2;
     int g_btexArr_3;
     
-    //int2 g_padding;
+    // 3D Animation 정보
+    int g_iAnim;
+    int g_iBoneCount;
+    
+    int2 padding;
 }
 
 cbuffer GLOBAL : register(b2)
@@ -104,8 +114,10 @@ Texture2DArray g_texarr_2 : register(t14);
 Texture2DArray g_texarr_3 : register(t15);
 
 // 광원 구조화 버퍼
-StructuredBuffer<tLightModule> g_LightBuffer : register(t12);
+StructuredBuffer<tLightModule> g_LightBuffer : register(t16);
 
+// Animation3D Bone Matrix Buffer
+StructuredBuffer<Matrix> g_arrBoneMat : register(t17);
 
 
 

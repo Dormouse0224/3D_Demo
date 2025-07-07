@@ -46,9 +46,12 @@ public:
     void GetData(void* _Dst, UINT _ElementSize = 0, UINT _ElementCount = 0);
 
     void Binding(int _RegisterNum);
-    void Binding_UAV(int _RegisterNum);
     void Binding_CS(int _RegisterNum);
     void Binding_CS_UAV(int _RegisterNum);
+
+    void Clear(int _RegisterNum);
+    void Clear_CS();
+    void Clear_CS_UAV();
 
 
 };

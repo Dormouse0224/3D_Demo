@@ -79,3 +79,34 @@ void enumSizeCheck()
 {
 	assert(COMPONENT_TYPE_SAVE_MAP.size() == static_cast<int>(COMPONENT_TYPE_SAVE::COMPONENT_END) + 2);
 }
+
+Matrix GetMatrixFromFbxMatrix(FbxAMatrix& _mat)
+{
+    Matrix mat;
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
+        {
+            mat.m[i][j] = (float)_mat.Get(i, j);
+        }
+    }
+    return mat;
+}
+
+void SaveWString(const wstring& _Str, std::fstream& _File)
+{
+    wstring str = _Str;
+    size_t len = str.size();
+    _File.write(reinterpret_cast<char*>(&len), sizeof(size_t));
+    if (len > 0)
+        _File.write(reinterpret_cast<char*>(str.data()), sizeof(wchar_t) * len);
+}
+
+void LoadWString(wstring& _Str, std::fstream& _File)
+{
+    size_t len = 0;
+    _File.read(reinterpret_cast<char*>(&len), sizeof(size_t));
+    _Str.resize(len);
+    if (len > 0)
+        _File.read(reinterpret_cast<char*>(_Str.data()), sizeof(wchar_t) * len);
+}

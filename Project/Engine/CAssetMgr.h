@@ -35,6 +35,8 @@ public:
 	bool GetLoading() { return m_Loading; }
 
 	void AddAsset(const wstring& _Key, AssetPtr<CAsset> _Asset);
+    template<typename T>
+    AssetPtr<T> FindAsset(const wstring& _RelativePath);
 	template<typename T>
 	AssetPtr<T> Load(const wstring& _RelativePath, bool _IsEngineAsset = false);
 	template<typename T>
@@ -52,9 +54,8 @@ public:
 
 	void UpdateAsset();
 
-private:
-	template<typename T>
-	AssetPtr<T> FindAsset(const wstring& _RelativePath);
+	AssetPtr<CMeshData> LoadFBX(const wstring& _strPath);
+
 };
 
 
@@ -63,6 +64,8 @@ ASSET_TYPE CAssetMgr::GetAssetType()
 {
 	if constexpr (is_same_v<CMesh, T>)
 		return ASSET_TYPE::MESH;
+    else if constexpr (is_same_v<CMeshData, T>)
+        return ASSET_TYPE::MESHDATA;
 	else if constexpr (is_same_v<CMaterial, T>)
 		return ASSET_TYPE::MATERIAL;
 	else if constexpr (is_same_v<CTexture, T>)
