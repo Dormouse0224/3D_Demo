@@ -48,6 +48,15 @@ CAnimator3D::~CAnimator3D()
 
 void CAnimator3D::FinalTick()
 {
+    if (RenderComponent() && RenderComponent()->GetMesh().Get())
+    {
+        SetBones(RenderComponent()->GetMesh()->GetBones());
+        SetAnimClip(RenderComponent()->GetMesh()->GetAnimClip());
+    }
+
+    if (m_vecClip == nullptr || m_vecClip->size() < 1)
+        return;
+
 	m_CurTime = 0.f;
 	// 현재 재생중인 Clip 의 시간을 진행한다.
 	m_vecClipUpdateTime[m_CurClip] += EngineDT;
@@ -87,8 +96,11 @@ void CAnimator3D::SetAnimClip(const vector<tMTAnimClip>& _vecAnimClip)
 	m_vecClipUpdateTime[0] = fTime;*/
 }
 
-void CAnimator3D::Binding()
+void CAnimator3D::Binding(UINT _MtrlIdx)
 {
+    if (m_vecClip == nullptr || m_vecClip->size() < 1)
+        return;
+
 	if (!m_bFinalMatUpdate)
 	{
 		// Animation3D Update Compute Shader
@@ -116,6 +128,9 @@ void CAnimator3D::Binding()
 
 	// t17 레지스터에 최종행렬 데이터(구조버퍼) 바인딩		
 	m_BoneFinalMatBuffer->Binding(17);
+
+    RenderComponent()->GetMaterial(_MtrlIdx)->SetAnim3D(true); // Animation Mesh 알리기
+    RenderComponent()->GetMaterial(_MtrlIdx)->SetBoneCount(Animator3D()->GetBoneCount());
 }
 
 void CAnimator3D::ClearData()

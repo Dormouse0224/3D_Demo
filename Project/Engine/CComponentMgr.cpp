@@ -64,6 +64,12 @@ CComponent* CComponentMgr::CreateComp(COMPONENT_TYPE _Type)
     case COMPONENT_TYPE::FSM:
         return new CFSM;
         break;
+    case COMPONENT_TYPE::LIGHT:
+        return new CLight;
+        break;
+    case COMPONENT_TYPE::ANIMATOR3D:
+        return new CAnimator3D;
+        break;
 
         // ·»´õ ÄÄÆ÷³ÍÆ®
     case COMPONENT_TYPE::MESHRENDER:
@@ -90,11 +96,6 @@ CComponent* CComponentMgr::CreateComp(COMPONENT_TYPE _Type)
         break;
     case COMPONENT_TYPE::UICOM:
         return new CUICom;
-        break;
-
-        // Additional
-    case COMPONENT_TYPE::LIGHT:
-        return new CLight;
         break;
     }
 

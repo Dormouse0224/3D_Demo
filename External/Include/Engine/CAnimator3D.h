@@ -28,7 +28,7 @@ private:
     int							m_NextFrameIdx;        // 클립의 다음 프레임
     float						m_Ratio;	            // 프레임 사이 비율
 
-    CStructuredBuffer* m_BoneFinalMatBuffer;   // 특정 프레임의 최종 행렬
+    CStructuredBuffer*          m_BoneFinalMatBuffer;   // 특정 프레임의 최종 행렬
     bool						m_bFinalMatUpdate;      // 최종행렬 연산 수행여부
 
 
@@ -41,7 +41,7 @@ public:
     UINT GetBoneCount() { return (UINT)m_vecBones->size(); }
     void ClearData();
 
-    void Binding();
+    void Binding(UINT _MtrlIdx);
 
 private:
     void check_mesh(AssetPtr<CMesh> _pMesh);

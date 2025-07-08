@@ -13,6 +13,7 @@ CRenderComponent::CRenderComponent(COMPONENT_TYPE _Type)
 CRenderComponent::CRenderComponent(const CRenderComponent& _Other)
 	: CComponent(_Other)
 	, m_Mesh(_Other.m_Mesh)
+    , m_vecMtrls(_Other.m_vecMtrls)
 {
 }
 
@@ -93,6 +94,7 @@ int CRenderComponent::RenderCom_Load(fstream& _Stream)
         LoadWString(mtrlName, _Stream);
         mtrl.pSharedMtrl = CAssetMgr::GetInst()->Load<CMaterial>(mtrlName);
         _Stream.read(reinterpret_cast<char*>(&mtrl.bUsingDynamic), sizeof(bool));
+        m_vecMtrls.push_back(mtrl);
     }
 
 	return S_OK;

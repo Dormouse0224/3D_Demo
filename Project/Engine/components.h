@@ -5,6 +5,8 @@
 #include "CCamera.h"
 #include "CPhysxActor.h"
 #include "CFSM.h"
+#include "CLight.h"
+#include "CAnimator3D.h"
 
 // ·»´õ ÄÄÆ÷³ÍÆ®
 #include "CMeshRender.h"
@@ -14,6 +16,3 @@
 #include "CParticleRender.h"
 #include "CSkyBox.h"
 #include "CUICom.h"
-
-// additional
-#include "CLight.h"
