@@ -96,9 +96,9 @@ using namespace physx;
 // FBX
 #include <fbxsdk/fbxsdk.h>
 #ifdef _DEBUG
-#pragma comment(lib, "FBXLoader/x64/debug/libfbxsdk-md.lib")
+#pragma comment(lib, "fbxsdk/libfbxsdk-md_d.lib")
 #else
-#pragma comment(lib, "FBXLoader/x64/release/libfbxsdk-md.lib")
+#pragma comment(lib, "fbxsdk/libfbxsdk-md.lib")
 #endif
 
 // STL
