@@ -6,7 +6,7 @@
 #include "CCamera.h"
 #include "CEngine.h"
 
-void DrawDebugRect(Vec4 _Color, Vec3 _WorldPos, Vec3 _WorldScale, Vec3 _WorldRotation
+void DrawDebugRect(Vec4 _Color, Vec3 _WorldPos, Vec3 _WorldScale, Vec4 _WorldRotation
 	, bool _DepthTest, float _Duration)
 {
 	tDebugShapeInfo info = {};
@@ -36,7 +36,7 @@ void DrawDebugRect(Vec4 _Color, const Matrix& _matWorld, bool _DepthTest, float 
 	CRenderMgr::GetInst()->AddDebugShapeInfo(info);
 }
 
-void DrawDebugCircle(Vec4 _Color, Vec3 _WorldPos, float _Radius, Vec3 _WorldRotation
+void DrawDebugCircle(Vec4 _Color, Vec3 _WorldPos, float _Radius, Vec4 _WorldRotation
 	, bool _DepthTest, float _Duration)
 {
 	tDebugShapeInfo info = {};
@@ -45,11 +45,58 @@ void DrawDebugCircle(Vec4 _Color, Vec3 _WorldPos, float _Radius, Vec3 _WorldRota
 	info.WorldPos = _WorldPos;
 	info.WorldScale = Vec3(_Radius * 2.f, _Radius * 2.f, 1.f);
 	info.WorldRotation = _WorldRotation;
+    info.MatWorld = XMMatrixIdentity();
 	info.CurTime = 0.f;
 	info.Duration = _Duration;
 	info.DepthTest = _DepthTest;
 
 	CRenderMgr::GetInst()->AddDebugShapeInfo(info);
+}
+
+void DrawDebugLine(Vec4 _Color, Vec3 _Start, Vec3 _Direction, float _Length, bool _DepthTest, float _Duration)
+{
+    Vec3 vecX(1.f, 0.f, 0.f);
+    tDebugShapeInfo info = {};
+    info.Shape = DEBUG_SHAPE::LINE;
+    info.Color = _Color;
+    info.WorldPos = _Start;
+    info.WorldScale = Vec3(_Length, 1.f, 1.f);
+    info.WorldRotation = XMQuaternionRotationAxis(vecX.Cross(_Direction), acos(vecX.Dot(_Direction)));
+    info.MatWorld = XMMatrixIdentity();
+    info.CurTime = 0.f;
+    info.Duration = _Duration;
+    info.DepthTest = _DepthTest;
+
+    CRenderMgr::GetInst()->AddDebugShapeInfo(info);
+}
+
+void DrawDebugCube(Vec4 _Color, const Matrix& _matWorld, bool _DepthTest, float _Duration)
+{
+    tDebugShapeInfo info = {};
+    info.Shape = DEBUG_SHAPE::CUBE;
+    info.Color = _Color;
+    info.MatWorld = _matWorld;
+    info.CurTime = 0.f;
+    info.Duration = _Duration;
+    info.DepthTest = _DepthTest;
+
+    CRenderMgr::GetInst()->AddDebugShapeInfo(info);
+}
+
+void DrawDebugSphere(Vec4 _Color, Vec3 _WorldPos, float _Radius, bool _DepthTest, float _Duration)
+{
+    tDebugShapeInfo info = {};
+    info.Shape = DEBUG_SHAPE::SPHERE;
+    info.Color = _Color;
+    info.WorldPos = _WorldPos;
+    info.WorldScale = Vec3(_Radius * 2, _Radius * 2, _Radius * 2);
+    info.WorldRotation = Vec4(0, 0, 0, 1);
+    info.MatWorld = XMMatrixIdentity();
+    info.CurTime = 0.f;
+    info.Duration = _Duration;
+    info.DepthTest = _DepthTest;
+
+    CRenderMgr::GetInst()->AddDebugShapeInfo(info);
 }
 
 bool IsRenderable(CGameObject* obj)

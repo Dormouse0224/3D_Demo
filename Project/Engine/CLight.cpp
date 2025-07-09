@@ -6,6 +6,7 @@
 #include "CRenderMgr.h"
 #include "CMaterial.h"
 #include "CMRT.h"
+#include "CTransform.h"
 
 CLight::CLight()
 	: CComponent(COMPONENT_TYPE::LIGHT)
@@ -34,13 +35,28 @@ CLight::~CLight()
 
 void CLight::FinalTick()
 {
+    m_LightModule.WorldPos = Transform()->GetWorldTrans();
+    m_LightModule.Dir = Transform()->GetWorldDir(DIR::FRONT);
+    Transform()->SetRelativeScale(Vec3(m_LightModule.Radius * 2));
 	CLightMgr::GetInst()->RegisterLight(this);
+
+    if (m_LightModule.Type == LIGHT_TYPE::POINT)
+    {
+        DrawDebugSphere(Vec4(0.f, 1.f, 0.f, 1.f), m_LightModule.WorldPos, m_LightModule.Radius, false, 0.f);
+    }
+    else if (m_LightModule.Type == LIGHT_TYPE::SPOT)
+    {
+        DrawDebugLine(Vec4(0.f, 1.f, 0.f, 1.f), m_LightModule.WorldPos, m_LightModule.Dir, m_LightModule.Radius, false, 0.f);
+        DrawDebugSphere(Vec4(0.f, 1.f, 0.f, 1.f), m_LightModule.WorldPos, m_LightModule.Radius, false, 0.f);
+    }
 }
 
 void CLight::Render()
 {
 	if (m_LightMesh == nullptr)
 		return;
+
+    Transform()->Binding();
 
     // Normal, Position 타겟을 리소스로 바인딩
 	m_LightMtrl->SetTexParam(TEX_0, CRenderMgr::GetInst()->GetMRT(MRT_TYPE::DEFERRED)->GetRenderTarget(1));

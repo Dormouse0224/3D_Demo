@@ -61,7 +61,7 @@ int CComputeShader::CreateComputeShader(const wstring& _RelativePath, const stri
 		}
 		else
 		{
-			MessageBoxA(nullptr, "쉐이더 파일 경로가 옮바르지 않습니다.", "쉐이더 컴파일 실패", MB_OK);
+			MessageBoxA(nullptr, "컴퓨트 쉐이더 파일 경로가 옮바르지 않습니다.", "쉐이더 컴파일 실패", MB_OK);
 		}
 		return E_FAIL;
 	}

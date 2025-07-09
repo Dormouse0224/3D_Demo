@@ -120,14 +120,14 @@ void CRenderMgr::MainRender()
 	if (pLevel == nullptr || pLevel->GetState() == LEVEL_STATE::STOP)
 	{
 		m_CurrentCam = m_EditorCam->Camera();
-		m_EditorCam->Camera()->Render();
+        m_CurrentCam->Render();
 	}
 	else
 	{
 		for (size_t i = 0; i < m_vecCam.size(); ++i)
 		{
 			m_CurrentCam = m_vecCam[i];
-			m_vecCam[i]->Render();
+            m_CurrentCam->Render();
 		}
 	}
 }
@@ -158,16 +158,24 @@ void CRenderMgr::DebugRender()
 		switch ((*iter).Shape)
 		{
 		case DEBUG_SHAPE::RECT:
-			m_DebugObject->GetRenderComponent()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"RectMesh_Debug", true));
+			m_DebugObject->GetRenderComponent()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"EA_RectMesh_Debug", true));
+            m_DebugObject->GetRenderComponent()->GetMaterial()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicShader>(L"EA_DebugShapeShader"));
 			break;
 		case DEBUG_SHAPE::CIRCLE:
-			m_DebugObject->GetRenderComponent()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"CircleMesh_Debug", true));
+			m_DebugObject->GetRenderComponent()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"EA_CircleMesh_Debug", true));
+            m_DebugObject->GetRenderComponent()->GetMaterial()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicShader>(L"EA_DebugShapeShader"));
 			break;
 		case DEBUG_SHAPE::LINE:
+            m_DebugObject->GetRenderComponent()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"EA_LineMesh", true));
+            m_DebugObject->GetRenderComponent()->GetMaterial()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicShader>(L"EA_DebugShapeShader"));
 			break;
 		case DEBUG_SHAPE::CUBE:
+            m_DebugObject->GetRenderComponent()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"EA_CubeMesh_Debug", true));
+            m_DebugObject->GetRenderComponent()->GetMaterial()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicShader>(L"EA_DebugShapeShader"));
 			break;
 		case DEBUG_SHAPE::SPHERE:
+            m_DebugObject->GetRenderComponent()->SetMesh(CAssetMgr::GetInst()->Load<CMesh>(L"EA_SphereMesh", true));
+            m_DebugObject->GetRenderComponent()->GetMaterial()->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicShader>(L"EA_DebugShapeShader_Sphere"));
 			break;
 		default:
 			break;
@@ -188,7 +196,7 @@ void CRenderMgr::DebugRender()
 			m_DebugObject->Transform()->SetRelativePos((*iter).WorldPos);
 			m_DebugObject->Transform()->SetRelativeScale((*iter).WorldScale);
 			m_DebugObject->Transform()->SetRelativeRot((*iter).WorldRotation);
-			m_DebugObject->Transform()->FinalTick();
+			//m_DebugObject->Transform()->FinalTick();
 		}
 		else
 		{
@@ -196,7 +204,10 @@ void CRenderMgr::DebugRender()
 		}
 
 		// 디버그 오브젝트 렌더링
-		m_DebugObject->Render();
+        m_CurrentCam->FinalTick();
+        m_DebugObject->FinalTick();
+        vector<CGameObject*> vec = { m_DebugObject };
+        m_CurrentCam->Camera()->Direct_Render(vec);
 
 		// 노출 시간이 넘어선 정보는 제거한다.
 		(*iter).CurTime += EngineDT;

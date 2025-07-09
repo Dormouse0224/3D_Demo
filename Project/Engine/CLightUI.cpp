@@ -43,16 +43,14 @@ void CLightUI::Render_Com()
 	// WorldPos
 	ImGui::Text("WorldPos");
 	float fWP[3] = { LightModule.WorldPos.x, LightModule.WorldPos.y, LightModule.WorldPos.z };
-	if (ImGui::InputFloat3("##WorldPos", fWP))
-	{
-		LightModule.WorldPos = Vec3(fWP[0], fWP[1], fWP[2]);
-		m_TargetObj->Light()->SetLightModule(LightModule);
-	}
+    ImGui::BeginDisabled();
+    ImGui::InputFloat3("##WorldPos", fWP);
+    ImGui::EndDisabled();
 
 	// Radius
 	ImGui::Text("Radius");
 	float fRad = LightModule.Radius;
-	if (ImGui::InputFloat("##Radius", &fRad))
+	if (ImGui::DragFloat("##Radius", &fRad))
 	{
 		LightModule.Radius = fRad;
 		m_TargetObj->Light()->SetLightModule(LightModule);
@@ -61,16 +59,14 @@ void CLightUI::Render_Com()
 	// Dir
 	ImGui::Text("Dir");
 	float fDir[3] = { LightModule.Dir.x, LightModule.Dir.y, LightModule.Dir.z };
-	if (ImGui::InputFloat3("##Dir", fDir))
-	{
-		LightModule.Dir = Vec3(fDir[0], fDir[1], fDir[2]);
-		m_TargetObj->Light()->SetLightModule(LightModule);
-	}
+    ImGui::BeginDisabled();
+    ImGui::InputFloat3("##Dir", fDir);
+    ImGui::EndDisabled();
 
 	// Angle
 	ImGui::Text("Angle");
 	float fAng = LightModule.Angle;
-	if (ImGui::InputFloat("##Angle", &fAng))
+	if (ImGui::DragFloat("##Angle", &fAng))
 	{
 		LightModule.Angle = fAng;
 		m_TargetObj->Light()->SetLightModule(LightModule);

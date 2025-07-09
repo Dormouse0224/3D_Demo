@@ -16,7 +16,6 @@ void CRenderMgr::Init()
 	// DebugShapeShader
 	// ================
 	AssetPtr<CGraphicShader> pShader = new CGraphicShader;
-
 	pShader->CreateVertexShader(L"HLSL\\Engine\\debug_shape.fx", "VS_DebugShape");
 	pShader->CreatePixelShader(L"HLSL\\Engine\\debug_shape.fx", "PS_DebugShape");
 	pShader->SetDomain(SHADER_DOMAIN::DOMAIN_DEBUG);
@@ -25,14 +24,22 @@ void CRenderMgr::Init()
 	pShader->SetBSType(BS_TYPE::ALPHABLEND);
 	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 	pShader->SetEngineAsset(true);
-
 	CAssetMgr::GetInst()->AddAsset(L"EA_DebugShapeShader", pShader.Get());
+
+    pShader = new CGraphicShader;
+    pShader->CreateVertexShader(L"HLSL\\Engine\\debug_shape.fx", "VS_DebugShapeSphere");
+    pShader->CreatePixelShader(L"HLSL\\Engine\\debug_shape.fx", "PS_DebugShapeSphere");
+    pShader->SetDomain(SHADER_DOMAIN::DOMAIN_DEBUG);
+    pShader->SetRSType(RS_TYPE::CULL_NONE);
+    pShader->SetDSType(DS_TYPE::LESS);
+    pShader->SetBSType(BS_TYPE::ALPHABLEND);
+    pShader->SetEngineAsset(true);
+    CAssetMgr::GetInst()->AddAsset(L"EA_DebugShapeShader_Sphere", pShader.Get());
 
 	// ==============
 	// DebugShapeMtrl
 	// ==============
 	AssetPtr<CMaterial> pMtrl = new CMaterial;
-	pMtrl->SetShader(pShader);
 	pMtrl->SetEngineAsset(true);
 	CAssetMgr::GetInst()->AddAsset(L"EA_DebugShapeMtrl", pMtrl.Get());
 

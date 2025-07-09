@@ -20,16 +20,47 @@ void CalcLight(float3 _ViewPos, float3 _ViewNormal, tLightModule _Module, float 
         float3 ViewDir = normalize(_ViewPos);
         float3 Specular = pow(max(dot(-ViewDir, ReflectDir), 0), _SpecularRatio) * _Module.Color;
         
-        _Diffuse = Diffuse;
-        _Specular = Specular;
+        _Diffuse += Diffuse;
+        _Specular += Specular;
     }
     else if (_Module.Type == POINT)
     {
+        float3 LocalPos = mul(mul(float4(_ViewPos, 1.f), g_matInvView), g_matInvWorld).xyz;
+        if (length(LocalPos) > 0.5f)
+            return;
         
+        float3 Normal = normalize(_ViewNormal);
+        float3 vLightViewPos = mul(float4(_Module.WorldPos, 1.f), g_matView).xyz;
+        float3 LightDir = normalize(_ViewPos - vLightViewPos);
+        float3 Diffuse = max(dot(Normal, -LightDir), 0) * _Module.Color;
+        
+        float3 ReflectDir = normalize(dot(Normal, -LightDir) * Normal * 2 + LightDir);
+        float3 ViewDir = normalize(_ViewPos);
+        float3 Specular = pow(max(dot(-ViewDir, ReflectDir), 0), _SpecularRatio) * _Module.Color;
+        
+        float Ratio = saturate(cos((length(_ViewPos - vLightViewPos) / _Module.Radius) * (PI / 2.f)));
+        _Diffuse += Diffuse * Ratio;
+        _Specular += Specular * Ratio;
     }
     else if (_Module.Type == SPOT)
     {
+        float3 LocalPos = mul(mul(float4(_ViewPos, 1.f), g_matInvView), g_matInvWorld).xyz;
+        float Angle = acos(dot(normalize(LocalPos), float3(0.f, 0.f, 1.f))) * (180.f / PI);
+        if (length(LocalPos) > 0.5f || Angle > _Module.Angle / 2.f)
+            return;
         
+        float3 Normal = normalize(_ViewNormal);
+        float3 vLightViewPos = mul(float4(_Module.WorldPos, 1.f), g_matView).xyz;
+        float3 LightDir = normalize(_ViewPos - vLightViewPos);
+        float3 Diffuse = max(dot(Normal, -LightDir), 0) * _Module.Color;
+        
+        float3 ReflectDir = normalize(dot(Normal, -LightDir) * Normal * 2 + LightDir);
+        float3 ViewDir = normalize(_ViewPos);
+        float3 Specular = pow(max(dot(-ViewDir, ReflectDir), 0), _SpecularRatio) * _Module.Color;
+        
+        float Ratio = saturate(cos((length(_ViewPos - vLightViewPos) / _Module.Radius) * (PI / 2.f)));
+        _Diffuse += Diffuse * Ratio;
+        _Specular += Specular * Ratio;
     }
 
 }

@@ -76,6 +76,7 @@ void CTransform::Binding()
 	CConstBuffer* pTransformBuffer = CDevice::GetInst()->GetConstBuffer(CB_TYPE::TRANSFORM);
 
 	g_Trans.matWorld = m_matWorld;
+    g_Trans.matInvWorld = XMMatrixInverse(NULL, m_matWorld);
 	g_Trans.matWV = g_Trans.matWorld * g_Trans.matView;
 	g_Trans.matVP = g_Trans.matView * g_Trans.matProj;
 	g_Trans.matWVP = g_Trans.matWV * g_Trans.matProj;

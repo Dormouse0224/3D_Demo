@@ -44,8 +44,8 @@ void CLightMgr::Binding()
 		// 광원 정보를 구조화 버퍼로 전달
 		m_LightModuleBuffer->SetData(m_vecLightModule.data(), sizeof(tLightModule), (UINT)m_vecLightModule.size());
 
-		// t12 에 바인딩
-		m_LightModuleBuffer->Binding(12);
+		// t16 에 바인딩
+		m_LightModuleBuffer->Binding(16);
 		g_global.g_Light2DCount = m_vecLightModule.size();
 	}
 }

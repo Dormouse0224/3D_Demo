@@ -32,6 +32,25 @@ void CAssetMgr::CreateEngineMesh()
 	pMesh->SetEngineAsset(true);
 	AddAsset(L"EA_PointMesh", pMesh.Get());
 
+    // =========
+    // LineMesh
+    // =========
+    pMesh = new CMesh;
+    Vtx arrLine[2];
+    arrLine[0].vPos = Vec3(0.f, 0.f, 0.f);
+    arrLine[0].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
+    arrLine[0].vUV = Vec2(0.f, 0.f);
+
+    arrLine[1].vPos = Vec3(1.f, 0.f, 0.f);
+    arrLine[1].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
+    arrLine[1].vUV = Vec2(1.f, 0.f);
+
+    // Index
+    UINT arrLineIdx[2] = { 0, 1 };
+
+    pMesh->Create(arrLine, 2, arrLineIdx, 2);
+    pMesh->SetEngineAsset(true);
+    AddAsset(L"EA_LineMesh", pMesh.Get());
 
 	// ========
 	// RectMesh
@@ -43,21 +62,21 @@ void CAssetMgr::CreateEngineMesh()
 
 	Vtx arrVtx[4] = {};
 	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
-	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	arrVtx[0].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
 	arrVtx[0].vUV = Vec2(0.f, 0.f);
 	arrVtx[0].vTangent = Vec3(1.f, 0.f, 0.f);
 	arrVtx[0].vBinormal = Vec3(0.f, -1.f, 0.f);
 	arrVtx[0].vNormal = Vec3(0.f, 0.f, -1.f);
 
 	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
-	arrVtx[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+	arrVtx[1].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
 	arrVtx[1].vUV = Vec2(1.f, 0.f);
 	arrVtx[1].vTangent = Vec3(1.f, 0.f, 0.f);
 	arrVtx[1].vBinormal = Vec3(0.f, -1.f, 0.f);
 	arrVtx[1].vNormal = Vec3(0.f, 0.f, -1.f);
 
 	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
-	arrVtx[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+	arrVtx[2].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
 	arrVtx[2].vUV = Vec2(1.f, 1.f);
 	arrVtx[2].vTangent = Vec3(1.f, 0.f, 0.f);
 	arrVtx[2].vBinormal = Vec3(0.f, -1.f, 0.f);

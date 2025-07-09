@@ -43,57 +43,53 @@ void CRenderComponentUI::Render_RCom()
         ImGui::EndDragDropTarget();
     }
 
-    if (vecMtrls.empty())
+    for (int i = 0; i < vecMtrls.size() + 1; ++i)
     {
-        ImGui::NewLine();
-        ImGui::Text("No Material Exist..");
-    }
-    else
-    {
-        for (int i = 0; i < vecMtrls.size(); ++i)
-        {
-            ImGui::NewLine();
-            string str = "Material #" + to_string(i);
-            ImGui::SeparatorText(str.c_str());
-            ImGui::Text("Shared Material");
-            std::string DefaultMtrlName = "NO EXIST";
-            if (vecMtrls[i].pSharedMtrl.Get())
-            {
-                DefaultMtrlName = to_str(vecMtrls[i].pSharedMtrl->GetName());
-            }
-            string label = "##SharedMtrl" + to_string(i);
-            ImGui::InputText(label.c_str(), const_cast<char*>(DefaultMtrlName.c_str())
-                , DefaultMtrlName.size() + 1, ImGuiInputTextFlags_ReadOnly);
-            if (ImGui::BeginDragDropTarget())
-            {
-                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ContentViewer"))
-                {
-                    CAsset* Asset = *reinterpret_cast<CAsset**>(payload->Data);
-                    AssetPtr<CMaterial> pMtrl = dynamic_cast<CMaterial*>(Asset);
-                    if (pMtrl.Get())
-                    {
-                        m_TargetObj->GetRenderComponent()->SetMaterial(pMtrl);
-                    }
-                }
-                ImGui::EndDragDropTarget();
-            }
+        tMtrlSet MtrlSet = {};
+        if (vecMtrls.size() > i)
+            MtrlSet = vecMtrls[i];
 
-            if (vecMtrls[i].bUsingDynamic)
+        ImGui::NewLine();
+        string str = "Material #" + to_string(i);
+        ImGui::SeparatorText(str.c_str());
+        ImGui::Text("Shared Material");
+        std::string DefaultMtrlName = "NO EXIST";
+        if (MtrlSet.pSharedMtrl.Get())
+        {
+            DefaultMtrlName = to_str(MtrlSet.pSharedMtrl->GetName());
+        }
+        string label = "##SharedMtrl" + to_string(i);
+        ImGui::InputText(label.c_str(), const_cast<char*>(DefaultMtrlName.c_str())
+            , DefaultMtrlName.size() + 1, ImGuiInputTextFlags_ReadOnly);
+        if (ImGui::BeginDragDropTarget())
+        {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ContentViewer"))
             {
-                ImGui::Text("Dynamic Material");
-                std::string DynamicMtrlName = "NO EXIST";
-                if (vecMtrls[i].pDynamicMtrl.Get())
+                CAsset* Asset = *reinterpret_cast<CAsset**>(payload->Data);
+                AssetPtr<CMaterial> pMtrl = dynamic_cast<CMaterial*>(Asset);
+                if (pMtrl.Get())
                 {
-                    DynamicMtrlName = to_str(vecMtrls[i].pDynamicMtrl->GetName());
+                    m_TargetObj->GetRenderComponent()->SetMaterial(pMtrl);
                 }
-                string label = "##DynamicMtrl" + to_string(i);
-                ImGui::InputText(label.c_str(), const_cast<char*>(DynamicMtrlName.c_str())
-                    , DynamicMtrlName.size() + 1, ImGuiInputTextFlags_ReadOnly);
             }
-            else
+            ImGui::EndDragDropTarget();
+        }
+
+        if (MtrlSet.bUsingDynamic)
+        {
+            ImGui::Text("Dynamic Material");
+            std::string DynamicMtrlName = "NO EXIST";
+            if (MtrlSet.pDynamicMtrl.Get())
             {
-                ImGui::Text("Not Using Dynamic Material..");
+                DynamicMtrlName = to_str(MtrlSet.pDynamicMtrl->GetName());
             }
+            string label = "##DynamicMtrl" + to_string(i);
+            ImGui::InputText(label.c_str(), const_cast<char*>(DynamicMtrlName.c_str())
+                , DynamicMtrlName.size() + 1, ImGuiInputTextFlags_ReadOnly);
+        }
+        else
+        {
+            ImGui::Text("Not Using Dynamic Material..");
         }
     }
 }

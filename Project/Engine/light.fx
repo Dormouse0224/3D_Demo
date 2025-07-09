@@ -28,7 +28,10 @@ struct VS_OUT
 VS_OUT VS_Light(VS_IN _In)
 {
     VS_OUT _Out;
-    _Out.vPos = float4(_In.vPos * 2.f, 1.f);
+    if (g_LightBuffer[LIGHT_INDEX].Type == DIRECTIONAL)
+        _Out.vPos = float4(_In.vPos * 2.f, 1.f);
+    else if (g_LightBuffer[LIGHT_INDEX].Type == POINT)
+        _Out.vPos = mul(float4(_In.vPos, 1.f), g_matWVP);
     _Out.vUV = _In.vUV;
     
     return _Out;
@@ -48,16 +51,25 @@ PS_OUT PS_Light(VS_OUT _In)
     output.vDiffuse = float4(0.f, 0.f, 0.f, 1.f);
     output.vSpecular = float4(0.f, 0.f, 0.f, 1.f);
     
-    float4 ViewPos = POSITION_TEX.Sample(g_sam_0, _In.vUV);
-    float4 ViewNorm = NORMAL_TEX.Sample(g_sam_0, _In.vUV);
+    float2 SamplePos = float2(0.f, 0.f);
+    if (g_LightBuffer[LIGHT_INDEX].Type == DIRECTIONAL)
+    {
+        SamplePos = _In.vUV;
+    }
+    else if (g_LightBuffer[LIGHT_INDEX].Type == POINT || g_LightBuffer[LIGHT_INDEX].Type == SPOT)
+    {
+        SamplePos = _In.vPos.xy / g_Resolution;
+    }
+    
+    float4 ViewPos = POSITION_TEX.Sample(g_sam_0, SamplePos);
+    float4 ViewNorm = NORMAL_TEX.Sample(g_sam_0, SamplePos);
+    
     if (ViewPos.x == 0 && ViewPos.y == 0 && ViewPos.z == 0 && ViewPos.w == 0)
         discard;
     
     
     CalcLight(ViewPos.xyz, ViewNorm.xyz, g_LightBuffer[LIGHT_INDEX], 2.f, output.vDiffuse.xyz, output.vSpecular.xyz);
     
-    //output.vDiffuse = ViewPos;
-    //output.vSpecular = ViewNorm;
     
     return output;
 }

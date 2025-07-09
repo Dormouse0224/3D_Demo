@@ -158,6 +158,10 @@ struct tTransform
 	Matrix	matView;
 	Matrix	matProj;
 
+    Matrix	matInvWorld;
+    Matrix	matInvView;
+    Matrix	matInvProj;
+
 	Matrix	matWV;
 	Matrix	matVP;
 	Matrix	matWVP;

@@ -100,6 +100,9 @@ void CCamera::SetMatrix()
 	// 카메라의 View, Proj 행렬을 세팅
 	g_Trans.matView = m_matView;
 	g_Trans.matProj = m_matProj;
+
+    g_Trans.matInvView = XMMatrixInverse(NULL, m_matView);
+    g_Trans.matInvProj = XMMatrixInverse(NULL, m_matProj);
 }
 
 void CCamera::Render()

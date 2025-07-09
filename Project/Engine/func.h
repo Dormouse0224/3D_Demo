@@ -2,11 +2,17 @@
 
 class CGameObject;
 
-void DrawDebugRect(Vec4 _Color, Vec3 _WorldPos, Vec3 _WorldScale, Vec3 _WorldRotation, bool _DepthTest = true, float _Duration = 0.f);
+void DrawDebugRect(Vec4 _Color, Vec3 _WorldPos, Vec3 _WorldScale, Vec4 _WorldRotation, bool _DepthTest = true, float _Duration = 0.f);
 void DrawDebugRect(Vec4 _Color, const Matrix& _matWorld, bool _DepthTest = true, float _Duration = 0.f);
 
 
-void DrawDebugCircle(Vec4 _Color, Vec3 _WorldPos, float _Radius, Vec3 _WorldRotation, bool _DepthTest = true, float _Duration = 0.f);
+void DrawDebugCircle(Vec4 _Color, Vec3 _WorldPos, float _Radius, Vec4 _WorldRotation, bool _DepthTest = true, float _Duration = 0.f);
+
+void DrawDebugLine(Vec4 _Color, Vec3 _Start, Vec3 _Direction, float _Length, bool _DepthTest, float _Duration);
+
+void DrawDebugCube(Vec4 _Color, const Matrix& _matWorld, bool _DepthTest, float _Duration);
+
+void DrawDebugSphere(Vec4 _Color, Vec3 _WorldPos, float _Radius, bool _DepthTest, float _Duration);
 
 bool IsRenderable(CGameObject* obj);
 
