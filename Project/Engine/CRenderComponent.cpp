@@ -7,6 +7,9 @@
 
 CRenderComponent::CRenderComponent(COMPONENT_TYPE _Type)
 	: CComponent(_Type)
+    , m_Mesh(nullptr)
+    , m_vecMtrls{}
+    , m_FrustumCull(true)
 {
 }
 
@@ -14,6 +17,7 @@ CRenderComponent::CRenderComponent(const CRenderComponent& _Other)
 	: CComponent(_Other)
 	, m_Mesh(_Other.m_Mesh)
     , m_vecMtrls(_Other.m_vecMtrls)
+    , m_FrustumCull(_Other.m_FrustumCull)
 {
 }
 
@@ -97,6 +101,8 @@ int CRenderComponent::RenderCom_Load(fstream& _Stream)
         m_vecMtrls.push_back(mtrl);
     }
 
+    _Stream.read(reinterpret_cast<char*>(&m_FrustumCull), sizeof(bool));
+
 	return S_OK;
 }
 
@@ -123,6 +129,8 @@ int CRenderComponent::RenderCom_Save(fstream& _Stream)
         SaveWString(m_vecMtrls[i].pSharedMtrl->GetName(), _Stream);
         _Stream.write(reinterpret_cast<char*>(&m_vecMtrls[i].bUsingDynamic), sizeof(bool));
     }
+
+    _Stream.write(reinterpret_cast<char*>(&m_FrustumCull), sizeof(bool));
 
 	return S_OK;
 }

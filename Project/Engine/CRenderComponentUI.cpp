@@ -19,8 +19,16 @@ void CRenderComponentUI::Render_RCom()
 
     AssetPtr<CMesh> Mesh = m_TargetObj->GetRenderComponent()->m_Mesh;
     vector<tMtrlSet> vecMtrls = m_TargetObj->GetRenderComponent()->m_vecMtrls;
+    bool bFrustumCull = m_TargetObj->GetRenderComponent()->GetFrustumCull();
 
     ImGui::SeparatorText("Basic Render Option");
+    ImGui::Text("Frustum Culling");
+    if (ImGui::Checkbox("#FrustumCulling", &bFrustumCull))
+    {
+        m_TargetObj->GetRenderComponent()->SetFrustumCull(bFrustumCull);
+    }
+
+
     ImGui::Text("Mesh");
     std::string MeshName = "NO EXIST";
     if (Mesh.Get())

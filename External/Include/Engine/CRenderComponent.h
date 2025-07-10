@@ -25,11 +25,13 @@ private:
     AssetPtr<CMesh>     m_Mesh;
     vector<tMtrlSet>    m_vecMtrls; // 메시에 대응하는 재질들
 
+    bool                m_FrustumCull;
 
 public:
     void SetMesh(AssetPtr<CMesh> _Mesh) { m_Mesh = _Mesh; }
     void SetMaterial(AssetPtr<CMaterial> _Mtrl, UINT _Idx = 0);
     void SetUsingDynamic(bool _UsingDynamic, UINT _Idx);
+    void SetFrustumCull(bool _FrustumCull) { m_FrustumCull = _FrustumCull; }
 
     AssetPtr<CMesh> GetMesh() { return m_Mesh; }
     // 현재 RenderComponent 의 동적 재질 사용 여부에 따라 기본 재질 또는 동적 재질을 반환합니다.
@@ -37,7 +39,7 @@ public:
     AssetPtr<CMaterial> GetSharedMaterial(UINT _Idx);
     bool GetUsingDynamic(UINT _Idx);
     UINT GetMaterialCount() { return (UINT)m_vecMtrls.size(); }
-    
+    bool GetFrustumCull() { return m_FrustumCull; }
 
     virtual void Render() = 0;
 

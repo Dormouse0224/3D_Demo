@@ -1,6 +1,8 @@
 #pragma once
 #include "CComponent.h"
 
+class CFrustum;
+
 class CCamera :
     public CComponent
 {
@@ -27,6 +29,7 @@ private:
 
     UINT        m_LayerCheck;   // 카메라가 렌더링할 레이어 비트설정
 
+    CFrustum*   m_Frustum;
 
     // 물체 분류 용도
     vector<CGameObject*>                m_vecOpaque;
@@ -61,6 +64,8 @@ public:
 
     const Matrix& GetViewMat() { return m_matView; }
     const Matrix& GetProjMat() { return m_matProj; }
+    //const Matrix& GetViewInvMat() { return Matrix(XMMatrixInverse(NULL, m_matView)); }
+    //const Matrix& GetProjInvMat() { return Matrix(XMMatrixInverse(NULL, m_matProj)); }
 
 
 

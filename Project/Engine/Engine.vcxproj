@@ -181,6 +181,7 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="CFlipbookRenderUI.h" />
     <ClInclude Include="CFlipbookUI.h" />
     <ClInclude Include="CFont.h" />
+    <ClInclude Include="CFrustum.h" />
     <ClInclude Include="CFSM.h" />
     <ClInclude Include="CFSMMgr.h" />
     <ClInclude Include="CFSMUI.h" />
@@ -299,6 +300,7 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CFlipbookRenderUI.cpp" />
     <ClCompile Include="CFlipbookUI.cpp" />
     <ClCompile Include="CFont.cpp" />
+    <ClCompile Include="CFrustum.cpp" />
     <ClCompile Include="CFSM.cpp" />
     <ClCompile Include="CFSMMgr.cpp" />
     <ClCompile Include="CFSMUI.cpp" />

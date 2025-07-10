@@ -57,6 +57,7 @@ void CRenderMgr::Init()
 	// Editor Cam Object
 	// ==================
 	m_EditorCam = new CGameObject;
+    m_EditorCam->SetName(L"EditorCam");
 	m_EditorCam->AddComponent(new CTransform);
 	m_EditorCam->AddComponent(new CCamera);
 	m_EditorCam->AddComponent(new CEditorCamScript);
@@ -69,6 +70,7 @@ void CRenderMgr::Init()
 	// UI Cam Object
 	// ==================
 	m_UICam = new CGameObject;
+    m_UICam->SetName(L"UICam");
 	m_UICam->AddComponent(new CTransform);
 	m_UICam->AddComponent(new CCamera);
 	m_UICam->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);

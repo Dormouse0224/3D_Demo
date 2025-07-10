@@ -295,6 +295,9 @@
     <Filter Include="HLSL\03. Compute\3DAnimation">
       <UniqueIdentifier>{0394c336-4a38-4d28-abdd-b8a1033c6239}</UniqueIdentifier>
     </Filter>
+    <Filter Include="07. Component\02. Camera\Frustum">
+      <UniqueIdentifier>{d37e6771-c305-4992-8fd2-27ddf73220b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEngine.h">
@@ -618,6 +621,9 @@
     <ClInclude Include="CMeshDataUI.h">
       <Filter>09. ImguiObject\AssetUI\02. MeshDataUI</Filter>
     </ClInclude>
+    <ClInclude Include="CFrustum.h">
+      <Filter>07. Component\02. Camera\Frustum</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CEngine.cpp">
@@ -919,6 +925,9 @@
     </ClCompile>
     <ClCompile Include="CMeshDataUI.cpp">
       <Filter>09. ImguiObject\AssetUI\02. MeshDataUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CFrustum.cpp">
+      <Filter>07. Component\02. Camera\Frustum</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

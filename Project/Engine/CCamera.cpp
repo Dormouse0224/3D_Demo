@@ -11,6 +11,7 @@
 #include "CGameObject.h"
 #include "components.h"
 #include "CGraphicShader.h"
+#include "CFrustum.h"
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
@@ -25,10 +26,14 @@ CCamera::CCamera()
 	, m_Registered(false)
 	, m_Zoom(1.f)
 	, m_LayerCheck(0)
+    , m_Frustum(nullptr)
 {
 	Vec2 vResolution = CDevice::GetInst()->GetRenderResolution();
 	m_ViewX = vResolution.x;
 	m_ViewY = vResolution.y;
+
+    m_Frustum = new CFrustum;
+    m_Frustum->m_Owner = this;
 }
 
 
@@ -46,10 +51,13 @@ CCamera::CCamera(const CCamera& _Origin)
 	, m_Zoom(_Origin.m_Zoom)
 	, m_LayerCheck(_Origin.m_LayerCheck)
 {
+    m_Frustum = new CFrustum(*_Origin.m_Frustum);
+    m_Frustum->m_Owner = this;
 }
 
 CCamera::~CCamera()
 {
+    delete m_Frustum;
 }
 
 void CCamera::SetPriority(int _Priority)
@@ -93,6 +101,10 @@ void CCamera::FinalTick()
 	{
 		m_matProj = XMMatrixPerspectiveFovLH(m_FOV / m_Zoom, m_ViewX / m_ViewY, 1.f, m_Far);
 	}
+
+    // 카메라 절두체
+    if (m_Frustum)
+        m_Frustum->FinalTick();
 }
 
 void CCamera::SetMatrix()
@@ -221,6 +233,10 @@ void CCamera::SortObject()
 			// 레이어 안에있는 물체들 중에서 렌더링 기능이 없는 물체는 거른다.
 			if (!IsRenderable(vecObjects[j]) && vecObjects[j]->GetComponent(COMPONENT_TYPE::UICOM) == nullptr)
 				continue;
+
+            // 카메라 절두체 컬링
+            if (vecObjects[j]->GetRenderComponent()->GetFrustumCull() && !m_Frustum->FrustumCheckAll(vecObjects[j]->Transform()->GetWorldTrans()))
+                continue;
 
 			if (IsRenderable(vecObjects[j]))
 			{
