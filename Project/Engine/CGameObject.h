@@ -79,6 +79,7 @@ public:
     void RegisterToLevel();
     void FinalTick();
     void Render();
+    void RenderShadow(int _Cascade);
 
     int Save(fstream& _Stream, bool _Update = false);
     int Load(fstream& _Stream);

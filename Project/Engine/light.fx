@@ -67,9 +67,10 @@ PS_OUT PS_Light(VS_OUT _In)
     if (ViewPos.x == 0 && ViewPos.y == 0 && ViewPos.z == 0 && ViewPos.w == 0)
         discard;
     
-    
+    // 빛 계산
     CalcLight(ViewPos.xyz, ViewNorm.xyz, g_LightBuffer[LIGHT_INDEX], 2.f, output.vDiffuse.xyz, output.vSpecular.xyz);
     
+    // 그림자 계산
     
     return output;
 }

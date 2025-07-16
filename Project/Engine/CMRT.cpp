@@ -39,6 +39,15 @@ int CMRT::CreateRenderTarget(D3D11_TEXTURE2D_DESC _Desc, wstring _Key, Vec4 _Cle
 	m_RTTex[m_TexCount] = CAssetMgr::GetInst()->CreateTexture(_Key, pRTTex);
 	m_ClearColor[m_TexCount] = _ClearColor;
 	++m_TexCount;
+
+    // ViewPort 설정
+    m_Viewport.TopLeftX = 0;
+    m_Viewport.TopLeftY = 0;
+    m_Viewport.Width = _Desc.Width;
+    m_Viewport.Height = _Desc.Height;
+    m_Viewport.MinDepth = 0.f;    // 깊이 텍스쳐에 저장하는 깊이값의 범위
+    m_Viewport.MaxDepth = 1.f;
+
 	return S_OK;
 }
 
@@ -54,7 +63,39 @@ int CMRT::CreateRenderTarget(ComPtr<ID3D11Texture2D> _RTTex, wstring _Key, Vec4 
 	m_RTTex[m_TexCount] = CAssetMgr::GetInst()->CreateTexture(_Key, _RTTex);
 	m_ClearColor[m_TexCount] = _ClearColor;
 	++m_TexCount;
+
+    // ViewPort 설정
+    m_Viewport.TopLeftX = 0;
+    m_Viewport.TopLeftY = 0;
+    m_Viewport.Width = Desc.Width;
+    m_Viewport.Height = Desc.Height;
+    m_Viewport.MinDepth = 0.f;    // 깊이 텍스쳐에 저장하는 깊이값의 범위
+    m_Viewport.MaxDepth = 1.f;
+
 	return S_OK;
+}
+
+int CMRT::CreateRenderTarget(AssetPtr<CTexture> _Tex, Vec4 _ClearColor)
+{
+    D3D11_TEXTURE2D_DESC Desc = _Tex->GetDesc();
+
+    // 렌더 타겟이 이미 8개 이거나 바인드 플래그가 렌더 타겟이 아닌 경우 생성 실패
+    if (m_TexCount == 8 || !(Desc.BindFlags & D3D11_BIND_RENDER_TARGET))
+        return E_FAIL;
+
+    m_RTTex[m_TexCount] = _Tex;
+    m_ClearColor[m_TexCount] = _ClearColor;
+    ++m_TexCount;
+
+    // ViewPort 설정
+    m_Viewport.TopLeftX = 0;
+    m_Viewport.TopLeftY = 0;
+    m_Viewport.Width = Desc.Width;
+    m_Viewport.Height = Desc.Height;
+    m_Viewport.MinDepth = 0.f;    // 깊이 텍스쳐에 저장하는 깊이값의 범위
+    m_Viewport.MaxDepth = 1.f;
+
+    return S_OK;
 }
 
 int CMRT::CreateDepthStencil(D3D11_TEXTURE2D_DESC _Desc, wstring _Key, float _DepthClear, UINT8 _StencilClear)
@@ -73,6 +114,21 @@ int CMRT::CreateDepthStencil(D3D11_TEXTURE2D_DESC _Desc, wstring _Key, float _De
 	m_DepthClear = _DepthClear;
 	m_StencilClear = _StencilClear;
 	return S_OK;
+}
+
+int CMRT::CreateDepthStencil(AssetPtr<CTexture> _Tex, float _DepthClear, UINT8 _StencilClear)
+{
+    D3D11_TEXTURE2D_DESC Desc = _Tex->GetDesc();
+
+    // 바인드 플래그가 깊이 스텐실이 아닌 경우 실패
+    if (!(Desc.BindFlags & D3D11_BIND_DEPTH_STENCIL))
+        return E_FAIL;
+
+    m_DSTex = _Tex;
+    m_DepthClear = _DepthClear;
+    m_StencilClear = _StencilClear;
+
+    return S_OK;
 }
 
 void CMRT::ClearTargets()

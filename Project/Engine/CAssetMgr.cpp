@@ -49,13 +49,13 @@ void CAssetMgr::AddAsset(const wstring& _Key, AssetPtr<CAsset> _Asset)
 }
 
 AssetPtr<CTexture> CAssetMgr::CreateTexture(const wstring& _Key, UINT _Width, UINT _Height
-	, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage)
+	, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage, int _TexArrCount, bool _IsCube)
 {
 	AssetPtr<CTexture> pTex = FindAsset<CTexture>(_Key);
 	assert(nullptr == pTex);	// 키값이 중복된 경우 중단합니다.
 
 	pTex = new CTexture;
-	if (FAILED(pTex->Create(_Width, _Height, _Format, _BindFlag, _Usage)))
+	if (FAILED(pTex->Create(_Width, _Height, _Format, _BindFlag, _Usage, _TexArrCount, _IsCube)))
 	{
 		MessageBox(nullptr, _Key.c_str(), L"텍스쳐 생성 실패", MB_OK);
 		return nullptr;

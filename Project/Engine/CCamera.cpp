@@ -12,6 +12,7 @@
 #include "components.h"
 #include "CGraphicShader.h"
 #include "CFrustum.h"
+#include "CAssetMgr.h"
 
 CCamera::CCamera()
 	: CComponent(COMPONENT_TYPE::CAMERA)
@@ -34,6 +35,7 @@ CCamera::CCamera()
 
     m_Frustum = new CFrustum;
     m_Frustum->m_Owner = this;
+
 }
 
 
@@ -163,6 +165,33 @@ void CCamera::Render()
 	m_vecUI.clear();
 }
 
+void CCamera::RenderShadow()
+{
+    SetMatrix();
+
+    SortObjectShadow();
+
+    // 광원 카메라로 오브젝트를 렌더링한다.
+    for (size_t i = 0; i < m_vecShadowNear.size(); ++i)
+    {
+        m_vecShadowNear[i]->RenderShadow(0);
+    }
+
+    for (size_t i = 0; i < m_vecShadowMiddle.size(); ++i)
+    {
+        m_vecShadowMiddle[i]->RenderShadow(1);
+    }
+
+    for (size_t i = 0; i < m_vecShadowFar.size(); ++i)
+    {
+        m_vecShadowFar[i]->RenderShadow(2);
+    }
+
+    m_vecShadowNear.clear();
+    m_vecShadowMiddle.clear();
+    m_vecShadowFar.clear();
+}
+
 void CCamera::Direct_Render(const vector<CGameObject*>& _vecObj)
 {
 	SetMatrix();
@@ -230,7 +259,7 @@ void CCamera::SortObject()
 
 		for (size_t j = 0; j < vecObjects.size(); ++j)
 		{
-			// 레이어 안에있는 물체들 중에서 렌더링 기능이 없는 물체는 거른다.
+			// 레이어 안에있는 물체들 중에서 렌더링 기능과 UI 기능이 없는 물체는 거른다.
 			if (!IsRenderable(vecObjects[j]) && vecObjects[j]->GetComponent(COMPONENT_TYPE::UICOM) == nullptr)
 				continue;
 
@@ -273,4 +302,42 @@ void CCamera::SortObject()
 		sort(m_vecTransparent.begin(), m_vecTransparent.end(), [](pair<float, CGameObject*> _a, pair<float, CGameObject*> _b) -> bool { return _a.first > _b.first; });
 	}
 
+}
+
+void CCamera::SortObjectShadow()
+{
+    CLevel* pCurLevel = CLevelMgr::GetInst()->GetCurrentLevel();
+    if (!pCurLevel)
+        return;
+
+    for (UINT i = 0; i < (UINT)LAYER::END; ++i)
+    {
+        // Camera 가 Rendering 하지 않는 레이어는 거른다.	
+        if (!(m_LayerCheck & (1 << i)))
+            continue;
+
+        // 레이어에 속한 물체들을 가져온다.
+        CLayer* pLayer = pCurLevel->GetLayer(i);
+        const vector<CGameObject*>& vecObjects = pLayer->GetObjects();
+
+        for (size_t j = 0; j < vecObjects.size(); ++j)
+        {
+            // 레이어 안에있는 물체들 중에서 렌더링 기능이 없는 물체는 거른다.
+            if (!IsRenderable(vecObjects[j]))
+                continue;
+
+            // 메인 카메라의 절두체 중 어느 위치에 있는지 분류한다. (두 부분 이상에 동시에 존재할 수도 있다)
+            Vec3 v = vecObjects[j]->Transform()->GetRelativeScale();
+            float scaleMax = fmax(v.x, fmax(v.y, v.z));
+
+            if (CRenderMgr::GetInst()->GetCurrentCam()->GetFrustum()->FrustumCheckSphere(vecObjects[j]->Transform()->GetWorldTrans(), scaleMax, CASCADE::eNEAR))
+                m_vecShadowNear.push_back(vecObjects[j]);
+
+            if (CRenderMgr::GetInst()->GetCurrentCam()->GetFrustum()->FrustumCheckSphere(vecObjects[j]->Transform()->GetWorldTrans(), scaleMax, CASCADE::eMIDDLE))
+                m_vecShadowMiddle.push_back(vecObjects[j]);
+
+            if (CRenderMgr::GetInst()->GetCurrentCam()->GetFrustum()->FrustumCheckSphere(vecObjects[j]->Transform()->GetWorldTrans(), scaleMax, CASCADE::eFAR))
+                m_vecShadowFar.push_back(vecObjects[j]);
+        }
+    }
 }

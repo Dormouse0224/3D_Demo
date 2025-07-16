@@ -659,6 +659,19 @@ void CAssetMgr::CreateEngineGraphicShader()
     pShader->SetDomain(SHADER_DOMAIN::DOMAIN_EFFECT);
     pShader->SetEngineAsset(true);
     AddAsset(L"EA_SkyboxShader", pShader.Get());
+
+
+    // Shadow Shader
+    pShader = new CGraphicShader;
+    pShader->CreateVertexShader(L"HLSL\\Engine\\shadow.fx", "VS_Shadow");
+    pShader->CreateGeometryShader(L"HLSL\\Engine\\shadow.fx", "GS_Shadow");
+    pShader->CreatePixelShader(L"HLSL\\Engine\\shadow.fx", "PS_Shadow");
+    pShader->SetBSType(BS_TYPE::DEFAULT);
+    pShader->SetRSType(RS_TYPE::CULL_NONE);
+    pShader->SetDSType(DS_TYPE::LESS_EQUAL);
+    pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
+    pShader->SetEngineAsset(true);
+    AddAsset(L"EA_ShadowShader", pShader.Get());
 }
 
 void CAssetMgr::CreateEngineMaterial()
@@ -710,5 +723,12 @@ void CAssetMgr::CreateEngineMaterial()
     pMaterial->SetEngineAsset(true);
     pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_SkyboxShader", true));
     CAssetMgr::GetInst()->AddAsset(L"EA_SkyboxMtrl", pMaterial.Get());
+
+
+    // Shadow Material
+    pMaterial = new CMaterial;
+    pMaterial->SetEngineAsset(true);
+    pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_ShadowShader", true));
+    CAssetMgr::GetInst()->AddAsset(L"EA_ShadowMtrl", pMaterial.Get());
 }
 

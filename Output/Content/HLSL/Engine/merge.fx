@@ -51,6 +51,18 @@ float4 PS_Merge(VS_OUT _in) : SV_Target
         
         vColor = vAlbedo * (vDiffuse + vSpecular + vAmbient) + vEffect;
 
+        float4 vPos = POSITION_TEX.Sample(g_sam_0, _in.UV);
+        
+        
+        //if (vPos.z == 0.f)
+        //    vColor = vColor;
+        //else if (vPos.z < 100.f)
+        //    vColor = vColor * float4(1.f, 0.5f, 0.5f, 1.f);
+        //else if (vPos.z < 1000.f)
+        //    vColor = vColor * float4(0.5f, 1.f, 0.5f, 1.f);
+        //else
+        //    vColor = vColor * float4(0.5f, 0.5f, 1.f, 1.f);
+
     }
     
     // ==========

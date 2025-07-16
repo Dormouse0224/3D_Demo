@@ -42,7 +42,7 @@ public:
 	template<typename T>
 	AssetPtr<T> LoadFromFile(const wstring& _Extention);
 	/// <param name="_BindFlag">flags of D3D11_BIND_FLAG</param>
-	AssetPtr<CTexture> CreateTexture(const wstring& _Key, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);
+	AssetPtr<CTexture> CreateTexture(const wstring& _Key, UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT, int _TexArrCount = 1, bool _IsCube = false);
 	AssetPtr<CTexture> CreateTexture(const wstring& _Key, ComPtr<ID3D11Texture2D> _Tex2D);
 	// 파일 경로로부터 확장자를 통해 에셋 타입을 반환합니다.
 	ASSET_TYPE GetAssetType(const wstring& _RelativePath);

@@ -27,6 +27,8 @@ private:
 
     bool                m_FrustumCull;
 
+    AssetPtr<CMaterial> m_ShadowMtrl;
+
 public:
     void SetMesh(AssetPtr<CMesh> _Mesh) { m_Mesh = _Mesh; }
     void SetMaterial(AssetPtr<CMaterial> _Mtrl, UINT _Idx = 0);
@@ -42,6 +44,7 @@ public:
     bool GetFrustumCull() { return m_FrustumCull; }
 
     virtual void Render() = 0;
+    virtual void RenderShadow(int _Cascade);
 
 protected:
     int RenderCom_Load(fstream& _Stream);

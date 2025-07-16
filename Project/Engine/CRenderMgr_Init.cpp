@@ -88,7 +88,6 @@ void CRenderMgr::Init()
 int CRenderMgr::CreateBackBufferView()
 {
 	m_arrMRT[MRT_TYPE::MERGE] = new CMRT;
-	m_arrMRT[MRT_TYPE::MERGE]->SetViewport(CDevice::GetInst()->GetViewPort());
 
 	// RenderTargetView 생성
 	// 이미 생성되어있는 렌더타겟 텍스쳐를 스왚체인으로 부터 얻어온다.
@@ -126,7 +125,6 @@ int CRenderMgr::CreateMRT()
     // ============
 
 	m_arrMRT[MRT_TYPE::DEFERRED] = new CMRT;
-	m_arrMRT[MRT_TYPE::DEFERRED]->SetViewport(CDevice::GetInst()->GetViewPort());
 
 	// Deffered Render Target 텍스쳐 생성
 	D3D11_TEXTURE2D_DESC texDesc = {};
@@ -216,7 +214,6 @@ int CRenderMgr::CreateMRT()
     // =========
 
     m_arrMRT[MRT_TYPE::LIGHT] = new CMRT;
-    m_arrMRT[MRT_TYPE::LIGHT]->SetViewport(CDevice::GetInst()->GetViewPort());
 
     // Light Render Target 텍스쳐 생성
     texDesc = {};

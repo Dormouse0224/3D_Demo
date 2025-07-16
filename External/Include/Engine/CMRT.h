@@ -22,13 +22,14 @@ private:
     UINT8                   m_StencilClear;
 
 public:
-    void SetViewport(D3D11_VIEWPORT _VP) { m_Viewport = _VP; }
     void SetRenderTarget();
     AssetPtr<CTexture> GetRenderTarget(int _Idx);
 
     int CreateRenderTarget(D3D11_TEXTURE2D_DESC _Desc, wstring _Key, Vec4 _ClearColor = Vec4(0.f));
     int CreateRenderTarget(ComPtr<ID3D11Texture2D> _Tex, wstring _Key, Vec4 _ClearColor = Vec4(0.f));
+    int CreateRenderTarget(AssetPtr<CTexture> _Tex, Vec4 _ClearColor = Vec4(0.f));
     int CreateDepthStencil(D3D11_TEXTURE2D_DESC _Desc, wstring _Key, float _DepthClear = 1.f, UINT8 _StencilClear = 0);
+    int CreateDepthStencil(AssetPtr<CTexture> _Tex, float _DepthClear = 1.f, UINT8 _StencilClear = 0);
 
     void ClearTargets();
 

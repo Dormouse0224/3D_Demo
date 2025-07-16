@@ -4,13 +4,16 @@
 #include "CAssetMgr.h"
 #include "CLevel.h"
 #include "CLevelMgr.h"
+#include "CTransform.h"
 
 CRenderComponent::CRenderComponent(COMPONENT_TYPE _Type)
 	: CComponent(_Type)
     , m_Mesh(nullptr)
     , m_vecMtrls{}
     , m_FrustumCull(true)
+    , m_ShadowMtrl(nullptr)
 {
+    m_ShadowMtrl = CAssetMgr::GetInst()->Load<CMaterial>(L"EA_ShadowMtrl", true);
 }
 
 CRenderComponent::CRenderComponent(const CRenderComponent& _Other)
@@ -18,6 +21,7 @@ CRenderComponent::CRenderComponent(const CRenderComponent& _Other)
 	, m_Mesh(_Other.m_Mesh)
     , m_vecMtrls(_Other.m_vecMtrls)
     , m_FrustumCull(_Other.m_FrustumCull)
+    , m_ShadowMtrl(_Other.m_ShadowMtrl)
 {
 }
 
@@ -72,6 +76,17 @@ bool CRenderComponent::GetUsingDynamic(UINT _Idx)
 {
     if (m_vecMtrls.size() > _Idx)
         return m_vecMtrls[_Idx].bUsingDynamic;
+}
+
+void CRenderComponent::RenderShadow(int _Cascade)
+{
+    if (m_ShadowMtrl.Get() == nullptr)
+        return;
+
+    Transform()->Binding();
+    m_ShadowMtrl->SetConstParam(INT_0, _Cascade);
+    m_ShadowMtrl->Binding();
+    m_Mesh->Render();
 }
 
 int CRenderComponent::RenderCom_Load(fstream& _Stream)

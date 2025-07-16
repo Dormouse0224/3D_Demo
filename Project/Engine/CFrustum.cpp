@@ -57,17 +57,17 @@ void CFrustum::FinalTick()
     m_Face[(UINT)FACE_TYPE::eTOP] = XMPlaneFromPoints(vWorldPos[1], vWorldPos[4], vWorldPos[5]);
 
 	m_Face[(UINT)FACE_TYPE::eNEAR_0] = XMPlaneFromPoints(vWorldPos[0], vWorldPos[1], vWorldPos[2]);
-    m_Face[(UINT)FACE_TYPE::eFAR_0] = XMPlaneFromPoints((vWorldPos[5] - vWorldPos[1]) * 0.3f + vWorldPos[1], (vWorldPos[4] - vWorldPos[0]) * 0.3f + vWorldPos[0], (vWorldPos[7] - vWorldPos[3]) * 0.3f + vWorldPos[3]);
+    m_Face[(UINT)FACE_TYPE::eFAR_0] = XMPlaneFromPoints((vWorldPos[5] - vWorldPos[1]) * 0.01f + vWorldPos[1], (vWorldPos[4] - vWorldPos[0]) * 0.01f + vWorldPos[0], (vWorldPos[7] - vWorldPos[3]) * 0.01f + vWorldPos[3]);
 
-    m_Face[(UINT)FACE_TYPE::eNEAR_1] = XMPlaneFromPoints((vWorldPos[4] - vWorldPos[0]) * 0.3f + vWorldPos[0], (vWorldPos[5] - vWorldPos[1]) * 0.3f + vWorldPos[1], (vWorldPos[7] - vWorldPos[3]) * 0.3f + vWorldPos[3]);
-    m_Face[(UINT)FACE_TYPE::eFAR_1] = XMPlaneFromPoints((vWorldPos[5] - vWorldPos[1]) * 0.7f + vWorldPos[1], (vWorldPos[4] - vWorldPos[0]) * 0.7f + vWorldPos[0], (vWorldPos[7] - vWorldPos[3]) * 0.7f + vWorldPos[3]);
+    m_Face[(UINT)FACE_TYPE::eNEAR_1] = XMPlaneFromPoints((vWorldPos[4] - vWorldPos[0]) * 0.01f + vWorldPos[0], (vWorldPos[5] - vWorldPos[1]) * 0.01f + vWorldPos[1], (vWorldPos[7] - vWorldPos[3]) * 0.01f + vWorldPos[3]);
+    m_Face[(UINT)FACE_TYPE::eFAR_1] = XMPlaneFromPoints((vWorldPos[5] - vWorldPos[1]) * 0.1f + vWorldPos[1], (vWorldPos[4] - vWorldPos[0]) * 0.1f + vWorldPos[0], (vWorldPos[7] - vWorldPos[3]) * 0.1f + vWorldPos[3]);
 
-    m_Face[(UINT)FACE_TYPE::eNEAR_2] = XMPlaneFromPoints((vWorldPos[4] - vWorldPos[0]) * 0.7f + vWorldPos[0], (vWorldPos[5] - vWorldPos[1]) * 0.7f + vWorldPos[1], (vWorldPos[7] - vWorldPos[3]) * 0.7f + vWorldPos[3]);
+    m_Face[(UINT)FACE_TYPE::eNEAR_2] = XMPlaneFromPoints((vWorldPos[4] - vWorldPos[0]) * 0.1f + vWorldPos[0], (vWorldPos[5] - vWorldPos[1]) * 0.1f + vWorldPos[1], (vWorldPos[7] - vWorldPos[3]) * 0.1f + vWorldPos[3]);
     m_Face[(UINT)FACE_TYPE::eFAR_2] = XMPlaneFromPoints(vWorldPos[5], vWorldPos[4], vWorldPos[7]);
 
 }
 
-int CFrustum::FrustumCheck(Vec3 _WorldPos, CASCADE _Cascade)
+bool CFrustum::FrustumCheck(Vec3 _WorldPos, CASCADE _Cascade)
 {
 	for (int i = 0; i < 4; ++i)
 	{		
@@ -78,7 +78,7 @@ int CFrustum::FrustumCheck(Vec3 _WorldPos, CASCADE _Cascade)
 	}
 
     int begin = (UINT)_Cascade * 2 + 4;
-    for (int i = begin; i < 2; ++i)
+    for (int i = begin; i < begin + 2; ++i)
     {
         Vec3 vNormal = m_Face[i];
 
@@ -89,7 +89,7 @@ int CFrustum::FrustumCheck(Vec3 _WorldPos, CASCADE _Cascade)
 	return true;
 }
 
-int CFrustum::FrustumCheckAll(Vec3 _WorldPos)
+bool CFrustum::FrustumCheckAll(Vec3 _WorldPos)
 {
     for (int i = 0; i < 5; ++i)
     {
@@ -107,7 +107,7 @@ int CFrustum::FrustumCheckAll(Vec3 _WorldPos)
     return true;
 }
 
-int CFrustum::FrustumCheckSphere(Vec3 _WorldPos, float _Radius, CASCADE _Cascade)
+bool CFrustum::FrustumCheckSphere(Vec3 _WorldPos, float _Radius, CASCADE _Cascade)
 {
     for (int i = 0; i < 4; ++i)
 	{
@@ -118,7 +118,7 @@ int CFrustum::FrustumCheckSphere(Vec3 _WorldPos, float _Radius, CASCADE _Cascade
 	}
 
     int begin = (UINT)_Cascade * 2 + 4;
-    for (int i = begin; i < 2; ++i)
+    for (int i = begin; i < begin + 2; ++i)
     {
         Vec3 vNormal = m_Face[i];
 
@@ -129,7 +129,7 @@ int CFrustum::FrustumCheckSphere(Vec3 _WorldPos, float _Radius, CASCADE _Cascade
 	return true;
 }
 
-int CFrustum::FrustumCheckSphereAll(Vec3 _WorldPos, float _Radius)
+bool CFrustum::FrustumCheckSphereAll(Vec3 _WorldPos, float _Radius)
 {
     for (int i = 0; i < 5; ++i)
     {

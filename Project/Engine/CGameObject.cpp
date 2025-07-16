@@ -209,10 +209,12 @@ void CGameObject::Render()
 {
 	if (IsRenderable(this))
 		m_RenderCom->Render();
-	
-	//if (auto pCom = m_Com[static_cast<int>(COMPONENT_TYPE::UICOM)]; pCom)
-	//	static_cast<CUICom*>(pCom)->Render();
-	
+}
+
+void CGameObject::RenderShadow(int _Cascade)
+{
+    if (IsRenderable(this))
+        m_RenderCom->RenderShadow(_Cascade);
 }
 
 int CGameObject::Save(fstream& _Stream, bool _Update)

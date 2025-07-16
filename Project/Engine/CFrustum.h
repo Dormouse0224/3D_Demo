@@ -49,10 +49,10 @@ private:
 
 
 public:
-    int FrustumCheck(Vec3 _WorldPos, CASCADE _Cascade);
-    int FrustumCheckAll(Vec3 _WorldPos);
-    int FrustumCheckSphere(Vec3 _WorldPos, float _Radius, CASCADE _Cascade);
-    int FrustumCheckSphereAll(Vec3 _WorldPos, float _Radius);
+    bool FrustumCheck(Vec3 _WorldPos, CASCADE _Cascade);
+    bool FrustumCheckAll(Vec3 _WorldPos);
+    bool FrustumCheckSphere(Vec3 _WorldPos, float _Radius, CASCADE _Cascade);
+    bool FrustumCheckSphereAll(Vec3 _WorldPos, float _Radius);
 
 
 private:

@@ -31,12 +31,17 @@ private:
 
     CFrustum*   m_Frustum;
 
+
     // 물체 분류 용도
     vector<CGameObject*>                m_vecOpaque;
     vector<CGameObject*>                m_vecMasked;
     vector<pair<float, CGameObject*>>   m_vecTransparent;
     vector<CGameObject*>                m_vecPostprocess;
     vector<CGameObject*>                m_vecUI;
+
+    vector<CGameObject*>                m_vecShadowNear;
+    vector<CGameObject*>                m_vecShadowMiddle;
+    vector<CGameObject*>                m_vecShadowFar;
 
 
 
@@ -57,6 +62,7 @@ public:
     int GetPriority() { return m_Priority; }
     bool GetLayerState(LAYER _LayerIdx) { return m_LayerCheck & (1 << (UINT)_LayerIdx); }
     float GetZoom() { return m_Zoom; }
+    CFrustum* GetFrustum() { return m_Frustum; }
 
     void CheckLayer(LAYER _LayerIdx) { m_LayerCheck ^= (1 << (UINT)_LayerIdx); }
     void CheckLayerAll() { m_LayerCheck = 0xffffffff; }
@@ -71,11 +77,13 @@ public:
 
 private:
     void SortObject();
+    void SortObjectShadow();
 
 public:
     virtual void FinalTick() override;
     void SetMatrix();
     void Render();
+    void RenderShadow();
 
     /// <summary>
     /// Render Manager 에서 관리되지 않는 별도의 카메라 객체용 렌더링 함수입니다.

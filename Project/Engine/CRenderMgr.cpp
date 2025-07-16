@@ -134,9 +134,6 @@ void CRenderMgr::MainRender()
 
 void CRenderMgr::LightRender()
 {
-    // Ãâ·Â ·»´õÅ¸°Ù ¹× Ãâ·Â ±íÀÌÅ¸°Ù ¼³Á¤
-    m_arrMRT[MRT_TYPE::LIGHT]->SetRenderTarget();
-
     // ±¤¿ø µ¥ÀÌÅÍ ¹ÙÀÎµù
     CLightMgr::GetInst()->Binding();
 

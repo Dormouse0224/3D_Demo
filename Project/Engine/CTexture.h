@@ -47,7 +47,7 @@ public:
 
 private:
     // _Flag : D3D11_BIND_FLAG
-    int Create(UINT _Width, UINT _Height, DXGI_FORMAT _format, UINT _Flag, D3D11_USAGE _usage = D3D11_USAGE_DEFAULT);
+    int Create(UINT _Width, UINT _Height, DXGI_FORMAT _format, UINT _Flag, D3D11_USAGE _usage = D3D11_USAGE_DEFAULT, int _TexArrCount = 1, bool _IsCube = false);
     int Create(ComPtr<ID3D11Texture2D> _Tex2D);
 
 public:

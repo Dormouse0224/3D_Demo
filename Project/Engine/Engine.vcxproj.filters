@@ -987,5 +987,8 @@
     <FxCompile Include="func.fx">
       <Filter>HLSL\01. Header</Filter>
     </FxCompile>
+    <FxCompile Include="shadow.fx">
+      <Filter>HLSL\02. Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

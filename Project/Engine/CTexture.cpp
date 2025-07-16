@@ -98,10 +98,11 @@ void CTexture::Binding_CS_UAV(UINT _RegisterNum)
 }
 
 int CTexture::Create(UINT _Width, UINT _Height, DXGI_FORMAT _format
-	, UINT _Flag, D3D11_USAGE _usage)
+	, UINT _Flag, D3D11_USAGE _usage, int _TexArrCount, bool _IsCube)
 {
 	m_Desc.Format = _format;
-	m_Desc.ArraySize = 1;
+	m_Desc.ArraySize = _TexArrCount;
+    m_Desc.MiscFlags = 0;
 	m_Desc.Width = _Width;
 	m_Desc.Height = _Height;
 	m_Desc.BindFlags = _Flag;
@@ -117,6 +118,13 @@ int CTexture::Create(UINT _Width, UINT _Height, DXGI_FORMAT _format
 	m_Desc.MipLevels = 1;
 	m_Desc.SampleDesc.Count = 1;
 	m_Desc.SampleDesc.Quality = 0;
+
+    if (_IsCube)
+    {
+        m_Desc.ArraySize = 6;
+        m_Desc.MiscFlags = D3D11_RESOURCE_MISC_TEXTURECUBE;
+        m_Desc.Height = m_Desc.Width;
+    }
 
 	if (FAILED(DEVICE->CreateTexture2D(&m_Desc, nullptr, m_Tex2D.GetAddressOf())))
 	{
