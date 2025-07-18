@@ -336,6 +336,21 @@ void CGraphicShader::Binding()
 
 }
 
+void CGraphicShader::Unbind()
+{
+    CONTEXT->IASetInputLayout(nullptr);
+
+    CONTEXT->VSSetShader(nullptr, nullptr, 0);
+    CONTEXT->GSSetShader(nullptr, nullptr, 0);
+    CONTEXT->DSSetShader(nullptr, nullptr, 0);
+    CONTEXT->HSSetShader(nullptr, nullptr, 0);
+    CONTEXT->PSSetShader(nullptr, nullptr, 0);
+
+    CONTEXT->RSSetState(nullptr);
+    CONTEXT->OMSetDepthStencilState(nullptr, 0);
+    CONTEXT->OMSetBlendState(nullptr, nullptr, 0xffffffff);
+}
+
 int CGraphicShader::Save(const wstring& _FileName, bool _Update)
 {
 	std::filesystem::path path = CPathMgr::GetContentDir() + std::wstring(L"GraphicShader\\") + _FileName + std::wstring(L".shader");

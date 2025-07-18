@@ -182,11 +182,11 @@ struct tMtrlConst
 {
     tMtrlData	mtrl;
 
-	int		iArr[4];
-	float	fArr[4];
-	Vec2	v2Arr[4];
-	Vec4	v4Arr[4];
-	Matrix	matArr[4];
+	int		iArr[6];
+	float	fArr[6];
+	Vec2	v2Arr[6];
+	Vec4	v4Arr[6];
+	Matrix	matArr[6];
 
 	//텍스쳐 바인딩 정보
 	int		bTex[TEX_END];
@@ -195,6 +195,17 @@ struct tMtrlConst
     int		arrAnimData[2];
 
     int     padding[2];
+};
+
+// 광원에서 추가로 사용하는 VP 행렬
+struct tShadowMat
+{
+    Matrix	matVP_0;
+    Matrix	matVP_1;
+    Matrix	matVP_2;
+    Matrix	matVP_3;
+    Matrix	matVP_4;
+    Matrix	matVP_5;
 };
 
 // Global Data

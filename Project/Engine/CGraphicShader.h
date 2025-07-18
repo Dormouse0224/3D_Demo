@@ -68,6 +68,7 @@ public:
     int CreatePixelShader(const wstring& _RelativePath, const string& _FuncName);
 
     void Binding();
+    void Unbind();
 
     virtual int Save(const wstring& _FileName, bool _Update = false) override;
     virtual int Load(const wstring& _FilePath) override;

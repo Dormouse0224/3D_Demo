@@ -137,6 +137,9 @@ void CDevice::CreateConstBuffer()
 
     m_ConstBuffer[(UINT)CB_TYPE::GLOBAL] = new CConstBuffer;
     m_ConstBuffer[(UINT)CB_TYPE::GLOBAL]->Create(CB_TYPE::GLOBAL, sizeof(tGlobal));
+
+    m_ConstBuffer[(UINT)CB_TYPE::SHADOW] = new CConstBuffer;
+    m_ConstBuffer[(UINT)CB_TYPE::SHADOW]->Create(CB_TYPE::SHADOW, sizeof(tShadowMat));
 }
 
 void CDevice::CreateRasterizerState()
@@ -263,6 +266,38 @@ void CDevice::CreateBlendState()
     }
 
     DEVICE->CreateBlendState(&Desc, m_BSState[(UINT)BS_TYPE::ALPHABLEND].GetAddressOf());
+
+    // AlphaToCoverage
+    Desc = {};
+    Desc.AlphaToCoverageEnable = true;
+    Desc.IndependentBlendEnable = false;
+    {
+        Desc.RenderTarget[0].BlendEnable = false;
+    }
+
+    DEVICE->CreateBlendState(&Desc, m_BSState[(UINT)BS_TYPE::ALPHA_TO_COVERAGE].GetAddressOf());
+
+    // One-One
+    Desc = {};
+    Desc.AlphaToCoverageEnable = false;
+    Desc.IndependentBlendEnable = false;
+    {
+        // 0¹ø ·»´õ Å¸°Ù ¾ËÆÄºí·»µå ¼³Á¤
+        Desc.RenderTarget[0].BlendEnable = true;
+        Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+        // RGB È¥ÇÕ °è¼ö ¼³Á¤
+        Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+        Desc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+        Desc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+
+        // A È¥ÇÕ °è¼ö ¼³Á¤
+        Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+        Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+        Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ONE;
+    }
+
+    DEVICE->CreateBlendState(&Desc, m_BSState[(UINT)BS_TYPE::ONE_ONE].GetAddressOf());
 }
 
 void CDevice::CreateSamplerState()

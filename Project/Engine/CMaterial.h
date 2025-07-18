@@ -33,6 +33,7 @@ public:
     void SetBoneCount(int _iBoneCount) { m_Const.arrAnimData[1] = _iBoneCount; }
 
     void Binding();
+    void Unbind();
     static AssetPtr<CMaterial> Create(wstring _Name);
 
     virtual int Save(const wstring& _FileName, bool _Update = false) override;
@@ -50,6 +51,8 @@ void CMaterial::SetConstParam(CONST_PARAM _Param, const T& _Data)
     case INT_1:
     case INT_2:
     case INT_3:
+    case INT_4:
+    case INT_5:
     {
         if constexpr (std::is_same_v<T, int> || std::is_same_v<T, unsigned int>)
         {
@@ -62,6 +65,8 @@ void CMaterial::SetConstParam(CONST_PARAM _Param, const T& _Data)
     case FLOAT_1:
     case FLOAT_2:
     case FLOAT_3:
+    case FLOAT_4:
+    case FLOAT_5:
     {
         if constexpr (std::is_same_v<T, float>)
         {
@@ -74,6 +79,8 @@ void CMaterial::SetConstParam(CONST_PARAM _Param, const T& _Data)
     case VEC2_1:
     case VEC2_2:
     case VEC2_3:
+    case VEC2_4:
+    case VEC2_5:
     {
         if constexpr (std::is_same_v<T, Vec2>)
         {
@@ -86,6 +93,8 @@ void CMaterial::SetConstParam(CONST_PARAM _Param, const T& _Data)
     case VEC4_1:
     case VEC4_2:
     case VEC4_3:
+    case VEC4_4:
+    case VEC4_5:
     {
         if constexpr (std::is_same_v<T, Vec4> || std::is_same_v<T, Vec3>)
         {
@@ -98,6 +107,8 @@ void CMaterial::SetConstParam(CONST_PARAM _Param, const T& _Data)
     case MAT_1:
     case MAT_2:
     case MAT_3:
+    case MAT_4:
+    case MAT_5:
     {
         if constexpr (std::is_same_v<T, Matrix>)
         {

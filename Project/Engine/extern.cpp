@@ -92,11 +92,12 @@ wstring LAYER_WSTR[] =
 {
 	L"Default",
 	L"Background",
-	L"Tile",
+	L"Landscape",
 	L"Player",
 	L"PlayerProjectile",
 	L"Enemy",
 	L"EnemyProjectile",
+    L"Tile",
 
 	L"UI",
 };

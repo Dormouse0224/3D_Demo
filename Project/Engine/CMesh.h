@@ -40,7 +40,7 @@ public:
     static CMesh* CreateFromContainer(CFBXLoader& _loader);
 
     void Render(UINT _iSubset = 0);
-    void Render_Particle(UINT _Count);
+    void Render_Instanced(UINT _Count, UINT _iSubset = 0);
 
 private:
     void Binding(UINT _iSubset);

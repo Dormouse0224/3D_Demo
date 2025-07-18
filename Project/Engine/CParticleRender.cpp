@@ -201,7 +201,7 @@ void CParticleRender::Render()
 	GetMaterial()->Binding();
 
 	// 파티클 인스턴싱 렌더링
-	GetMesh()->Render_Particle(m_MaxParticle);
+	GetMesh()->Render_Instanced(m_MaxParticle);
 
 	//// 파티클 버퍼 Unbind
 	//m_ParticleBuffer->Unbind(20);

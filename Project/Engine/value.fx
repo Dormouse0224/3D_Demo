@@ -34,26 +34,36 @@ cbuffer MATERIAL : register(b1)
     int g_int_1;
     int g_int_2;
     int g_int_3;
+    int g_int_4;
+    int g_int_5;
                      
     float g_float_0;
     float g_float_1;
     float g_float_2;
     float g_float_3;
+    float g_float_4;
+    float g_float_5;
                      
     float2 g_vec2_0;
     float2 g_vec2_1;
     float2 g_vec2_2;
     float2 g_vec2_3;
+    float2 g_vec2_4;
+    float2 g_vec2_5;
                      
     float4 g_vec4_0;
     float4 g_vec4_1;
     float4 g_vec4_2;
     float4 g_vec4_3;
+    float4 g_vec4_4;
+    float4 g_vec4_5;
     
     row_major Matrix g_mat_0;
     row_major Matrix g_mat_1;
     row_major Matrix g_mat_2;
     row_major Matrix g_mat_3;
+    row_major Matrix g_mat_4;
+    row_major Matrix g_mat_5;
     
     int g_btex_0;
     int g_btex_1;
@@ -90,6 +100,16 @@ cbuffer GLOBAL : register(b2)
     float g_EngineTime;
     int g_Light2DCount;
     int g_Light3DCount;
+}
+
+cbuffer SHADOW : register(b3)
+{
+    row_major Matrix g_matShadowVP_0;
+    row_major Matrix g_matShadowVP_1;
+    row_major Matrix g_matShadowVP_2;
+    row_major Matrix g_matShadowVP_3;
+    row_major Matrix g_matShadowVP_4;
+    row_major Matrix g_matShadowVP_5;
 }
 
 // »ùÇÃ·¯

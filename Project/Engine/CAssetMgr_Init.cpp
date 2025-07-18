@@ -606,7 +606,7 @@ void CAssetMgr::CreateEngineGraphicShader()
     pShader->CreateVertexShader(L"HLSL\\Engine\\light.fx", "VS_Light");
     pShader->CreatePixelShader(L"HLSL\\Engine\\light.fx", "PS_Light");
     pShader->SetBSType(BS_TYPE::ONE_ONE);
-    pShader->SetRSType(RS_TYPE::CULL_NONE);
+    pShader->SetRSType(RS_TYPE::CULL_FRONT);
     pShader->SetDSType(DS_TYPE::NO_TEST_NO_WIRITE);
     pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
     pShader->SetEngineAsset(true);

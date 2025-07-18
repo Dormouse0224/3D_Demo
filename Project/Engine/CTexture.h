@@ -37,6 +37,7 @@ public:
 public:
     // GraphicShader, t 레지스터
     void Binding(UINT _RegisterNum);
+    void Unbind(UINT _RegisterNum);
 
     // ComputeShader, t 레지스터
     void Binding_CS(UINT _RegisterNum);

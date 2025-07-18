@@ -26,7 +26,7 @@ private:
 	AssetPtr<CMesh>			m_MergeMesh;
 	AssetPtr<CMaterial>		m_MergeMtrl;
     int                     m_MergeMode;
-
+    int                     m_DebugOption;
 
 
 public:
@@ -41,6 +41,7 @@ public:
     CMRT* GetMRT(MRT_TYPE _Type) { return m_arrMRT[_Type]; }
 
     void SetMergeMode(int _mode) { m_MergeMode = _mode; }
+    void SetDebugOption(int _mode) { m_DebugOption = _mode; }
 
 	void UnbindShaders();
     void UnbindShaders_CS();

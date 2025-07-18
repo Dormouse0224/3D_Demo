@@ -84,6 +84,17 @@ void CTexture::Binding(UINT _RegisterNum)
     CONTEXT->PSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 }
 
+void CTexture::Unbind(UINT _RegisterNum)
+{
+    ID3D11ShaderResourceView* nullSRV = nullptr;
+
+    CONTEXT->VSSetShaderResources(_RegisterNum, 1, &nullSRV);
+    CONTEXT->HSSetShaderResources(_RegisterNum, 1, &nullSRV);
+    CONTEXT->DSSetShaderResources(_RegisterNum, 1, &nullSRV);
+    CONTEXT->GSSetShaderResources(_RegisterNum, 1, &nullSRV);
+    CONTEXT->PSSetShaderResources(_RegisterNum, 1, &nullSRV);
+}
+
 void CTexture::Binding_CS(UINT _RegisterNum)
 {
 	m_RecentSRV_CS = _RegisterNum;

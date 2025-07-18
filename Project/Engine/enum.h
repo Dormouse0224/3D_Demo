@@ -5,6 +5,7 @@ enum class CB_TYPE
 	TRANSFORM,	// b0
 	MATERIAL,	// b1
 	GLOBAL,		// b2
+    SHADOW,     // b3
 
 	END,
 };
@@ -43,7 +44,7 @@ enum class BS_TYPE
 {
 	DEFAULT,	// Src : 1, Dst : 0
 	ALPHABLEND, // Src : A, Dst : (1 - A)
-	ALPHABLEND_COVERAGE,
+	ALPHA_TO_COVERAGE,    // MSAA
 	ONE_ONE,
 
 	END,
@@ -155,11 +156,11 @@ enum class SHADER_DOMAIN
 
 enum CONST_PARAM
 {
-	INT_0,		INT_1,		INT_2,		INT_3,
-	FLOAT_0,	FLOAT_1,	FLOAT_2,	FLOAT_3,
-	VEC2_0,		VEC2_1,		VEC2_2,		VEC2_3,
-	VEC4_0,		VEC4_1,		VEC4_2,		VEC4_3,
-	MAT_0,		MAT_1,		MAT_2,		MAT_3,
+	INT_0,		INT_1,		INT_2,		INT_3,      INT_4,      INT_5,
+    FLOAT_0,    FLOAT_1,    FLOAT_2,    FLOAT_3,    FLOAT_4,    FLOAT_5,
+    VEC2_0,     VEC2_1,     VEC2_2,     VEC2_3,     VEC2_4,     VEC2_5,
+    VEC4_0,     VEC4_1,     VEC4_2,     VEC4_3,     VEC4_4,     VEC4_5,
+    MAT_0,      MAT_1,      MAT_2,      MAT_3,      MAT_4,      MAT_5,
 };
 
 enum TEX_PARAM
@@ -215,11 +216,12 @@ enum class LAYER
 {
 	Default,
 	Background,
-	Tile,
+	Landscape,
 	Player,
 	PlayerProjectile,
 	Enemy,
 	EnemyProjectile,
+    Tile,
 
 	UI,
 

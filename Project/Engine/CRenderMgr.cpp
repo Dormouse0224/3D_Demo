@@ -28,7 +28,8 @@ CRenderMgr::CRenderMgr()
     , m_arrMRT{}
     , m_MergeMesh(nullptr)
     , m_MergeMtrl(nullptr)
-    , m_MergeMode(-1)
+    , m_MergeMode(0)
+    , m_DebugOption(0)
 {
 
 }
@@ -227,6 +228,7 @@ void CRenderMgr::MergeRender()
     m_MergeMtrl->SetTexParam(TEX_4, m_arrMRT[MRT_TYPE::LIGHT]->GetRenderTarget(0));     // Diffuse
     m_MergeMtrl->SetTexParam(TEX_5, m_arrMRT[MRT_TYPE::LIGHT]->GetRenderTarget(1));     // Specular
     m_MergeMtrl->SetConstParam(INT_0, m_MergeMode);
+    m_MergeMtrl->SetConstParam(INT_1, m_DebugOption);
 	m_MergeMtrl->Binding();
 
 	m_MergeMesh->Render();
@@ -245,6 +247,8 @@ void CRenderMgr::MergeRender()
 
 	// Ä¿¼­ ·»´õ¸µ
 	CKeyMgr::GetInst()->Render();
+
+    m_MergeMtrl->Unbind();
 }
 
 void CRenderMgr::ClearMRT()

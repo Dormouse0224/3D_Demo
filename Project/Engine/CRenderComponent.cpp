@@ -78,13 +78,15 @@ bool CRenderComponent::GetUsingDynamic(UINT _Idx)
         return m_vecMtrls[_Idx].bUsingDynamic;
 }
 
-void CRenderComponent::RenderShadow(int _Cascade)
+void CRenderComponent::RenderShadow(LIGHT_TYPE _Type, int _Cascade)
 {
     if (m_ShadowMtrl.Get() == nullptr)
         return;
 
     Transform()->Binding();
-    m_ShadowMtrl->SetConstParam(INT_0, _Cascade);
+    m_ShadowMtrl->SetConstParam(INT_0, (int)_Type);
+    m_ShadowMtrl->SetConstParam(INT_1, _Cascade);
+
     m_ShadowMtrl->Binding();
     m_Mesh->Render();
 }

@@ -64,6 +64,26 @@ void CMaterial::Binding()
 	pBuffer->Binding();
 }
 
+void CMaterial::Unbind()
+{
+    m_Shader->Unbind();
+
+    for (UINT i = 0; i < TEX_PARAM::TEX_END; ++i)
+    {
+        if (nullptr != m_arrTex[i].Get())
+        {
+            m_arrTex[i]->Unbind(i);
+            m_Const.bTex[i] = true;
+        }
+        else
+            m_Const.bTex[i] = false;
+    }
+
+    // 재질 상수값을 상수버퍼에 전달 및 바인딩
+    static CConstBuffer* pBuffer = CDevice::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL);
+    pBuffer->Unbind();
+}
+
 AssetPtr<CMaterial> CMaterial::Create(wstring _Name)
 {
 	AssetPtr<CMaterial> pNewMtrl = new CMaterial;

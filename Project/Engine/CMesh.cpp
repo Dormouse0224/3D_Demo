@@ -267,12 +267,12 @@ void CMesh::Render(UINT _iSubset)
     CONTEXT->DrawIndexed(m_vecIdxInfo[_iSubset].IdxCount, 0, 0);
 }
 
-void CMesh::Render_Particle(UINT _Count)
+void CMesh::Render_Instanced(UINT _Count, UINT _iSubset)
 {
     // 0 번 인덱스버퍼를 사용하는것으로 가정
-	Binding(0);
+	Binding(_iSubset);
 
-    CONTEXT->DrawIndexedInstanced(m_vecIdxInfo[0].IdxCount, _Count, 0, 0, 0);
+    CONTEXT->DrawIndexedInstanced(m_vecIdxInfo[_iSubset].IdxCount, _Count, 0, 0, 0);
 }
 
 int CMesh::Save(const wstring& _FileName, bool _Update)

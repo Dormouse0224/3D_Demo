@@ -211,10 +211,10 @@ void CGameObject::Render()
 		m_RenderCom->Render();
 }
 
-void CGameObject::RenderShadow(int _Cascade)
+void CGameObject::RenderShadow(LIGHT_TYPE _Type, int _Cascade)
 {
     if (IsRenderable(this))
-        m_RenderCom->RenderShadow(_Cascade);
+        m_RenderCom->RenderShadow(_Type, _Cascade);
 }
 
 int CGameObject::Save(fstream& _Stream, bool _Update)

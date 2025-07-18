@@ -94,7 +94,7 @@ void CGraphicShaderUI::Render_Ast()
 
     // È¥ÇÕ ¼³Á¤
     ImGui::Text("Blend State");
-    const char* BSType[] = { "DEFAULT", "ALPHABLEND", "ALPHABLEND_COVERAGE", "ONE_ONE" };
+    const char* BSType[] = { "DEFAULT", "ALPHABLEND", "ALPHA_TO_COVERAGE", "ONE_ONE" };
     int BSType_current = static_cast<int>(pGS->GetDomain());
     if (ImGui::Combo("##BlendState", &BSType_current, BSType, IM_ARRAYSIZE(BSType)))
     {

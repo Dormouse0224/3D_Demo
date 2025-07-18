@@ -24,6 +24,7 @@ public:
     /// <param name="_DataSize">작성할 데이터의 크기</param>
     void SetData(void* _Data, UINT _DataSize);
     void Binding();
+    void Unbind();
     void Binding_CS();
 };
 

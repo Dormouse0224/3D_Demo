@@ -39,9 +39,7 @@ private:
     vector<CGameObject*>                m_vecPostprocess;
     vector<CGameObject*>                m_vecUI;
 
-    vector<CGameObject*>                m_vecShadowNear;
-    vector<CGameObject*>                m_vecShadowMiddle;
-    vector<CGameObject*>                m_vecShadowFar;
+    vector<CGameObject*>                m_vecShadow[6];
 
 
 
@@ -77,13 +75,13 @@ public:
 
 private:
     void SortObject();
-    void SortObjectShadow();
+    void SortObjectShadow(LIGHT_TYPE _Type, bool _CSM);
 
 public:
     virtual void FinalTick() override;
     void SetMatrix();
     void Render();
-    void RenderShadow();
+    void RenderShadow(LIGHT_TYPE _Type, bool _CSM);
 
     /// <summary>
     /// Render Manager 에서 관리되지 않는 별도의 카메라 객체용 렌더링 함수입니다.

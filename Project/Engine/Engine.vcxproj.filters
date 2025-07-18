@@ -268,9 +268,6 @@
     <Filter Include="07. Component\RenderComponent\09. UICom">
       <UniqueIdentifier>{0f4a5d8d-2e15-490e-b02a-3341e712fbf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="09. ImguiObject\ComponentUI\05. Light">
-      <UniqueIdentifier>{51b380d4-b228-462d-9d96-99c5d176ed98}</UniqueIdentifier>
-    </Filter>
     <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\06. SkyBoxUI">
       <UniqueIdentifier>{3a459744-06c8-4cba-8ae7-64685cb0a6dc}</UniqueIdentifier>
     </Filter>
@@ -297,6 +294,9 @@
     </Filter>
     <Filter Include="07. Component\02. Camera\Frustum">
       <UniqueIdentifier>{d37e6771-c305-4992-8fd2-27ddf73220b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\05. LightUI">
+      <UniqueIdentifier>{51b380d4-b228-462d-9d96-99c5d176ed98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -595,7 +595,7 @@
       <Filter>04. Manager\13. LightMgr</Filter>
     </ClInclude>
     <ClInclude Include="CLightUI.h">
-      <Filter>09. ImguiObject\ComponentUI\05. Light</Filter>
+      <Filter>09. ImguiObject\ComponentUI\05. LightUI</Filter>
     </ClInclude>
     <ClInclude Include="CMRT.h">
       <Filter>03. Device\MRT</Filter>
@@ -900,7 +900,7 @@
       <Filter>04. Manager\13. LightMgr</Filter>
     </ClCompile>
     <ClCompile Include="CLightUI.cpp">
-      <Filter>09. ImguiObject\ComponentUI\05. Light</Filter>
+      <Filter>09. ImguiObject\ComponentUI\05. LightUI</Filter>
     </ClCompile>
     <ClCompile Include="CMRT.cpp">
       <Filter>03. Device\MRT</Filter>

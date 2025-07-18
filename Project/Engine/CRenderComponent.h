@@ -44,7 +44,7 @@ public:
     bool GetFrustumCull() { return m_FrustumCull; }
 
     virtual void Render() = 0;
-    virtual void RenderShadow(int _Cascade);
+    virtual void RenderShadow(LIGHT_TYPE _Type, int _Cascade);
 
 protected:
     int RenderCom_Load(fstream& _Stream);

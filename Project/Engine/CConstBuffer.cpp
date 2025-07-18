@@ -57,6 +57,17 @@ void CConstBuffer::Binding()
 	CONTEXT->PSSetConstantBuffers((UINT)m_Type, 1, m_Buffer.GetAddressOf());
 }
 
+void CConstBuffer::Unbind()
+{
+    ID3D11Buffer* nullBuffer = nullptr;
+
+    CONTEXT->VSSetConstantBuffers((UINT)m_Type, 1, &nullBuffer);
+    CONTEXT->HSSetConstantBuffers((UINT)m_Type, 1, &nullBuffer);
+    CONTEXT->DSSetConstantBuffers((UINT)m_Type, 1, &nullBuffer);
+    CONTEXT->GSSetConstantBuffers((UINT)m_Type, 1, &nullBuffer);
+    CONTEXT->PSSetConstantBuffers((UINT)m_Type, 1, &nullBuffer);
+}
+
 
 void CConstBuffer::Binding_CS()
 {

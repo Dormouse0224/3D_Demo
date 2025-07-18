@@ -3,7 +3,8 @@
 
 #include "value.fx"
 
-#define MERGE_MODE g_int_0
+#define MERGE_MODE      g_int_0
+#define DEBUG_OPTION    g_int_1
 
 #define ALBEDO_TEX      g_tex_0
 #define NORMAL_TEX      g_tex_1
@@ -39,7 +40,7 @@ float4 PS_Merge(VS_OUT _in) : SV_Target
 {
     float4 vColor = (float4) 0.f;
     
-    if (MERGE_MODE == -1)
+    if (MERGE_MODE == 0)
     {
         // 통합 출력
         float4 vAlbedo = ALBEDO_TEX.Sample(g_sam_0, _in.UV);
@@ -53,15 +54,18 @@ float4 PS_Merge(VS_OUT _in) : SV_Target
 
         float4 vPos = POSITION_TEX.Sample(g_sam_0, _in.UV);
         
-        
-        //if (vPos.z == 0.f)
-        //    vColor = vColor;
-        //else if (vPos.z < 100.f)
-        //    vColor = vColor * float4(1.f, 0.5f, 0.5f, 1.f);
-        //else if (vPos.z < 1000.f)
-        //    vColor = vColor * float4(0.5f, 1.f, 0.5f, 1.f);
-        //else
-        //    vColor = vColor * float4(0.5f, 0.5f, 1.f, 1.f);
+        // 카메라 프러스텀 영역 디버그 렌더링
+        if (DEBUG_OPTION == 1)
+        {
+            if (vPos.z == 0.f)
+                vColor = vColor;
+            else if (vPos.z < 100.f)
+                vColor = vColor * float4(1.f, 0.5f, 0.5f, 1.f);
+            else if (vPos.z < 1000.f)
+                vColor = vColor * float4(0.5f, 1.f, 0.5f, 1.f);
+            else
+                vColor = vColor * float4(0.5f, 0.5f, 1.f, 1.f);
+        }
 
     }
     
@@ -69,37 +73,37 @@ float4 PS_Merge(VS_OUT _in) : SV_Target
     // Merge Mode
     // ==========
     
-    else if (MERGE_MODE == 0)
+    else if (MERGE_MODE == 1)
     {
         // Albedo 출력
         vColor = ALBEDO_TEX.Sample(g_sam_0, _in.UV);
     }
-    else if (MERGE_MODE == 1)
+    else if (MERGE_MODE == 2)
     {
         // Normal 출력
         vColor = NORMAL_TEX.Sample(g_sam_0, _in.UV);
     }
-    else if (MERGE_MODE == 2)
+    else if (MERGE_MODE == 3)
     {
         // Position 출력
         vColor = POSITION_TEX.Sample(g_sam_0, _in.UV);
     }
-    else if (MERGE_MODE == 3)
+    else if (MERGE_MODE == 4)
     {
         // Position 출력
         vColor = EFFECT_TEX.Sample(g_sam_0, _in.UV);
     }
-    else if (MERGE_MODE == 4)
+    else if (MERGE_MODE == 5)
     {
         // Position 출력
         vColor = DIFFUSE_TEX.Sample(g_sam_0, _in.UV);
     }
-    else if (MERGE_MODE == 5)
+    else if (MERGE_MODE == 6)
     {
         // Position 출력
         vColor = SPECULAR_TEX.Sample(g_sam_0, _in.UV);
     }
-    else if (MERGE_MODE == 6)
+    else if (MERGE_MODE == 7)
     {
         // Position 출력
         vColor = EMISSIVE_TEX.Sample(g_sam_0, _in.UV);

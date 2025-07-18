@@ -19,6 +19,14 @@ void CLightUI::Update_Com()
 
 void CLightUI::Render_Com()
 {
+    ImGui::Text("Cascade Shadow Mapping");
+    bool bCSM = m_TargetObj->Light()->GetCSM();
+    ImGui::SameLine(200.f);
+    if (ImGui::Checkbox("##CSM", &bCSM))
+    {
+        m_TargetObj->Light()->SetCSM(bCSM);
+    }
+
 	tLightModule LightModule = m_TargetObj->Light()->GetLightModule();
 
 	// Font Type
@@ -52,6 +60,8 @@ void CLightUI::Render_Com()
 	float fRad = LightModule.Radius;
 	if (ImGui::DragFloat("##Radius", &fRad))
 	{
+        if (fRad < 2.f)
+            fRad = 2.f;
 		LightModule.Radius = fRad;
 		m_TargetObj->Light()->SetLightModule(LightModule);
 	}
@@ -68,6 +78,8 @@ void CLightUI::Render_Com()
 	float fAng = LightModule.Angle;
 	if (ImGui::DragFloat("##Angle", &fAng))
 	{
+        if (fAng < 1.f)
+            fAng = 1.f;
 		LightModule.Angle = fAng;
 		m_TargetObj->Light()->SetLightModule(LightModule);
 	}

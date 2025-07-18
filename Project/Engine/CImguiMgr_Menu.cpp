@@ -184,39 +184,54 @@ void CImguiMgr::DebugMenuBar()
             {
                 if (ImGui::MenuItem("Default"))
                 {
-                    CRenderMgr::GetInst()->SetMergeMode(-1);
+                    CRenderMgr::GetInst()->SetMergeMode(0);
                 }
                 if (ImGui::MenuItem("Albedo"))
                 {
-                    CRenderMgr::GetInst()->SetMergeMode(0);
+                    CRenderMgr::GetInst()->SetMergeMode(1);
                 }
                 if (ImGui::MenuItem("Normal"))
                 {
-                    CRenderMgr::GetInst()->SetMergeMode(1);
+                    CRenderMgr::GetInst()->SetMergeMode(2);
                 }
                 if (ImGui::MenuItem("Position"))
                 {
-                    CRenderMgr::GetInst()->SetMergeMode(2);
+                    CRenderMgr::GetInst()->SetMergeMode(3);
                 }
                 if (ImGui::MenuItem("Effect"))
                 {
-                    CRenderMgr::GetInst()->SetMergeMode(3);
+                    CRenderMgr::GetInst()->SetMergeMode(4);
                 }
                 if (ImGui::MenuItem("Diffuse"))
                 {
-                    CRenderMgr::GetInst()->SetMergeMode(4);
+                    CRenderMgr::GetInst()->SetMergeMode(5);
                 }
                 if (ImGui::MenuItem("Specular"))
                 {
-                    CRenderMgr::GetInst()->SetMergeMode(5);
+                    CRenderMgr::GetInst()->SetMergeMode(6);
                 }
                 if (ImGui::MenuItem("Emissive"))
                 {
-                    CRenderMgr::GetInst()->SetMergeMode(6);
+                    CRenderMgr::GetInst()->SetMergeMode(7);
                 }
 
                 ImGui::EndMenu();
             }
+
+            if (ImGui::BeginMenu("DebugOption"))
+            {
+                if (ImGui::MenuItem("Default"))
+                {
+                    CRenderMgr::GetInst()->SetDebugOption(0);
+                }
+                if (ImGui::MenuItem("Camera Frustum Section"))
+                {
+                    CRenderMgr::GetInst()->SetDebugOption(1);
+                }
+
+                ImGui::EndMenu();
+            }
+
             ImGui::EndMenu();
         }
 

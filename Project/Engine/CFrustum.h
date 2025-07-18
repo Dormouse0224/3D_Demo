@@ -25,9 +25,10 @@ enum class FACE_TYPE
 
 enum class CASCADE
 {
-    eNEAR,
-    eMIDDLE,
-    eFAR,
+    eNEAR,      // 비율 0 ~ 0.01
+    eMIDDLE,    // 비율 0.01 ~ 0.1
+    eFAR,       // 비율 0.1 ~ 1
+    eAll,
 
     eEND,
 };
@@ -46,13 +47,13 @@ private:
 
     Vec3        m_ProjPos[8];
     Vec4        m_Face[(UINT)FACE_TYPE::eEND];
+    Vec4        m_CircumscribedSphere[(UINT)CASCADE::eEND];
 
 
 public:
     bool FrustumCheck(Vec3 _WorldPos, CASCADE _Cascade);
-    bool FrustumCheckAll(Vec3 _WorldPos);
     bool FrustumCheckSphere(Vec3 _WorldPos, float _Radius, CASCADE _Cascade);
-    bool FrustumCheckSphereAll(Vec3 _WorldPos, float _Radius);
+    Vec4 GetCircumscribedSphere(CASCADE _Cascade) { return m_CircumscribedSphere[(UINT)_Cascade]; }
 
 
 private:
