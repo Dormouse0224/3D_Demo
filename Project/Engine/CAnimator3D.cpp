@@ -96,7 +96,7 @@ void CAnimator3D::SetAnimClip(const vector<tMTAnimClip>& _vecAnimClip)
 	m_vecClipUpdateTime[0] = fTime;*/
 }
 
-void CAnimator3D::Binding(UINT _MtrlIdx)
+void CAnimator3D::Binding(AssetPtr<CMaterial> _Mtrl)
 {
     if (m_vecClip == nullptr || m_vecClip->size() < 1)
         return;
@@ -129,25 +129,33 @@ void CAnimator3D::Binding(UINT _MtrlIdx)
 	// t17 레지스터에 최종행렬 데이터(구조버퍼) 바인딩		
 	m_BoneFinalMatBuffer->Binding(17);
 
-    RenderComponent()->GetMaterial(_MtrlIdx)->SetAnim3D(true); // Animation Mesh 알리기
-    RenderComponent()->GetMaterial(_MtrlIdx)->SetBoneCount(Animator3D()->GetBoneCount());
+    _Mtrl->SetAnim3D(true); // Animation Mesh 알리기
+    _Mtrl->SetBoneCount(Animator3D()->GetBoneCount());
 }
 
-void CAnimator3D::ClearData()
+void CAnimator3D::ClearData(AssetPtr<CMaterial> _Mtrl)
 {
 	m_BoneFinalMatBuffer->Clear(17);
 
 	UINT iMtrlCount = MeshRender()->GetMaterialCount();
-    AssetPtr<CMaterial> pMtrl = nullptr;
-	for (UINT i = 0; i < iMtrlCount; ++i)
-	{
-		pMtrl = MeshRender()->GetSharedMaterial(i);
-		if (nullptr == pMtrl)
-			continue;
+    if (_Mtrl == nullptr)
+    {
+        AssetPtr<CMaterial> pMtrl = nullptr;
+        for (UINT i = 0; i < iMtrlCount; ++i)
+        {
+            pMtrl = MeshRender()->GetSharedMaterial(i);
+            if (nullptr == pMtrl)
+                continue;
 
-		pMtrl->SetAnim3D(false); // Animation Mesh 알리기
-		pMtrl->SetBoneCount(0);
-	}
+            pMtrl->SetAnim3D(false); // Animation Mesh 알리기
+            pMtrl->SetBoneCount(0);
+        }
+    }
+    else
+    {
+        _Mtrl->SetAnim3D(false); // Animation Mesh 알리기
+        _Mtrl->SetBoneCount(0);
+    }
 }
 
 void CAnimator3D::check_mesh(AssetPtr<CMesh> _pMesh)

@@ -25,31 +25,17 @@ void CMeshRender::Render()
     // 위치정보 업데이트
     Transform()->Binding();
 
-    //// Animator3D Binding
-    //if (Animator3D())
-    //{
-    //    Animator3D()->Binding();
-
-    //    for (UINT i = 0; i < GetMesh()->GetIdxCount(); ++i)
-    //    {
-    //        if (nullptr == GetMaterial(i))
-    //            continue;
-
-    //        GetMaterial(i)->SetAnim3D(true); // Animation Mesh 알리기
-    //        GetMaterial(i)->SetBoneCount(Animator3D()->GetBoneCount());
-    //    }
-    //}
-
     for (UINT i = 0; i < GetMaterialCount(); ++i)
     {
-        if (nullptr == GetMaterial(i))
+        AssetPtr<CMaterial> Mtrl = GetMaterial(i);
+        if (nullptr == Mtrl)
             continue;
 
         if (Animator3D())
-            Animator3D()->Binding(i);
+            Animator3D()->Binding(Mtrl);
 
         // 사용할 재질 바인딩
-        GetMaterial(i)->Binding();
+        Mtrl->Binding();
 
         // 렌더링 시작
         GetMesh()->Render(i);

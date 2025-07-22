@@ -5,6 +5,7 @@
 #include "CLevel.h"
 #include "CLevelMgr.h"
 #include "CTransform.h"
+#include "CAnimator3D.h"
 
 CRenderComponent::CRenderComponent(COMPONENT_TYPE _Type)
 	: CComponent(_Type)
@@ -83,12 +84,27 @@ void CRenderComponent::RenderShadow(LIGHT_TYPE _Type, int _Cascade)
     if (m_ShadowMtrl.Get() == nullptr)
         return;
 
-    Transform()->Binding();
-    m_ShadowMtrl->SetConstParam(INT_0, (int)_Type);
-    m_ShadowMtrl->SetConstParam(INT_1, _Cascade);
+    for (UINT i = 0; i < GetMaterialCount(); ++i)
+    {
+        if (nullptr == GetMaterial(i))
+            continue;
 
-    m_ShadowMtrl->Binding();
-    m_Mesh->Render();
+        if (Animator3D())
+        {
+            Animator3D()->Binding(m_ShadowMtrl);
+        }
+
+        Transform()->Binding();
+        m_ShadowMtrl->SetConstParam(INT_0, (int)_Type);
+        m_ShadowMtrl->SetConstParam(INT_1, _Cascade);
+
+        m_ShadowMtrl->Binding();
+        m_Mesh->Render(i);
+    }
+
+    if (Animator3D())
+        Animator3D()->ClearData(m_ShadowMtrl);
+
 }
 
 int CRenderComponent::RenderCom_Load(fstream& _Stream)

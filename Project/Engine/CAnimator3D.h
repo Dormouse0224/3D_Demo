@@ -4,6 +4,7 @@
 #include "CMesh.h"
 
 class CStructuredBuffer;
+class CMaterial;
 
 class CAnimator3D :
     public CComponent
@@ -39,9 +40,9 @@ public:
 
     CStructuredBuffer* GetFinalBoneMat() { return m_BoneFinalMatBuffer; }
     UINT GetBoneCount() { return (UINT)m_vecBones->size(); }
-    void ClearData();
+    void ClearData(AssetPtr<CMaterial> _Mtrl = nullptr);
 
-    void Binding(UINT _MtrlIdx);
+    void Binding(AssetPtr<CMaterial> _Mtrl);
 
 private:
     void check_mesh(AssetPtr<CMesh> _pMesh);

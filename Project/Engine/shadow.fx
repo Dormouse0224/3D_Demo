@@ -2,6 +2,7 @@
 #define _SHADOW
 
 #include "value.fx"
+#include "func.fx"
 
 #define LIGHT_TYPE g_int_0
 #define CASCADE g_int_1
@@ -25,10 +26,10 @@ VS_OUT VS_Shadow(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
         
-    //if (g_iAnim)
-    //{
-    //    Skinning_LocalPos(_in.vPos, _in.vWeights, _in.vIndices, 0);
-    //}
+    if (g_iAnim)
+    {
+        Skinning_LocalPos(_in.vPos, _in.vWeights, _in.vIndices, 0);
+    }
     
     if (LIGHT_TYPE == 0) // Directional
     {
