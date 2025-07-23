@@ -131,6 +131,15 @@ void CKeyMgr::SetCursorTex(AssetPtr<CTexture> _Tex)
         m_Cursor->MeshRender()->GetMaterial()->SetTexParam(TEX_0, _Tex);
 }
 
+void CKeyMgr::SetMousePos(Vec2 _Pos)
+{
+    m_MousePos = _Pos;
+    POINT point;
+    point.x = _Pos.x; point.y = _Pos.y;
+    ClientToScreen(CEngine::GetInst()->GetMainWndHwnd(), &point);
+    SetCursorPos(point.x, point.y);
+}
+
 void CKeyMgr::Init()
 {
 	// 모든 키 상태를 NONE, 이전에 눌린 적 없음으로 초기화

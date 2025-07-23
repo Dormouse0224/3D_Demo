@@ -27,7 +27,7 @@ CImguiMgr::CImguiMgr()
 
 CImguiMgr::~CImguiMgr()
 {
-    SetCurrentDirectory(CPathMgr::GetBinPath());
+    SetCurrentDirectory(CPathMgr::GetBinPath().c_str());
 
     string inipath = to_str(CPathMgr::GetBinPath()) + "imgui.ini";
     // Cleanup

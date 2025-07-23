@@ -10,10 +10,12 @@
 #include "CCamera.h"
 #include "CLevel.h"
 #include "CEngine.h"
+#include "CDevice.h"
 
 CEditorCamScript::CEditorCamScript()
 	: m_CamSpeedLin(200.f)
 	, m_CamSpeedAng(200.f)
+    , m_Rotate(false)
 {
 }
 
@@ -80,11 +82,14 @@ void CEditorCamScript::Move_Perspective()
 
 	Transform()->SetRelativePos(vPos);
 
+    if (KEY_TAP(Keyboard::MOUSE_RBTN))
+        m_Rotate = !m_Rotate;
 
-	if (!KEY_PRESSED(Keyboard::MOUSE_RBTN))
+	if (!m_Rotate || GetFocus() != CEngine::GetInst()->GetMainWndHwnd())
 		return;
 
 	Vec2 vDragDir = CKeyMgr::GetInst()->GetDragDir();
+    CKeyMgr::GetInst()->SetMousePos(CDevice::GetInst()->GetRenderResolution() / 2.f);
 
 	//Vec3 vRot = Transform()->GetRelativeRotEuler();
 	//vRot.x += vDragDir.y * EngineDT * m_CamSpeedAng;

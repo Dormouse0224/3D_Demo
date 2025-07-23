@@ -10,6 +10,7 @@ public:
 private:
     float   m_CamSpeedLin;
     float   m_CamSpeedAng;
+    bool    m_Rotate;
 
 public:
     virtual void Tick() override;

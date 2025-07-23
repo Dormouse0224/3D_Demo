@@ -144,6 +144,7 @@ public:
     Vec2 GetDragDir() { return m_DragDir; }
 
     void SetCursorTex(AssetPtr<CTexture> _Tex);
+    void SetMousePos(Vec2 _Pos);
 
     void Init();
     void Tick();

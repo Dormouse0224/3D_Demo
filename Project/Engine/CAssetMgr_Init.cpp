@@ -12,7 +12,7 @@ void CAssetMgr::Init()
 
 	CreateEngineMaterial();
 
-	m_DirNotifyHandle = FindFirstChangeNotification(CPathMgr::GetContentDir(), true
+	m_DirNotifyHandle = FindFirstChangeNotification(CPathMgr::GetContentDir().c_str(), true
 													, FILE_NOTIFY_CHANGE_FILE_NAME | FILE_NOTIFY_CHANGE_DIR_NAME
 													| FILE_NOTIFY_CHANGE_LAST_WRITE | FILE_NOTIFY_CHANGE_CREATION);
 }

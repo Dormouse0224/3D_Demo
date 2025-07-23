@@ -54,7 +54,8 @@ int CGraphicShader::CreateVertexShader(const wstring& _RelativePath, const strin
 		}
 		else
 		{
-			MessageBoxA(nullptr, "정점 쉐이더 파일 경로가 올바르지 않습니다.", "쉐이더 컴파일 실패", MB_OK);
+            wstring msg = L"정점 쉐이더 파일 경로가 올바르지 않습니다.\n" + strFilePath + L"\n" + CPathMgr::GetContentDir();
+			MessageBoxW(nullptr, msg.c_str(), L"쉐이더 컴파일 실패", MB_OK);
 		}
 		return E_FAIL;
 	}
@@ -172,7 +173,8 @@ int CGraphicShader::CreateGeometryShader(const wstring& _RelativePath, const str
 		}
 		else
 		{
-			MessageBoxA(nullptr, "지오메트리 쉐이더 파일 경로가 올바르지 않습니다.", "쉐이더 컴파일 실패", MB_OK);
+            wstring msg = L"지오메트리 쉐이더 파일 경로가 올바르지 않습니다.\n" + strFilePath;
+			MessageBoxW(nullptr, msg.c_str(), L"쉐이더 컴파일 실패", MB_OK);
 		}
 		return E_FAIL;
 	}
@@ -215,7 +217,8 @@ int CGraphicShader::CreateDomainShader(const wstring& _RelativePath, const strin
 		}
 		else
 		{
-			MessageBoxA(nullptr, "도메인 쉐이더 파일 경로가 올바르지 않습니다.", "쉐이더 컴파일 실패", MB_OK);
+            wstring msg = L"도메인 쉐이더 파일 경로가 올바르지 않습니다.\n" + strFilePath;
+			MessageBoxW(nullptr, msg.c_str(), L"쉐이더 컴파일 실패", MB_OK);
 		}
 		return E_FAIL;
 	}
@@ -258,7 +261,8 @@ int CGraphicShader::CreateHullShader(const wstring& _RelativePath, const string&
 		}
 		else
 		{
-			MessageBoxA(nullptr, "헐 쉐이더 파일 경로가 올바르지 않습니다.", "쉐이더 컴파일 실패", MB_OK);
+            wstring msg = L"헐 쉐이더 파일 경로가 올바르지 않습니다.\n" + strFilePath;
+			MessageBoxW(nullptr, msg.c_str(), L"쉐이더 컴파일 실패", MB_OK);
 		}
 		return E_FAIL;
 	}
@@ -301,7 +305,8 @@ int CGraphicShader::CreatePixelShader(const wstring& _RelativePath, const string
 		}
 		else
 		{
-			MessageBoxA(nullptr, "픽셀 쉐이더 파일 경로가 올바르지 않습니다.", "쉐이더 컴파일 실패", MB_OK);
+            wstring msg = L"픽셀 쉐이더 파일 경로가 올바르지 않습니다.\n" + strFilePath;
+			MessageBoxW(nullptr, msg.c_str(), L"쉐이더 컴파일 실패", MB_OK);
 		}
 		return E_FAIL;
 	}
