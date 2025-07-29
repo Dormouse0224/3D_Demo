@@ -21420,7 +21420,7 @@ void ImGui::ShowMetricsWindow(bool* p_open)
         ImGuiDockContext* dc = &g.DockContext;
         Checkbox("List root nodes", &root_nodes_only);
         Checkbox("Ctrl shows window dock info", &cfg->ShowDockingNodes);
-        if (SmallButton("Clear nodes")) { DockContextClearNodes(&g, 0, true); }
+        if (SmallButton("Unbind nodes")) { DockContextClearNodes(&g, 0, true); }
         SameLine();
         if (SmallButton("Rebuild all")) { dc->WantFullRebuild = true; }
         for (int n = 0; n < dc->Nodes.Data.Size; n++)
@@ -21434,7 +21434,7 @@ void ImGui::ShowMetricsWindow(bool* p_open)
     // Settings
     if (TreeNode("Settings"))
     {
-        if (SmallButton("Clear"))
+        if (SmallButton("Unbind"))
             ClearIniSettings();
         SameLine();
         if (SmallButton("Save to memory"))
@@ -22446,7 +22446,7 @@ void ImGui::ShowDebugLogWindow(bool* p_open)
     ShowDebugLogFlag("Viewport", ImGuiDebugLogFlags_EventViewport);
     ShowDebugLogFlag("InputRouting", ImGuiDebugLogFlags_EventInputRouting);
 
-    if (SmallButton("Clear"))
+    if (SmallButton("Unbind"))
     {
         g.DebugLogBuf.clear();
         g.DebugLogIndex.clear();

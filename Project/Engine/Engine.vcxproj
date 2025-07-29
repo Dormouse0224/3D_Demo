@@ -187,9 +187,12 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="CFSMUI.h" />
     <ClInclude Include="CFSM_State.h" />
     <ClInclude Include="CGraphicShaderUI.h" />
+    <ClInclude Include="CHeightMapCS.h" />
     <ClInclude Include="CImguiMgr.h" />
     <ClInclude Include="CImguiObject.h" />
     <ClInclude Include="CInspector.h" />
+    <ClInclude Include="CLandScape.h" />
+    <ClInclude Include="CLandScapeUI.h" />
     <ClInclude Include="CLight.h" />
     <ClInclude Include="CLightMgr.h" />
     <ClInclude Include="CLightUI.h" />
@@ -210,6 +213,7 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="CPrefab.h" />
     <ClInclude Include="CComponentMgr.h" />
     <ClInclude Include="CPrefabUI.h" />
+    <ClInclude Include="CRaycastCS.h" />
     <ClInclude Include="CRenderComponentUI.h" />
     <ClInclude Include="CSimulationEvent.h" />
     <ClInclude Include="CSkyBox.h" />
@@ -227,6 +231,7 @@ call EngineHeaderCopy.bat</Command>
     <ClInclude Include="CTreeUI.h" />
     <ClInclude Include="CUICom.h" />
     <ClInclude Include="CUIComUI.h" />
+    <ClInclude Include="CWeightMapCS.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_dx11.h" />
@@ -308,11 +313,15 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CGraphicShader.cpp" />
     <ClCompile Include="CGraphicShaderUI.cpp" />
+    <ClCompile Include="CHeightMapCS.cpp" />
     <ClCompile Include="CImguiMgr.cpp" />
     <ClCompile Include="CImguiMgr_Init.cpp" />
     <ClCompile Include="CImguiObject.cpp" />
     <ClCompile Include="CInspector.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
+    <ClCompile Include="CLandScape.cpp" />
+    <ClCompile Include="CLandScapeUI.cpp" />
+    <ClCompile Include="CLandScape_Init.cpp" />
     <ClCompile Include="CLayer.cpp" />
     <ClCompile Include="CLevel.cpp" />
     <ClCompile Include="CLevelMgr.cpp" />
@@ -339,6 +348,7 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CPhysxMgr.cpp" />
     <ClCompile Include="CPrefab.cpp" />
     <ClCompile Include="CPrefabUI.cpp" />
+    <ClCompile Include="CRaycastCS.cpp" />
     <ClCompile Include="CRenderComponent.cpp" />
     <ClCompile Include="CRenderComponentUI.cpp" />
     <ClCompile Include="CRenderMgr.cpp" />
@@ -366,6 +376,7 @@ call EngineHeaderCopy.bat</Command>
     <ClCompile Include="CTreeUI.cpp" />
     <ClCompile Include="CUICom.cpp" />
     <ClCompile Include="CUIComUI.cpp" />
+    <ClCompile Include="CWeightMapCS.cpp" />
     <ClCompile Include="extern.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -394,6 +405,18 @@ call EngineHeaderCopy.bat</Command>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="func.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="heightmap.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="landscape.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
@@ -447,6 +470,12 @@ call EngineHeaderCopy.bat</Command>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="raycast.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="shadow.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
@@ -490,6 +519,12 @@ call EngineHeaderCopy.bat</Command>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
     </FxCompile>
     <FxCompile Include="value.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="weightmap.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>

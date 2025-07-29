@@ -15,4 +15,5 @@
 #include "CTileRender.h"
 #include "CParticleRender.h"
 #include "CSkyBox.h"
+#include "CLandScape.h"
 #include "CUICom.h"

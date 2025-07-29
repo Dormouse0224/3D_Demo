@@ -135,7 +135,7 @@ void CAnimator3D::Binding(AssetPtr<CMaterial> _Mtrl)
 
 void CAnimator3D::ClearData(AssetPtr<CMaterial> _Mtrl)
 {
-	m_BoneFinalMatBuffer->Clear(17);
+	m_BoneFinalMatBuffer->Unbind();
 
 	UINT iMtrlCount = MeshRender()->GetMaterialCount();
     if (_Mtrl == nullptr)

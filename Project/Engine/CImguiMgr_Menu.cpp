@@ -148,7 +148,7 @@ void CImguiMgr::DebugMenuBar()
         {
             ImGui::MenuItem("Demo Window", nullptr, &m_DemoActive);
 
-            if (ImGui::MenuItem("Sound Clear"))
+            if (ImGui::MenuItem("Sound Unbind"))
             {
                 FMOD::ChannelGroup* master = nullptr;
                 CEngine::GetInst()->GetFMODSystem()->getMasterChannelGroup(&master);

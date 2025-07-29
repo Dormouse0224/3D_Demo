@@ -35,6 +35,7 @@ public:
 	bool GetLoading() { return m_Loading; }
 
 	void AddAsset(const wstring& _Key, AssetPtr<CAsset> _Asset);
+    void DeleteAsset(ASSET_TYPE _Type, const wstring& _Key);
     template<typename T>
     AssetPtr<T> FindAsset(const wstring& _RelativePath);
 	template<typename T>
@@ -113,7 +114,7 @@ inline AssetPtr<T> CAssetMgr::Load(const wstring& _RelativePath, bool _IsEngineA
 
 		pAsset = new T;
 		pAsset->SetName(_RelativePath);
-		pAsset->SetData();
+		pAsset->SetDataInfo();
 		pAsset->Load(_RelativePath);
 		CAssetMgr::GetInst()->AddAsset(_RelativePath, pAsset.Get());
 

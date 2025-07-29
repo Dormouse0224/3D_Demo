@@ -8,7 +8,22 @@ CStructuredBuffer::CStructuredBuffer()
 	, m_Type(SRV_ONLY)
 	, m_ElementSize(0)
 	, m_ElementCount(0)
+    , m_SysMemMove(false)
 {
+}
+
+CStructuredBuffer::CStructuredBuffer(const CStructuredBuffer& _Other)
+    : m_Desc(_Other.m_Desc)
+    , m_Type(_Other.m_Type)
+    , m_ElementSize(_Other.m_ElementSize)
+    , m_ElementCount(_Other.m_ElementCount)
+    , m_SysMemMove(_Other.m_SysMemMove)
+{
+    Create(m_ElementSize, m_ElementCount, m_Type, m_SysMemMove);
+
+    CONTEXT->CopyResource(m_SB.Get(), _Other.m_SB.Get());
+    CONTEXT->CopyResource(m_SB_Read.Get(), _Other.m_SB_Read.Get());
+    CONTEXT->CopyResource(m_SB_Write.Get(), _Other.m_SB_Write.Get());
 }
 
 CStructuredBuffer::~CStructuredBuffer()
@@ -169,6 +184,7 @@ void CStructuredBuffer::GetData(void* _Dst, UINT _ElementSize, UINT _ElementCoun
 
 void CStructuredBuffer::Binding(int _RegisterNum)
 {
+    m_RecentSRV = _RegisterNum;
 	CONTEXT->VSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 	CONTEXT->HSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
 	CONTEXT->DSSetShaderResources(_RegisterNum, 1, m_SRV.GetAddressOf());
@@ -189,24 +205,24 @@ void CStructuredBuffer::Binding_CS_UAV(int _RegisterNum)
 	CONTEXT->CSSetUnorderedAccessViews(_RegisterNum, 1, m_UAV.GetAddressOf(), &i);
 }
 
-void CStructuredBuffer::Clear(int _RegisterNum)
+void CStructuredBuffer::Unbind()
 {
     ID3D11ShaderResourceView* pSRV = nullptr;
-    CONTEXT->VSSetShaderResources(_RegisterNum, 1, &pSRV);
-    CONTEXT->HSSetShaderResources(_RegisterNum, 1, &pSRV);
-    CONTEXT->DSSetShaderResources(_RegisterNum, 1, &pSRV);
-    CONTEXT->GSSetShaderResources(_RegisterNum, 1, &pSRV);
-    CONTEXT->PSSetShaderResources(_RegisterNum, 1, &pSRV);
+    CONTEXT->VSSetShaderResources(m_RecentSRV, 1, &pSRV);
+    CONTEXT->HSSetShaderResources(m_RecentSRV, 1, &pSRV);
+    CONTEXT->DSSetShaderResources(m_RecentSRV, 1, &pSRV);
+    CONTEXT->GSSetShaderResources(m_RecentSRV, 1, &pSRV);
+    CONTEXT->PSSetShaderResources(m_RecentSRV, 1, &pSRV);
 }
 
-void CStructuredBuffer::Clear_CS()
+void CStructuredBuffer::Unbind_CS()
 {
     ID3D11ShaderResourceView* pSRV = nullptr;
     CONTEXT->CSSetShaderResources(m_RecentSRV_CS, 1, &pSRV);
     m_RecentSRV_CS = -1;
 }
 
-void CStructuredBuffer::Clear_CS_UAV()
+void CStructuredBuffer::Unbind_CS_UAV()
 {
     ID3D11UnorderedAccessView* pUAV = nullptr;
     UINT i = -1;

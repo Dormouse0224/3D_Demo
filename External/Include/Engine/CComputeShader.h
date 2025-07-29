@@ -10,7 +10,7 @@ class CComputeShader :
 public:
     CComputeShader();
     CComputeShader(const wstring& _RelativePath, const string& _FuncName
-        , UINT _GroupPerX, UINT _GroupPerY, UINT _GroupPerZ);
+        , UINT _ThreadPerGroupX, UINT _ThreadPerGroupY, UINT _ThreadPerGroupZ);
     ~CComputeShader();
     CLONE_DISABLE(CComputeShader);
 
@@ -41,7 +41,7 @@ public:
 
     int Execute();
     virtual void UIRender() = 0;
-    virtual void SetData() = 0;
+    virtual void SetDataInfo() = 0;
 
 private:
     virtual int Binding() = 0;

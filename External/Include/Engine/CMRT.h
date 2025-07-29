@@ -24,6 +24,7 @@ private:
 public:
     void SetRenderTarget();
     AssetPtr<CTexture> GetRenderTarget(int _Idx);
+    const D3D11_VIEWPORT& GetViewPort() { return m_Viewport; }
 
     int CreateRenderTarget(D3D11_TEXTURE2D_DESC _Desc, wstring _Key, Vec4 _ClearColor = Vec4(0.f));
     int CreateRenderTarget(ComPtr<ID3D11Texture2D> _Tex, wstring _Key, Vec4 _ClearColor = Vec4(0.f));

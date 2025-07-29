@@ -27,12 +27,15 @@ public:
     UINT GetWidth() { return m_Desc.Width; }
     UINT GetHeight() { return m_Desc.Height; }
     const D3D11_TEXTURE2D_DESC& GetDesc() { return m_Desc; }
+    const TexMetadata& GetMetaData() { return m_Image.GetMetadata(); }
 
     ComPtr<ID3D11RenderTargetView>	    GetRTV() { return  m_RTV; }
     ComPtr<ID3D11DepthStencilView>	    GetDSV() { return  m_DSV; }
     ComPtr<ID3D11ShaderResourceView>    GetSRV() { return  m_SRV; }
     ComPtr<ID3D11UnorderedAccessView>   GetUAV() { return  m_UAV; }
     ComPtr<ID3D11Texture2D>             GetTex() { return  m_Tex2D; }
+
+    int GenerateMip(UINT _Level);
 
 public:
     // GraphicShader, t 레지스터
@@ -45,14 +48,19 @@ public:
     // ComputeShader, u 레지스터
     void Binding_CS_UAV(UINT _RegisterNum);
 
+    void Unbind_CS();
+    void Unbind_CS_UAV();
+
+    int CreateUAV();
 
 private:
     // _Flag : D3D11_BIND_FLAG
     int Create(UINT _Width, UINT _Height, DXGI_FORMAT _format, UINT _Flag, D3D11_USAGE _usage = D3D11_USAGE_DEFAULT, int _TexArrCount = 1, bool _IsCube = false);
     int Create(ComPtr<ID3D11Texture2D> _Tex2D);
 
+
 public:
-    virtual int Save(const wstring& _FilePath, bool _Update = false) override { MessageBoxW(nullptr, L"2D텍스쳐는 파일 저장을 지원하지 않습니다.", L"Texture2D Save Error", MB_OK); return S_OK; }
+    virtual int Save(const wstring& _FileName, bool _Update = false) override;
     virtual int Load(const wstring& _FilePath) override;
 
 };

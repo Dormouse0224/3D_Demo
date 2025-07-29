@@ -22,5 +22,6 @@
 #include "CTileRnederUI.h"
 #include "CParticleRenderUI.h"
 #include "CSkyBoxUI.h"
+#include "CLandScapeUI.h"
 #include "CUIComUI.h"
 #include "CLightUI.h"

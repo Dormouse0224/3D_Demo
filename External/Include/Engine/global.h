@@ -8,6 +8,8 @@
 using namespace std;
 using namespace std::filesystem;
 
+#include <Wincodec.h>
+
 // ComPtr
 #include <wrl/client.h>
 using namespace Microsoft::WRL;
@@ -42,6 +44,7 @@ using namespace DirectX::SimpleMath;
 // DirectXTK 스프라이트 폰트
 #include <DirectXTK/SpriteFont.h>
 #include <DirectXTK/SpriteBatch.h>
+#include <DirectXTK/ScreenGrab.h>
 #ifdef _DEBUG
 #pragma comment(lib, "DirectXTK/DirectXTK_d.lib")
 #else

@@ -68,6 +68,18 @@ struct tLightModule
     float Angle; // 광원 각도(스포트 라이트)	
 };
 
+struct tRaycastOut
+{
+    float2 Location;
+    uint Distance;
+    int Success;
+};
+
+struct tWeight8
+{
+    float arrWeight[8];
+};
+
 struct tSkinningInfo
 {
     float3 vPos;

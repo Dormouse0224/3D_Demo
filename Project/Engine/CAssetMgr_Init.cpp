@@ -672,6 +672,21 @@ void CAssetMgr::CreateEngineGraphicShader()
     pShader->SetDomain(SHADER_DOMAIN::DOMAIN_SYSTEM);
     pShader->SetEngineAsset(true);
     AddAsset(L"EA_ShadowShader", pShader.Get());
+
+
+    // Landscape Shader
+    pShader = new CGraphicShader;
+    pShader->CreateVertexShader(L"HLSL\\Engine\\landscape.fx", "VS_LandScape");
+    pShader->CreateHullShader(L"HLSL\\Engine\\landscape.fx", "HS_LandScape");
+    pShader->CreateDomainShader(L"HLSL\\Engine\\landscape.fx", "DS_LandScape");
+    pShader->CreatePixelShader(L"HLSL\\Engine\\landscape.fx", "PS_LandScape");
+    pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST);
+    pShader->SetRSType(RS_TYPE::CULL_BACK);
+    pShader->SetDSType(DS_TYPE::LESS);
+    pShader->SetDomain(SHADER_DOMAIN::DOMAIN_MASKED);
+    pShader->SetConstData(FLOAT_0, "TessFactor");
+    pShader->SetEngineAsset(true);
+    AddAsset(L"EA_LandScapeShader", pShader.Get());
 }
 
 void CAssetMgr::CreateEngineMaterial()
@@ -695,40 +710,46 @@ void CAssetMgr::CreateEngineMaterial()
     pMaterial = new CMaterial;
     pMaterial->SetEngineAsset(true);
     pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_LightShader", true));
-    CAssetMgr::GetInst()->AddAsset(L"EA_LightMtrl", pMaterial.Get());
+    AddAsset(L"EA_LightMtrl", pMaterial.Get());
 
     // SpriteMtrl
     pMaterial = new CMaterial;
     pMaterial->SetEngineAsset(true);
     pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_SpriteShader", true));
-    CAssetMgr::GetInst()->AddAsset(L"EA_SpriteMtrl", pMaterial.Get());
+    AddAsset(L"EA_SpriteMtrl", pMaterial.Get());
 
 
     // Merge Material
     pMaterial = new CMaterial;
     pMaterial->SetEngineAsset(true);
     pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_MergeShader", true));
-    CAssetMgr::GetInst()->AddAsset(L"EA_MergeMtrl", pMaterial.Get());
+    AddAsset(L"EA_MergeMtrl", pMaterial.Get());
 
 
     // Particle Material
     pMaterial = new CMaterial;
     pMaterial->SetEngineAsset(true);
     pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_ParticleShader", true));
-    CAssetMgr::GetInst()->AddAsset(L"EA_ParticleMtrl", pMaterial.Get());
+    AddAsset(L"EA_ParticleMtrl", pMaterial.Get());
 
 
     // SkyBox Material
     pMaterial = new CMaterial;
     pMaterial->SetEngineAsset(true);
     pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_SkyboxShader", true));
-    CAssetMgr::GetInst()->AddAsset(L"EA_SkyboxMtrl", pMaterial.Get());
+    AddAsset(L"EA_SkyboxMtrl", pMaterial.Get());
 
 
     // Shadow Material
     pMaterial = new CMaterial;
     pMaterial->SetEngineAsset(true);
     pMaterial->SetShader(CAssetMgr::GetInst()->Load<CGraphicShader>(L"EA_ShadowShader", true));
-    CAssetMgr::GetInst()->AddAsset(L"EA_ShadowMtrl", pMaterial.Get());
+    AddAsset(L"EA_ShadowMtrl", pMaterial.Get());
+
+
+    // Landscape Material
+    pMaterial = new CMaterial;
+    pMaterial->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicShader>(L"EA_LandScapeShader"));
+    AddAsset(L"EA_LandScapeMtrl", pMaterial.Get());
 }
 

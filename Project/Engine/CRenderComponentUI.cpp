@@ -51,13 +51,13 @@ void CRenderComponentUI::Render_RCom()
         ImGui::EndDragDropTarget();
     }
 
+    ImGui::NewLine();
     for (int i = 0; i < vecMtrls.size() + 1; ++i)
     {
         tMtrlSet MtrlSet = {};
         if (vecMtrls.size() > i)
             MtrlSet = vecMtrls[i];
 
-        ImGui::NewLine();
         string str = "Material #" + to_string(i);
         ImGui::SeparatorText(str.c_str());
         ImGui::Text("Shared Material");
@@ -99,5 +99,7 @@ void CRenderComponentUI::Render_RCom()
         {
             ImGui::Text("Not Using Dynamic Material..");
         }
+
+        ImGui::NewLine();
     }
 }

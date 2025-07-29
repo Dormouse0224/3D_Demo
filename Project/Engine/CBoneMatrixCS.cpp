@@ -34,9 +34,9 @@ void CBoneMatrixCS::CalcGroupNum()
 
 void CBoneMatrixCS::Clear()
 {
-	m_FrameDataBuffer->Clear_CS();
-	m_OffsetMatBuffer->Clear_CS();
-	m_OutputBuffer->Clear_CS_UAV();
+	m_FrameDataBuffer->Unbind_CS();
+	m_OffsetMatBuffer->Unbind_CS();
+	m_OutputBuffer->Unbind_CS_UAV();
 
 	m_FrameDataBuffer = nullptr;
 	m_OffsetMatBuffer = nullptr;

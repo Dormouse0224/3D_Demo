@@ -14,6 +14,7 @@ class CStructuredBuffer :
 {
 public:
     CStructuredBuffer();
+    CStructuredBuffer(const CStructuredBuffer& _Other);
     ~CStructuredBuffer();
     CLONE(CStructuredBuffer);
 
@@ -32,6 +33,7 @@ private:
     UINT                                m_ElementSize;  // 데이터 1개 크기
     UINT                                m_ElementCount; // 데이터 개수
 
+    int                                 m_RecentSRV;
     int                                 m_RecentSRV_CS;
     int                                 m_RecentUAV_CS;
 
@@ -49,9 +51,9 @@ public:
     void Binding_CS(int _RegisterNum);
     void Binding_CS_UAV(int _RegisterNum);
 
-    void Clear(int _RegisterNum);
-    void Clear_CS();
-    void Clear_CS_UAV();
+    void Unbind();
+    void Unbind_CS();
+    void Unbind_CS_UAV();
 
 
 };

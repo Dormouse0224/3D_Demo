@@ -93,6 +93,7 @@ CComponent* CComponentMgr::CreateComp(COMPONENT_TYPE _Type)
     case COMPONENT_TYPE::DECAL:
         break;
     case COMPONENT_TYPE::LANDSCAPE:
+        return new CLandScape;
         break;
     case COMPONENT_TYPE::UICOM:
         return new CUICom;

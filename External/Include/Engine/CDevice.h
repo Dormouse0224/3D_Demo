@@ -23,7 +23,7 @@ private:
 	ComPtr<ID3D11DepthStencilState>		m_DSState[(UINT)DS_TYPE::END];
 	ComPtr<ID3D11BlendState>			m_BSState[(UINT)BS_TYPE::END];
 
-	ComPtr<ID3D11SamplerState>			m_Sampler[2];			// 샘플링(색상 추출)
+	ComPtr<ID3D11SamplerState>			m_Sampler[3];			// 샘플링(색상 추출)
 
 
 

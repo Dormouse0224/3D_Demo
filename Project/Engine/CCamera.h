@@ -31,6 +31,8 @@ private:
 
     CFrustum*   m_Frustum;
 
+    // 카메라가 바라보는 화면에서 마우스를 향하는 직선
+    tRay        m_Ray;
 
     // 물체 분류 용도
     vector<CGameObject*>                m_vecOpaque;
@@ -68,14 +70,15 @@ public:
 
     const Matrix& GetViewMat() { return m_matView; }
     const Matrix& GetProjMat() { return m_matProj; }
-    //const Matrix& GetViewInvMat() { return Matrix(XMMatrixInverse(NULL, m_matView)); }
-    //const Matrix& GetProjInvMat() { return Matrix(XMMatrixInverse(NULL, m_matProj)); }
 
+    const tRay& GetRay() { return m_Ray; }
 
 
 private:
     void SortObject();
     void SortObjectShadow(LIGHT_TYPE _Type, bool _CSM);
+
+    void CalcRay();
 
 public:
     virtual void FinalTick() override;

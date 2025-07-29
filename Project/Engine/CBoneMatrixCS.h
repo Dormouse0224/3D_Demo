@@ -23,7 +23,7 @@ public:
 
 public:
     virtual void UIRender() override {}
-    virtual void SetData() override {}
+    virtual void SetDataInfo() override {}
 
     virtual int Binding() override;
     virtual void CalcGroupNum() override;

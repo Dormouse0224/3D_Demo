@@ -103,6 +103,11 @@ struct tLightModule
 	float		Angle;		// 광원 각도(스포트 라이트)
 };
 
+struct tRay
+{
+    Vec3	vStart;
+    Vec3	vDir;
+};
 
 // ============
 // Animation 3D

@@ -115,8 +115,10 @@ void CMeshUI::VertexRender()
     for (int i = 0; i < m_VertexObject->MeshRender()->GetMesh()->GetIdxCount(); ++i)
     {
         m_VertexObject->MeshRender()->SetMaterial(CAssetMgr::GetInst()->Load<CMaterial>(L"EA_DebugShapeMtrl", true), i);
+        m_VertexObject->MeshRender()->GetMaterial(i)->SetShader(CAssetMgr::GetInst()->FindAsset<CGraphicShader>(L"EA_DebugShapeShader"));
         m_VertexObject->MeshRender()->GetMaterial(i)->SetConstParam(VEC4_0, Vec4(0, 1, 0, 1));
-        m_VertexObject->MeshRender()->GetMaterial(i)->GetShader()->SetBSType(BS_TYPE::DEFAULT);
+        //m_VertexObject->MeshRender()->GetMaterial(i)->GetShader()->SetBSType(BS_TYPE::DEFAULT);
+        //m_VertexObject->MeshRender()->GetMaterial(i)->GetShader()->SetRSType(RS_TYPE::WIRE_FRAME);
     }
 	m_MeshCam->FinalTick();
 	m_VertexObject->FinalTick();

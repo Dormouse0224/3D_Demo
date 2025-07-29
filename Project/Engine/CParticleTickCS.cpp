@@ -44,7 +44,7 @@ void CParticleTickCS::CalcGroupNum()
 	m_GroupZ = 1;
 }
 
-void CParticleTickCS::SetData()
+void CParticleTickCS::SetDataInfo()
 {
 	SetConstData(INT_0, "Max Particle Count");
 	SetTexData(TEX_0, "Noise Texture");
@@ -53,13 +53,13 @@ void CParticleTickCS::SetData()
 
 void CParticleTickCS::Clear()
 {
-    m_ParticleBuffer->Clear_CS_UAV();
+    m_ParticleBuffer->Unbind_CS_UAV();
     m_ParticleBuffer = nullptr;
 
-    m_SpawnBuffer->Clear_CS_UAV();
+    m_SpawnBuffer->Unbind_CS_UAV();
     m_SpawnBuffer = nullptr;
 
-    m_ModuleBuffer->Clear_CS();
+    m_ModuleBuffer->Unbind_CS();
     m_ModuleBuffer = nullptr;
 
     //if (nullptr != m_NoiseTex)

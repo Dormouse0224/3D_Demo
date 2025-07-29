@@ -46,9 +46,6 @@
     <Filter Include="07. Component\RenderComponent\07. Decal">
       <UniqueIdentifier>{e00e674b-bb38-4f02-8089-6146f31c1555}</UniqueIdentifier>
     </Filter>
-    <Filter Include="07. Component\RenderComponent\08. Landscape">
-      <UniqueIdentifier>{e30fd8ce-254a-4752-afa6-5bb7a3ae71f6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="07. Component\RenderComponent\05. ParticleRender">
       <UniqueIdentifier>{86a19fec-02ae-4370-aafa-ceabf5e999c5}</UniqueIdentifier>
     </Filter>
@@ -274,9 +271,6 @@
     <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\07. DecalUI">
       <UniqueIdentifier>{c0420b7f-e192-4af0-a572-f7331c29530a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\08. Landscape">
-      <UniqueIdentifier>{20e3a47c-518f-432d-b0e4-77abfb4ecff8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\09. UIComUI">
       <UniqueIdentifier>{63ff8a32-4414-4ef8-902a-79226d36451f}</UniqueIdentifier>
     </Filter>
@@ -297,6 +291,24 @@
     </Filter>
     <Filter Include="09. ImguiObject\ComponentUI\05. LightUI">
       <UniqueIdentifier>{51b380d4-b228-462d-9d96-99c5d176ed98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\03. Compute\Landscape">
+      <UniqueIdentifier>{05bfa6d7-11a9-4db3-a186-d22c74116597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\03. Compute\Landscape\Heightmap">
+      <UniqueIdentifier>{846602d2-ff81-4159-bda4-09502e2c5f4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\03. Compute\Landscape\Weightmap">
+      <UniqueIdentifier>{f58d744e-0274-4482-a347-62d91317a4ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HLSL\03. Compute\Landscape\Raycast">
+      <UniqueIdentifier>{64bd4323-f525-48aa-bd96-835ae225ea27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\RenderComponentUI\08. LandScapeUI">
+      <UniqueIdentifier>{20e3a47c-518f-432d-b0e4-77abfb4ecff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. Component\RenderComponent\08. LandScape">
+      <UniqueIdentifier>{e30fd8ce-254a-4752-afa6-5bb7a3ae71f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -624,6 +636,21 @@
     <ClInclude Include="CFrustum.h">
       <Filter>07. Component\02. Camera\Frustum</Filter>
     </ClInclude>
+    <ClInclude Include="CWeightMapCS.h">
+      <Filter>HLSL\03. Compute\Landscape\Weightmap</Filter>
+    </ClInclude>
+    <ClInclude Include="CRaycastCS.h">
+      <Filter>HLSL\03. Compute\Landscape\Raycast</Filter>
+    </ClInclude>
+    <ClInclude Include="CHeightMapCS.h">
+      <Filter>HLSL\03. Compute\Landscape\Heightmap</Filter>
+    </ClInclude>
+    <ClInclude Include="CLandScape.h">
+      <Filter>07. Component\RenderComponent\08. LandScape</Filter>
+    </ClInclude>
+    <ClInclude Include="CLandScapeUI.h">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\08. LandScapeUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CEngine.cpp">
@@ -929,6 +956,24 @@
     <ClCompile Include="CFrustum.cpp">
       <Filter>07. Component\02. Camera\Frustum</Filter>
     </ClCompile>
+    <ClCompile Include="CWeightMapCS.cpp">
+      <Filter>HLSL\03. Compute\Landscape\Weightmap</Filter>
+    </ClCompile>
+    <ClCompile Include="CRaycastCS.cpp">
+      <Filter>HLSL\03. Compute\Landscape\Raycast</Filter>
+    </ClCompile>
+    <ClCompile Include="CHeightMapCS.cpp">
+      <Filter>HLSL\03. Compute\Landscape\Heightmap</Filter>
+    </ClCompile>
+    <ClCompile Include="CLandScape.cpp">
+      <Filter>07. Component\RenderComponent\08. LandScape</Filter>
+    </ClCompile>
+    <ClCompile Include="CLandScape_Init.cpp">
+      <Filter>07. Component\RenderComponent\08. LandScape</Filter>
+    </ClCompile>
+    <ClCompile Include="CLandScapeUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\08. LandScapeUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleMath.inl">
@@ -988,6 +1033,18 @@
       <Filter>HLSL\01. Header</Filter>
     </FxCompile>
     <FxCompile Include="shadow.fx">
+      <Filter>HLSL\02. Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="weightmap.fx">
+      <Filter>HLSL\03. Compute\Landscape\Weightmap</Filter>
+    </FxCompile>
+    <FxCompile Include="raycast.fx">
+      <Filter>HLSL\03. Compute\Landscape\Raycast</Filter>
+    </FxCompile>
+    <FxCompile Include="heightmap.fx">
+      <Filter>HLSL\03. Compute\Landscape\Heightmap</Filter>
+    </FxCompile>
+    <FxCompile Include="landscape.fx">
       <Filter>HLSL\02. Shader</Filter>
     </FxCompile>
   </ItemGroup>

@@ -31,6 +31,7 @@ CInspector::CInspector(wstring _Name)
 	m_ComponentUI[(UINT)COMPONENT_TYPE::TILERENDER] = new CTileRnederUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::PARTICLERENDER] = new CParticleRenderUI;
     m_ComponentUI[(UINT)COMPONENT_TYPE::SKYBOX] = new CSkyBoxUI;
+    m_ComponentUI[(UINT)COMPONENT_TYPE::LANDSCAPE] = new CLandScapeUI;
     m_ComponentUI[(UINT)COMPONENT_TYPE::UICOM] = new CUIComUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::LIGHT] = new CLightUI;
 

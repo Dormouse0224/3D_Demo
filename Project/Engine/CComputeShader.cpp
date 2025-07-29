@@ -19,11 +19,11 @@ CComputeShader::CComputeShader()
 }
 
 CComputeShader::CComputeShader(const wstring& _RelativePath, const string& _FuncName
-	, UINT _GroupPerX, UINT _GroupPerY, UINT _GroupPerZ)
+	, UINT _ThreadPerGroupX, UINT _ThreadPerGroupY, UINT _ThreadPerGroupZ)
 	: CShader(ASSET_TYPE::COMPUTE_SHADER)
-	, m_ThreadPerGroupX(_GroupPerX)
-	, m_ThreadPerGroupY(_GroupPerY)
-	, m_ThreadPerGroupZ(_GroupPerZ)
+	, m_ThreadPerGroupX(_ThreadPerGroupX)
+	, m_ThreadPerGroupY(_ThreadPerGroupY)
+	, m_ThreadPerGroupZ(_ThreadPerGroupZ)
 	, m_GroupX(1)
 	, m_GroupY(1)
 	, m_GroupZ(1)
@@ -107,9 +107,4 @@ int CComputeShader::Execute()
     // 리소스 및 쉐이더 클리어
     Clear();
     CONTEXT->CSSetShader(nullptr, nullptr, 0);
-
-	// 리소스 및 쉐이더 바인딩 클리어
-    //CRenderMgr::GetInst()->UnbindShaders_CS();
-    //CRenderMgr::GetInst()->UnbindResources_CS();
-    //CRenderMgr::GetInst()->UnbindResources_CS_UAV();
 }

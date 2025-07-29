@@ -205,7 +205,7 @@ int CGraphicShader::CreateDomainShader(const wstring& _RelativePath, const strin
 	if (FAILED(D3DCompileFromFile(strFilePath.c_str()
 		, nullptr
 		, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		, _FuncName.c_str(), "gs_5_0", Flag, 0
+		, _FuncName.c_str(), "ds_5_0", Flag, 0
 		, m_DSBlob.GetAddressOf()
 		, m_ErrBlob.GetAddressOf())))
 	{
@@ -249,7 +249,7 @@ int CGraphicShader::CreateHullShader(const wstring& _RelativePath, const string&
 	if (FAILED(D3DCompileFromFile(strFilePath.c_str()
 		, nullptr
 		, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		, _FuncName.c_str(), "gs_5_0", Flag, 0
+		, _FuncName.c_str(), "hs_5_0", Flag, 0
 		, m_HSBlob.GetAddressOf()
 		, m_ErrBlob.GetAddressOf())))
 	{

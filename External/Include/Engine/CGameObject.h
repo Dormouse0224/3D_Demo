@@ -54,7 +54,6 @@ public:
     class CCamera*      Camera() { return (CCamera*)GetComponent(COMPONENT_TYPE::CAMERA); }
     class CPhysxActor*  PhysxActor() { return (CPhysxActor*)GetComponent(COMPONENT_TYPE::PHYSXACTOR); }
     class CFSM*         FSM() { return (CFSM*)GetComponent(COMPONENT_TYPE::FSM); }
-    class CUICom*       UICom() { return (CUICom*)GetComponent(COMPONENT_TYPE::UICOM); }
     class CLight*       Light() { return (CLight*)GetComponent(COMPONENT_TYPE::LIGHT); }
     class CAnimator3D*  Animator3D() { return (CAnimator3D*)GetComponent(COMPONENT_TYPE::ANIMATOR3D); }
 
@@ -63,6 +62,9 @@ public:
     class CFlipbookRender*  FlipbookRender() { return (CFlipbookRender*)GetComponent(COMPONENT_TYPE::FLIPBOOKRENDER); }
     class CTileRender*      TileRender() { return (CTileRender*)GetComponent(COMPONENT_TYPE::TILERENDER); }
     class CParticleRender*  ParticleRender() { return (CParticleRender*)GetComponent(COMPONENT_TYPE::PARTICLERENDER); }
+    class CSkyBox*          SkyBox() { return (CSkyBox*)GetComponent(COMPONENT_TYPE::SKYBOX); }
+    class CLandScape*       LandScape() { return (CLandScape*)GetComponent(COMPONENT_TYPE::LANDSCAPE); }
+    class CUICom*           UICom() { return (CUICom*)GetComponent(COMPONENT_TYPE::UICOM); }
 
     void Destroy();
     void ChangeLayer(LAYER _Dest, bool _CHildMove);

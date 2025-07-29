@@ -48,6 +48,11 @@ void CAssetMgr::AddAsset(const wstring& _Key, AssetPtr<CAsset> _Asset)
 	m_AssetModified = true;
 }
 
+void CAssetMgr::DeleteAsset(ASSET_TYPE _Type, const wstring& _Key)
+{
+    m_mapAsset[(UINT)_Type].erase(_Key);
+}
+
 AssetPtr<CTexture> CAssetMgr::CreateTexture(const wstring& _Key, UINT _Width, UINT _Height
 	, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage, int _TexArrCount, bool _IsCube)
 {
