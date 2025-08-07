@@ -25,6 +25,8 @@ CInspector::CInspector(wstring _Name)
 	m_ComponentUI[(UINT)COMPONENT_TYPE::CAMERA] = new CCameraUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::PHYSXACTOR] = new CPhysxActorUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::FSM] = new CFSMUI;
+    m_ComponentUI[(UINT)COMPONENT_TYPE::LIGHT] = new CLightUI;
+    m_ComponentUI[(UINT)COMPONENT_TYPE::ANIMATOR3D] = new CAnimator3DUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::MESHRENDER] = new CMeshRenderUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::SPRITERENDER] = new CSpriteRenderUI;
 	m_ComponentUI[(UINT)COMPONENT_TYPE::FLIPBOOKRENDER] = new CFlipbookRenderUI;
@@ -33,7 +35,6 @@ CInspector::CInspector(wstring _Name)
     m_ComponentUI[(UINT)COMPONENT_TYPE::SKYBOX] = new CSkyBoxUI;
     m_ComponentUI[(UINT)COMPONENT_TYPE::LANDSCAPE] = new CLandScapeUI;
     m_ComponentUI[(UINT)COMPONENT_TYPE::UICOM] = new CUIComUI;
-	m_ComponentUI[(UINT)COMPONENT_TYPE::LIGHT] = new CLightUI;
 
 	m_AssetUI[(UINT)ASSET_TYPE::MESH] = new CMeshUI;
     m_AssetUI[(UINT)ASSET_TYPE::MESHDATA] = new CMeshDataUI;

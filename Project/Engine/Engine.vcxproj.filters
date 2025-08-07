@@ -310,6 +310,9 @@
     <Filter Include="07. Component\RenderComponent\08. LandScape">
       <UniqueIdentifier>{e30fd8ce-254a-4752-afa6-5bb7a3ae71f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="09. ImguiObject\ComponentUI\06. Animator3DUI">
+      <UniqueIdentifier>{ceba36dc-f7f6-4154-81b5-25b0480f0a1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CEngine.h">
@@ -651,6 +654,9 @@
     <ClInclude Include="CLandScapeUI.h">
       <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\08. LandScapeUI</Filter>
     </ClInclude>
+    <ClInclude Include="CAnimator3DUI.h">
+      <Filter>09. ImguiObject\ComponentUI\06. Animator3DUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CEngine.cpp">
@@ -973,6 +979,9 @@
     </ClCompile>
     <ClCompile Include="CLandScapeUI.cpp">
       <Filter>09. ImguiObject\ComponentUI\RenderComponentUI\08. LandScapeUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CAnimator3DUI.cpp">
+      <Filter>09. ImguiObject\ComponentUI\06. Animator3DUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

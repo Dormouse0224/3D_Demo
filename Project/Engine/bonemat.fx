@@ -240,9 +240,11 @@ void CS_Animation3D(int3 _iThreadIdx : SV_DispatchThreadID)
     // 최종 본행렬 연산    
     //MatrixAffineTransformation(g_arrFrameTrans[iFrameDataIndex].vScale, vQZero, g_arrFrameTrans[iFrameDataIndex].qRot, g_arrFrameTrans[iFrameDataIndex].vTranslate, matBone);
 
+    // cpu에서 row-major 로 작성된 행렬이 hlsl에서 column-major 로 읽히기 때문에 전치를 해준다.
     matrix matInverse = transpose(g_arrInverse[_iThreadIdx.x]);
 
     // 구조화버퍼에 결과값 저장
+    // 바인딩 포즈에서의 정점 위치 -> 모델의 로컬 원점 -> 애니메이션 프레임에서의 정점 위치
     g_arrFinelMat[_iThreadIdx.x] = mul(matInverse, matBone);
 }
 

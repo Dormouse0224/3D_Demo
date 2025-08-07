@@ -16,6 +16,8 @@
 #include "CCameraUI.h"
 #include "CPhysxActorUI.h"
 #include "CFSMUI.h"
+#include "CLightUI.h"
+#include "CAnimator3DUI.h"
 #include "CMeshRenderUI.h"
 #include "CSpriteRenderUI.h"
 #include "CFlipbookRenderUI.h"
@@ -24,4 +26,3 @@
 #include "CSkyBoxUI.h"
 #include "CLandScapeUI.h"
 #include "CUIComUI.h"
-#include "CLightUI.h"

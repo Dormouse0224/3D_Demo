@@ -96,6 +96,12 @@ void CAnimator3D::SetAnimClip(const vector<tMTAnimClip>& _vecAnimClip)
 	m_vecClipUpdateTime[0] = fTime;*/
 }
 
+void CAnimator3D::SetCurClipIdx(int _Idx)
+{
+    if (m_vecClip->size() > _Idx)
+        m_CurClip = _Idx;
+}
+
 void CAnimator3D::Binding(AssetPtr<CMaterial> _Mtrl)
 {
     if (m_vecClip == nullptr || m_vecClip->size() < 1)

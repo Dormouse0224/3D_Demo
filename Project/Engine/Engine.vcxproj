@@ -168,6 +168,7 @@ call EngineHeaderCopy.bat</Command>
   <ItemGroup>
     <ClInclude Include="assets.h" />
     <ClInclude Include="CAnimator3D.h" />
+    <ClInclude Include="CAnimator3DUI.h" />
     <ClInclude Include="CAssetUI.h" />
     <ClInclude Include="CBoneMatrixCS.h" />
     <ClInclude Include="CCameraUI.h" />
@@ -282,6 +283,7 @@ call EngineHeaderCopy.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAnimator3D.cpp" />
+    <ClCompile Include="CAnimator3DUI.cpp" />
     <ClCompile Include="CAsset.cpp" />
     <ClCompile Include="CAssetMgr.cpp" />
     <ClCompile Include="CAssetMgr_Init.cpp" />

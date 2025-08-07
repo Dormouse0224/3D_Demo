@@ -756,6 +756,9 @@ void CFBXLoader::LoadOffsetMatrix(FbxCluster* _pCluster
 	matReflect[2] = V2;
 	matReflect[3] = V3;
 
+    // _matNodeTransform : Mesh 자체의 트랜스폼. 사실상 단위행렬.
+    // matClusterTrans(TransformMatrix) : 바인딩 시점에서 Mesh 의 글로벌 트랜스폼. 모든 클러스터는 같은 TransformMatrix 를 가진다.
+    // matClusterLinkTrans(TransformLinkMatrix) : 바인딩 시점에서 클러스터(joint)의 트랜스폼.
 	FbxAMatrix matOffset;
 	matOffset = matClusterLinkTrans.Inverse() * matClusterTrans * _matNodeTransform;
 	matOffset = matReflect * matOffset * matReflect;
