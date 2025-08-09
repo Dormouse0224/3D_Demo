@@ -4,6 +4,7 @@
 #include "CDevice.h"
 #include "CConstBuffer.h"
 #include "CPhysxActor.h"
+#include "CTimeMgr.h"
 
 
 CTransform::CTransform()
@@ -231,8 +232,8 @@ void CTransform::CalcMatWorld()
 	Matrix matTrans = XMMatrixTranslation(worldTrans.x, worldTrans.y, worldTrans.z);
 	//Matrix matTrans = XMMatrixTranslation(m_RelativePos.x, m_RelativePos.y, m_RelativePos.z);
 
-	// 크기 회전 이동 부모 순서로 적용
-	m_matWorld = matScale * matRot * matTrans;
+    // 크기 회전 이동 부모 순서로 적용
+    m_matWorld = matScale * matRot * matTrans ;
 
 	// 오브젝트의 방향정보 계산
 	m_RelativeDir[(UINT)DIR::RIGHT] = Vec3(1.f, 0.f, 0.f);

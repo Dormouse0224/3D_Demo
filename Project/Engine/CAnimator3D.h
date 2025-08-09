@@ -31,6 +31,9 @@ private:
 
     CStructuredBuffer*          m_BoneFinalMatBuffer;   // 특정 프레임의 최종 행렬
     bool						m_bFinalMatUpdate;      // 최종행렬 연산 수행여부
+    
+    Vec3                        m_LeftLegIK;
+    Vec3                        m_RightLegIK;
 
 
 public:
@@ -38,18 +41,24 @@ public:
     void SetAnimClip(const vector<tMTAnimClip>& _vecAnimClip);
     void SetClipTime(int _iClipIdx, float _fTime) { m_vecClipUpdateTime[_iClipIdx] = _fTime; }
     void SetCurClipIdx(int _Idx);
+    void SetLeftLegIK(Vec3 _v) { m_LeftLegIK = _v; }
+    void SetRightLegIK(Vec3 _v) { m_RightLegIK = _v; }
 
     CStructuredBuffer* GetFinalBoneMat() { return m_BoneFinalMatBuffer; }
     UINT GetBoneCount() { return (UINT)m_vecBones->size(); }
     int GetCurClipIdx() { return m_CurClip; }
     const vector<tMTAnimClip>* GetClipVec() { return m_vecClip; }
+    Vec3 GetLeftLegIK() { return m_LeftLegIK; }
+    Vec3 GetRightLegIK() { return m_RightLegIK; }
 
     void ClearData(AssetPtr<CMaterial> _Mtrl = nullptr);
-
     void Binding(AssetPtr<CMaterial> _Mtrl);
 
 private:
     void check_mesh(AssetPtr<CMesh> _pMesh);
+    void LegIKSolution(const tMTBone* _pBoneFoot, Vec3 _Offset);
+    vector<Matrix> RotateBone(const tMTBone* _pBoneFoot, Matrix _RotMat, const vector<Matrix>& _vecMat);
+
 
 public:
     virtual void FinalTick() override;

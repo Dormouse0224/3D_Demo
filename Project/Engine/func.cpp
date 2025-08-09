@@ -122,6 +122,18 @@ Vec2 GetScreenFromWorld(Vec3 _WorldPos, CCamera* _Cam)
 	return screen;
 }
 
+Vec4 XMQuaternionRotationVectorToVector(Vec3 _Src, Vec3 _Dst)
+{
+
+    Vec3 nS = _Src.Normalize();
+    Vec3 nD = _Dst.Normalize();
+    Vec3 axis = nS.Cross(nD);
+    float angle = acos(nS.Dot(nD));
+    if (axis == Vec3(0, 0, 0))
+        return Vec4(0, 0, 0, 1);
+    return XMQuaternionRotationAxis(axis, angle);
+}
+
 void enumSizeCheck()
 {
 	assert(COMPONENT_TYPE_SAVE_MAP.size() == static_cast<int>(COMPONENT_TYPE_SAVE::COMPONENT_END) + 2);

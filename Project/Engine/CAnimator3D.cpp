@@ -109,7 +109,8 @@ void CAnimator3D::Binding(AssetPtr<CMaterial> _Mtrl)
 
 	if (!m_bFinalMatUpdate)
 	{
-		// Animation3D Update Compute Shader
+        // Animation3D Update Compute Shader
+        // 현재 애니메이션 프레임에서의 모든 본의 스키닝 트랜스폼을 연산
 		static AssetPtr<CBoneMatrixCS> pBoneMatCS = new CBoneMatrixCS;
 
 		// Bone Data
@@ -128,6 +129,12 @@ void CAnimator3D::Binding(AssetPtr<CMaterial> _Mtrl)
 
 		// 업데이트 쉐이더 실행
 		pBoneMatCS->Execute();
+        
+        // IK Compute Shader
+        // 허벅지, 무릎, 발 본의 위치를 수정
+        // Bip001LThigh/Calf/Foot, Bip001RThigh/Calf/Foot
+        LegIKSolution(pMesh->FindBone(L"Bip001LFoot"), m_LeftLegIK);
+        LegIKSolution(pMesh->FindBone(L"Bip001RFoot"), m_RightLegIK);
 
 		m_bFinalMatUpdate = true;
 	}
@@ -169,8 +176,119 @@ void CAnimator3D::check_mesh(AssetPtr<CMesh> _pMesh)
 	UINT iBoneCount = _pMesh->GetBoneCount();
 	if (m_BoneFinalMatBuffer->GetElementCount() != iBoneCount)
 	{
-		m_BoneFinalMatBuffer->Create(sizeof(Matrix), iBoneCount, SB_TYPE::SRV_UAV, false, nullptr);
+		m_BoneFinalMatBuffer->Create(sizeof(Matrix), iBoneCount, SB_TYPE::SRV_UAV, true, nullptr);
 	}
+}
+
+void CAnimator3D::LegIKSolution(const tMTBone* _pBoneFoot, Vec3 _Offset)
+{
+    if (_pBoneFoot == nullptr)
+        return;
+    if (_Offset == Vec3(0, 0, 0))
+        return;
+
+    AssetPtr<CMesh> pMesh = MeshRender()->GetMesh();
+    const tMTBone* pBoneCalf = pMesh->GetBone(_pBoneFoot->iParentIndx);
+    if (pBoneCalf == nullptr) return;
+    const tMTBone* pBoneThigh = pMesh->GetBone(pBoneCalf->iParentIndx);
+    if (pBoneThigh == nullptr) return;
+
+    vector<Matrix> vecInvMat(pMesh->GetBoneInverseBuffer()->GetElementCount());
+    pMesh->GetBoneInverseBuffer()->GetData(vecInvMat.data());
+    vector<Matrix> vecFinMat(m_BoneFinalMatBuffer->GetElementCount());
+    m_BoneFinalMatBuffer->GetData(vecFinMat.data());
+    if (vecFinMat.size() < _pBoneFoot->iIdx || vecFinMat.size() < pBoneCalf->iIdx || vecFinMat.size() < pBoneThigh->iIdx) return;
+    
+    // IK 적용 전 본의 월드 변환행렬과 좌표
+    Matrix matFoot = _pBoneFoot->matOffset.Invert() * vecFinMat[_pBoneFoot->iIdx].Transpose();
+    Matrix matCalf = pBoneCalf->matOffset.Invert() * vecFinMat[pBoneCalf->iIdx].Transpose();
+    Matrix matThigh = pBoneThigh->matOffset.Invert() * vecFinMat[pBoneThigh->iIdx].Transpose();
+    Vec3 posFootOrigin = matFoot.Translation();
+    Vec3 posCalfOrigin = matCalf.Translation();
+    Vec3 posThigh = matThigh.Translation();
+
+    // 허벅지-종아리 본 간격과 종아리-발 본 간격
+    float lenTC = (posCalfOrigin - posThigh).Length();
+    float lenCF = (posFootOrigin - posCalfOrigin).Length();
+
+    // IK 적용 목표 위치
+    Vec3 posFootTarget = posFootOrigin + _Offset;
+    float lenTF = (posFootTarget - posThigh).Length();
+    if (lenTF > lenTC + lenCF) return;
+    float d = (lenTC * lenTC - lenCF * lenCF + lenTF * lenTF) / (2.f * lenTF);
+    float h = sqrt(lenTC * lenTC - d * d);
+    Vec3 vTFTarget = (posFootTarget - posThigh).Normalize();
+    Vec3 vRight = XMVector3TransformNormal(Vec3(0, 1, 0), matCalf);
+    Vec3 vPole = vTFTarget.Cross(vRight).Normalize();
+    Vec3 posCalfTarget = posThigh + d * vTFTarget + h * vPole;
+
+    Vec3 vTCOrigin = posCalfOrigin - posThigh;
+    Vec3 vTCTarget = posCalfTarget - posThigh;
+    Matrix matRotT = XMMatrixRotationQuaternion(XMQuaternionRotationVectorToVector(vTCOrigin, vTCTarget));
+    vecFinMat = RotateBone(pBoneThigh, matRotT, vecFinMat);
+    Vec3 vCFOrigin = posFootOrigin - posCalfOrigin;
+    Vec3 vCFTarget = posFootTarget - posCalfTarget;
+    vCFOrigin = XMVector3TransformNormal(vCFOrigin, matRotT);
+    Matrix matRotC = XMMatrixRotationQuaternion(XMQuaternionRotationVectorToVector(vCFOrigin, vCFTarget));
+    vecFinMat = RotateBone(pBoneCalf, matRotC, vecFinMat);
+
+    Vec3 posCalf2 = (pBoneCalf->matOffset.Invert() * vecFinMat[pBoneCalf->iIdx].Transpose()).Translation();
+    Vec3 posFoot2 = (_pBoneFoot->matOffset.Invert() * vecFinMat[_pBoneFoot->iIdx].Transpose()).Translation();
+    m_BoneFinalMatBuffer->SetData(vecFinMat.data());
+}
+
+vector<Matrix> CAnimator3D::RotateBone(const tMTBone* _pBone, Matrix _RotMat, const vector<Matrix>& _vecMat)
+{
+    AssetPtr<CMesh> pMesh = MeshRender()->GetMesh();
+    vector<Matrix> vecFinMat = _vecMat;
+    int count = 0;
+    // 입력받은 본을 회전시킨다
+    Matrix matBone = _pBone->matOffset.Invert() * _vecMat[_pBone->iIdx].Transpose();
+    Vec3 vTrans = matBone.Translation();
+    matBone._41 -= vTrans.x; matBone._42 -= vTrans.y; matBone._43 -= vTrans.z;
+    matBone *= _RotMat;
+    matBone._41 += vTrans.x; matBone._42 += vTrans.y; matBone._43 += vTrans.z;
+    vecFinMat[_pBone->iIdx] = (_pBone->matOffset * matBone).Transpose();
+
+    // 회전된 본의 자식 본들을 로컬 트랜스폼을 이용해 갱신한다
+    queue<int> q;
+    for (int i : _pBone->vecChildIdx)
+    {
+        ++count;
+        q.push(i);
+    }
+    while (!q.empty())
+    {
+        const tMTBone* pChildBone = pMesh->GetBone(q.front());
+        const tMTBone* pParentBone = pMesh->GetBone(pChildBone->iParentIndx);
+        q.pop();
+        if (pChildBone->vecChildIdx.empty())
+            continue;
+        for (int i : pChildBone->vecChildIdx)
+        {
+            ++count;
+            q.push(i);
+        }
+
+        Matrix matChBone = pChildBone->matOffset.Invert() * _vecMat[pChildBone->iIdx].Transpose();
+        //Vec3 vTrans = matChBone.Translation();
+        matChBone._41 -= vTrans.x; matChBone._42 -= vTrans.y; matChBone._43 -= vTrans.z;
+        matChBone *= _RotMat;
+        matChBone._41 += vTrans.x; matChBone._42 += vTrans.y; matChBone._43 += vTrans.z;
+        vecFinMat[pChildBone->iIdx] = (pChildBone->matOffset * matChBone).Transpose();
+
+        //Matrix matChildBone = pChildBone->matOffset.Invert() * _vecMat[pChildBone->iIdx].Transpose();
+        //Matrix matParentBone = pParentBone->matOffset.Invert() * _vecMat[pParentBone->iIdx].Transpose();
+        //Matrix locMat = matParentBone.Invert() * matChildBone;
+        //Matrix matNewParentBone = pParentBone->matOffset.Invert() * vecFinMat[pParentBone->iIdx].Transpose();
+        //Matrix matNewThisBone = matNewParentBone * locMat;
+        //vecFinMat[pChildBone->iIdx] = (pChildBone->matOffset * matNewThisBone).Transpose();
+
+        //Matrix locMat = _vecMat[pChildBone->iParentIndx].Transpose().Invert() * _vecMat[pChildBone->iIdx].Transpose();
+        //vecFinMat[pChildBone->iIdx] = (vecFinMat[pChildBone->iParentIndx].Transpose() * locMat).Transpose();
+    }
+    int a = 0;
+    return vecFinMat;
 }
 
 int CAnimator3D::Save(fstream& _Stream)

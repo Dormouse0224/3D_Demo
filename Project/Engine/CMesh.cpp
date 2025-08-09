@@ -169,10 +169,12 @@ CMesh* CMesh::CreateFromContainer(CFBXLoader& _loader)
     {
         tMTBone bone = {};
         bone.iDepth = vecBone[i]->iDepth;
+        bone.iIdx = vecBone[i]->iIdx;
         bone.iParentIndx = vecBone[i]->iParentIndx;
         bone.matBone = GetMatrixFromFbxMatrix(vecBone[i]->matBone);
         bone.matOffset = GetMatrixFromFbxMatrix(vecBone[i]->matOffset);
         bone.strBoneName = vecBone[i]->strBoneName;
+        bone.vecChildIdx = vecBone[i]->vecChildIdx;
 
         for (UINT j = 0; j < vecBone[i]->vecKeyFrame.size(); ++j)
         {
@@ -241,7 +243,7 @@ CMesh* CMesh::CreateFromContainer(CFBXLoader& _loader)
         }
 
         pMesh->m_BoneInverse = new CStructuredBuffer;
-        pMesh->m_BoneInverse->Create(sizeof(Matrix), (UINT)vecOffset.size(), SB_TYPE::SRV_ONLY, false, vecOffset.data());
+        pMesh->m_BoneInverse->Create(sizeof(Matrix), (UINT)vecOffset.size(), SB_TYPE::SRV_ONLY, true, vecOffset.data());
 
         pMesh->m_BoneFrameData = new CStructuredBuffer;
         pMesh->m_BoneFrameData->Create(sizeof(tFrameTrans), (UINT)vecOffset.size() * iFrameCount
@@ -258,6 +260,17 @@ void CMesh::Binding(UINT _iSubset)
 	UINT Offset = 0;
 	CONTEXT->IASetVertexBuffers(0, 1, m_VB.GetAddressOf(), &Stride, &Offset);
     CONTEXT->IASetIndexBuffer(m_vecIdxInfo[_iSubset].IB.Get(), DXGI_FORMAT_R32_UINT, 0);
+}
+
+const tMTBone* CMesh::FindBone(wstring _Name)
+{
+    for (const tMTBone& bone : m_vecBones)
+    {
+        if (bone.strBoneName == _Name)
+            return &bone;
+    }
+
+    return nullptr;
 }
 
 void CMesh::Render(UINT _iSubset)
@@ -319,16 +332,23 @@ int CMesh::Save(const wstring& _FileName, bool _Update)
     {
         SaveWString(m_vecBones[i].strBoneName, file);
         file.write(reinterpret_cast<char*>(&m_vecBones[i].iDepth), sizeof(int));
+        file.write(reinterpret_cast<char*>(&m_vecBones[i].iIdx), sizeof(int));
         file.write(reinterpret_cast<char*>(&m_vecBones[i].iParentIndx), sizeof(int));
         file.write(reinterpret_cast<char*>(&m_vecBones[i].matBone), sizeof(Matrix));
         file.write(reinterpret_cast<char*>(&m_vecBones[i].matOffset), sizeof(Matrix));
 
         int iFrameCount = (int)m_vecBones[i].vecKeyFrame.size();
         file.write(reinterpret_cast<char*>(&iFrameCount), sizeof(int));
-
         for (int j = 0; j < m_vecBones[i].vecKeyFrame.size(); ++j)
         {
             file.write(reinterpret_cast<char*>(&m_vecBones[i].vecKeyFrame[j]), sizeof(tMTKeyFrame));
+        }
+
+        int iChildCount = (int)m_vecBones[i].vecChildIdx.size();
+        file.write(reinterpret_cast<char*>(&iChildCount), sizeof(int));
+        for (int j = 0; j < m_vecBones[i].vecChildIdx.size(); ++j)
+        {
+            file.write(reinterpret_cast<char*>(&m_vecBones[i].vecChildIdx[j]), sizeof(int));
         }
     }
 
@@ -410,6 +430,7 @@ int CMesh::Load(const wstring& _FilePath)
     {
         LoadWString(m_vecBones[i].strBoneName, file);
         file.read(reinterpret_cast<char*>(&m_vecBones[i].iDepth), sizeof(int));
+        file.read(reinterpret_cast<char*>(&m_vecBones[i].iIdx), sizeof(int));
         file.read(reinterpret_cast<char*>(&m_vecBones[i].iParentIndx), sizeof(int));
         file.read(reinterpret_cast<char*>(&m_vecBones[i].matBone), sizeof(Matrix));
         file.read(reinterpret_cast<char*>(&m_vecBones[i].matOffset), sizeof(Matrix));
@@ -421,6 +442,14 @@ int CMesh::Load(const wstring& _FilePath)
         for (int j = 0; j < m_vecBones[i].vecKeyFrame.size(); ++j)
         {
             file.read(reinterpret_cast<char*>(&m_vecBones[i].vecKeyFrame[j]), sizeof(tMTKeyFrame));
+        }
+
+        int iChildCount = (int)m_vecBones[i].vecChildIdx.size();
+        file.read(reinterpret_cast<char*>(&iChildCount), sizeof(int));
+        m_vecBones[i].vecChildIdx.resize(iChildCount);
+        for (int j = 0; j < m_vecBones[i].vecChildIdx.size(); ++j)
+        {
+            file.read(reinterpret_cast<char*>(&m_vecBones[i].vecChildIdx[j]), sizeof(int));
         }
     }
 
@@ -448,7 +477,7 @@ int CMesh::Load(const wstring& _FilePath)
         }
 
         m_BoneInverse = new CStructuredBuffer;
-        m_BoneInverse->Create(sizeof(Matrix), (UINT)vecOffset.size(), SB_TYPE::SRV_ONLY, false, vecOffset.data());
+        m_BoneInverse->Create(sizeof(Matrix), (UINT)vecOffset.size(), SB_TYPE::SRV_ONLY, true, vecOffset.data());
 
         m_BoneFrameData = new CStructuredBuffer;
         m_BoneFrameData->Create(sizeof(tFrameTrans), (UINT)vecOffset.size() * (UINT)maxFrameCount

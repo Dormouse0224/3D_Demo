@@ -29,4 +29,20 @@ void CAnimator3DUI::Render_Com()
     {
         pAnim->SetCurClipIdx(curClipIdx);
     }
+
+    ImGui::NewLine();
+    ImGui::Text("Leg IK : Left");
+    float LeftIK[3] = { pAnim->GetLeftLegIK().x, pAnim->GetLeftLegIK().y, pAnim->GetLeftLegIK().z };
+    if (ImGui::DragFloat3("##IK_L", LeftIK, 0.01f))
+    {
+        pAnim->SetLeftLegIK(Vec3(LeftIK));
+    }
+
+    ImGui::NewLine();
+    ImGui::Text("Leg IK : Right");
+    float RightIK[3] = { pAnim->GetRightLegIK().x, pAnim->GetRightLegIK().y, pAnim->GetRightLegIK().z };
+    if (ImGui::DragFloat3("##IK_R", RightIK, 0.01f))
+    {
+        pAnim->SetRightLegIK(Vec3(RightIK));
+    }
 }

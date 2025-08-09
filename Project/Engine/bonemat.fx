@@ -135,7 +135,7 @@ void MatrixAffineTransformation(in float4 Scaling
     MScaling._11_22_33 = Scaling.xyz;
 
     float4 VRotationOrigin = float4(RotationOrigin.xyz, 0.f);
-    float4 VTranslation = float4(Translation.xyz, 0.f);
+    float4 VTranslation = float4(Translation.xyz, 1.f);
 
     matrix MRotation = (matrix) 0.f;
     MatrixRotationQuaternion(RotationQuaternion, MRotation);
@@ -233,10 +233,10 @@ void CS_Animation3D(int3 _iThreadIdx : SV_DispatchThreadID)
     float4 vScale = lerp(g_arrFrameTrans[iFrameDataIndex].vScale, g_arrFrameTrans[iNextFrameDataIdx].vScale, Ratio);
     float4 vTrans = lerp(g_arrFrameTrans[iFrameDataIndex].vTranslate, g_arrFrameTrans[iNextFrameDataIdx].vTranslate, Ratio);
     float4 qRot = QuternionLerp(g_arrFrameTrans[iFrameDataIndex].qRot, g_arrFrameTrans[iNextFrameDataIdx].qRot, Ratio);
-
+    
     // 최종 본행렬 연산
     MatrixAffineTransformation(vScale, vQZero, qRot, vTrans, matBone);
-
+    
     // 최종 본행렬 연산    
     //MatrixAffineTransformation(g_arrFrameTrans[iFrameDataIndex].vScale, vQZero, g_arrFrameTrans[iFrameDataIndex].qRot, g_arrFrameTrans[iFrameDataIndex].vTranslate, matBone);
 

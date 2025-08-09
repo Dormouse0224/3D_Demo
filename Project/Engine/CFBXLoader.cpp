@@ -506,31 +506,35 @@ void CFBXLoader::LoadSkeleton(FbxNode* _pNode)
 {
 	int iChildCount = _pNode->GetChildCount();
 
-	LoadSkeleton_Re(_pNode, 0, 0, -1);
+	LoadSkeleton_Re(_pNode, 0, 0, -1, nullptr);
 }
 
-void CFBXLoader::LoadSkeleton_Re(FbxNode* _pNode, int _iDepth, int _iIdx, int _iParentIdx)
+void CFBXLoader::LoadSkeleton_Re(FbxNode* _pNode, int _iDepth, int _iIdx, int _iParentIdx, tBone* _Parent)
 {
 	FbxNodeAttribute* pAttr = _pNode->GetNodeAttribute();
 
+    tBone* pBone = _Parent;
 	if (pAttr && pAttr->GetAttributeType() == FbxNodeAttribute::eSkeleton)
 	{
-		tBone* pBone = new tBone;
+		pBone = new tBone;
 
 		string strBoneName = _pNode->GetName();
 
 		pBone->strBoneName = wstring(strBoneName.begin(), strBoneName.end());
 		pBone->iDepth = _iDepth++;
+        pBone->iIdx = _iIdx;
 		pBone->iParentIndx = _iParentIdx;
+        if (_Parent)
+            _Parent->vecChildIdx.push_back(_iIdx);
 
 		m_vecBone.push_back(pBone);
 	}
 
-	int iChildCount = _pNode->GetChildCount();
-	for (int i = 0; i < iChildCount; ++i)
-	{
-		LoadSkeleton_Re(_pNode->GetChild(i), _iDepth, (int)m_vecBone.size(), _iIdx);
-	}
+    int iChildCount = _pNode->GetChildCount();
+    for (int i = 0; i < iChildCount; ++i)
+    {
+        LoadSkeleton_Re(_pNode->GetChild(i), _iDepth, (int)m_vecBone.size(), _iIdx, pBone);
+    }
 }
 
 void CFBXLoader::LoadAnimationClip()

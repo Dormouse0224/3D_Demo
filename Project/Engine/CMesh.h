@@ -51,6 +51,8 @@ public:
     void* GetVtxSysMem() { return m_VtxSysMem; }
 
     const vector<tMTBone>& GetBones() { return m_vecBones; }
+    const tMTBone* GetBone(int _Idx) { if (m_vecBones.size() > _Idx) return &m_vecBones[_Idx]; }
+    const tMTBone* FindBone(wstring _Name);
     UINT GetBoneCount() { return (UINT)m_vecBones.size(); }
     const vector<tMTAnimClip>& GetAnimClip() { return m_vecAnimClip; }
     CStructuredBuffer* GetBoneFrameDataBuffer() { return m_BoneFrameData; } // 전체 본 프레임 정보

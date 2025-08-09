@@ -110,6 +110,7 @@ using namespace physx;
 #include <set>
 #include <list>
 #include <string>
+#include <queue>
 
 
 // 엔진 프로젝트 헤더

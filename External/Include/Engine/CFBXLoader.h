@@ -62,7 +62,9 @@ struct tBone
 {
 	wstring				strBoneName;
 	int					iDepth;			// °èÃþ±¸Á¶ ±íÀÌ
+    int					iIdx;
 	int					iParentIndx;	// ºÎ¸ð Bone ÀÇ ÀÎµ¦½º
+    vector<int>         vecChildIdx;
 	FbxAMatrix			matOffset;		// Offset Çà·Ä( -> »Ñ¸® -> Local)
 	FbxAMatrix			matBone;
 	vector<tKeyFrame>	vecKeyFrame;
@@ -128,7 +130,7 @@ private:
 
 	// Animation
 	void LoadSkeleton(FbxNode* _pNode);
-	void LoadSkeleton_Re(FbxNode* _pNode, int _iDepth, int _iIdx, int _iParentIdx);
+    void LoadSkeleton_Re(FbxNode* _pNode, int _iDepth, int _iIdx, int _iParentIdx, tBone* _Parent);
 	void LoadAnimationClip();
 	void Triangulate(FbxNode* _pNode);
 

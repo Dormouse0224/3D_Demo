@@ -132,8 +132,10 @@ struct tMTBone
 {
     wstring				strBoneName;
     int					iDepth;
+    int					iIdx;
     int					iParentIndx;
-    Matrix				matOffset;	// Inverse 행렬( Skin 정점을 -> 기본상태로 되돌림)
+    vector<int>         vecChildIdx;
+    Matrix				matOffset;	// Inverse 행렬 (바인딩 시점 본 위치 -> 메시의 로컬 원점)
     Matrix				matBone;
     vector<tMTKeyFrame>	vecKeyFrame;
 };

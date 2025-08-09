@@ -21,6 +21,8 @@ inline std::wstring to_wstr(const std::string& _str) { return std::wstring(_str.
 
 Vec2 GetScreenFromWorld(Vec3 _WorldPos, class CCamera* _Cam);
 
+Vec4 XMQuaternionRotationVectorToVector(Vec3 _Src, Vec3 _Dst);
+
 template<typename T>
 void Delete_Vec(std::vector<T*>& _vec)
 {
