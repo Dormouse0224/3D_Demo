@@ -1,4 +1,4 @@
-# WutheringWaves
+# 3D Engine Practice
 ---
 
 ## 1. 프로젝트 개요
