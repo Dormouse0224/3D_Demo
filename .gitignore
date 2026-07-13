@@ -368,3 +368,8 @@ FodyWeavers.xsd
 !Output/bin/[Dd]ebug/
 Output/bin/[Dd]ebug/*
 !Output/bin/[Dd]ebug/*.dll
+
+# Stray "dev/null" folder: on Windows, tools that suppress git hooks via
+# core.hooksPath=/dev/null cause git-lfs to write its hooks to a literal
+# dev\null directory in the repo root. Safe to delete; may reappear.
+/dev/
