@@ -15,7 +15,6 @@
 CEditorCamScript::CEditorCamScript()
 	: m_CamSpeedLin(200.f)
 	, m_CamSpeedAng(200.f)
-    , m_Rotate(false)
 {
 }
 
@@ -29,13 +28,13 @@ void CEditorCamScript::Tick()
 	if (pLevel == nullptr || pLevel->GetState() != LEVEL_STATE::STOP)
 		return;
 
-	// Ä«¸Þ¶ó ÄÄÆ÷³ÍÆ®°¡ ¾øÀ¸¸é Á¾·á
+	// Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if (!Camera())
 		return;
 
 	PROJ_TYPE type = Camera()->GetProjType();
 
-	// ¸ÞÀÎ À©µµ¿ì°¡ Æ÷Ä¿½Ì ÁßÀÏ ¶§¸¸ Á¶ÀÛ
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ì°¡ ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if (GetForegroundWindow() == CEngine::GetInst()->GetMainWndHwnd())
 	{
 		if (PROJ_TYPE::PERSPECTIVE == type)
@@ -75,18 +74,28 @@ void CEditorCamScript::Move_Perspective()
 		vPos -= vRight * EngineDT * m_CamSpeedLin;
 	if (KEY_PRESSED(Keyboard::D))
 		vPos += vRight * EngineDT * m_CamSpeedLin;
-    if (KEY_PRESSED(Keyboard::LSHIFT))
+    if (KEY_PRESSED(Keyboard::R))
         vPos += vUp * EngineDT * m_CamSpeedLin;
-    if (KEY_PRESSED(Keyboard::LCTRL))
+    if (KEY_PRESSED(Keyboard::F))
         vPos -= vUp * EngineDT * m_CamSpeedLin;
+    if (KEY_PRESSED(Keyboard::E))
+        vPos += Vec3(0.f, 1.f, 0.f) * EngineDT * m_CamSpeedLin;
+    if (KEY_PRESSED(Keyboard::Q))
+        vPos -= Vec3(0.f, 1.f, 0.f) * EngineDT * m_CamSpeedLin;
 
 	Transform()->SetRelativePos(vPos);
 
-    if (KEY_TAP(Keyboard::MOUSE_RBTN))
-        m_Rotate = !m_Rotate;
-
-	if (!m_Rotate || GetFocus() != CEngine::GetInst()->GetMainWndHwnd())
+	if (GetFocus() != CEngine::GetInst()->GetMainWndHwnd())
 		return;
+
+    if (KEY_TAP(Keyboard::MOUSE_RBTN))
+    {
+        CKeyMgr::GetInst()->SetMousePos(CDevice::GetInst()->GetRenderResolution() / 2.f);
+        return;
+    }
+
+    if (!KEY_PRESSED(Keyboard::MOUSE_RBTN))
+        return;
 
 	Vec2 vDragDir = CKeyMgr::GetInst()->GetDragDir();
     CKeyMgr::GetInst()->SetMousePos(CDevice::GetInst()->GetRenderResolution() / 2.f);

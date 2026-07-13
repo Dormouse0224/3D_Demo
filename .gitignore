@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Third-party runtime DLLs (PhysX, fmod, FBX SDK) needed to run from a fresh
+# checkout or worktree. Output/bin/debug is ignored by the [Dd]ebug/ rule above,
+# so re-include the directory, re-ignore its build artifacts, keep the DLLs.
+!Output/bin/[Dd]ebug/
+Output/bin/[Dd]ebug/*
+!Output/bin/[Dd]ebug/*.dll
